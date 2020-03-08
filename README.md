@@ -5,4 +5,4 @@
 * Roman Planidin
 * Popov Artem
 
-2020 AbbySoft. All right reserved.
+2020 AbbySoft. All rights reserved.
