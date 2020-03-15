@@ -6,7 +6,10 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    private const int SCORE_INCREMENT = 10;
+
     public static GameManager Instance { private set; get; }
+
     public bool IsRunning { set; get; }
     public PropertyList Properties {get; private set;}
     public PlayerMotor playerMotor;
@@ -14,6 +17,7 @@ public class GameManager : MonoBehaviour
     private Timer secTimer;
 
     private int scoreIncrease = 1;
+    private bool scoreIncreaseTick = false;
 
     void Awake()
     {
@@ -35,6 +39,14 @@ public class GameManager : MonoBehaviour
             playerMotor.StartRunning();
             secTimer.Start();
         }
+
+        if (scoreIncreaseTick)
+        {
+            var score = Properties.GetInt("score") + scoreIncrease * Properties.GetFloat("multiplier");
+            int roundedScore = (int)Math.Floor(score + 1);
+            Properties.setProperty("score", roundedScore);
+            scoreIncreaseTick = false;
+        }
     }
 
     private Timer InitTimer()
@@ -47,8 +59,14 @@ public class GameManager : MonoBehaviour
     }
 
     private void OnTimer(object source, ElapsedEventArgs e) {
-        var score = Properties.GetInt("score") + scoreIncrease * Properties.GetFloat("multiplier");
-        score = (int) Math.Round(score);
-        Properties.setProperty("score", score);
+        scoreIncreaseTick = true;
+    }
+
+    public void AddScore()
+    {
+        var score = Properties.GetInt("score");
+        var multiplier = Properties.GetFloat("multiplier");
+        var newScore = Mathf.RoundToInt(score + multiplier * SCORE_INCREMENT);
+        Properties.setProperty("score", newScore);
     }
 }

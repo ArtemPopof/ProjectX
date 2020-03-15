@@ -42,7 +42,7 @@ public class PlayerMotor : MonoBehaviour {
         }
 
         // Gather the inputs on which lane we should be
-         if (MobileInput.Instance.SwipeLeft) {
+        if (MobileInput.Instance.SwipeLeft) {
              MoveLane(false);
          }
          if (MobileInput.Instance.SwipeRight) {
