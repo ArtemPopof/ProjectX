@@ -5,7 +5,7 @@ using UnityEngine;
 public class CameraMotor : MonoBehaviour
 {
     public Transform lookAt; // Our player // object we're looking at
-    public Vector3 offset = new Vector3(0, 3.0f, 1.0f);
+    public Vector3 offset;
 
     private void LateUpdate() {
         Vector3 desiredPosition = lookAt.position + offset;
