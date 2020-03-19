@@ -26,10 +26,10 @@
         void vert(inout appdata_full v)
         {
             float4 worldSpace = mul(unity_ObjectToWorld, v.vertex);
-            worldSpace.xyz -= _WorldSpaceCameraPos.xyz;
-            //worldSpace = float4( (worldSpace.z * worldSpace.z) * -_SideCurvature, (worldSpace.z * worldSpace.z) * -_ForwardCurvature, 0.0f, 0.0f);
+            //worldSpace.xyz -= _WorldSpaceCameraPos.xyz;
+           // worldSpace = float4( (worldSpace.z * worldSpace.z) * -_SideCurvature, (worldSpace.z * worldSpace.z) * -_ForwardCurvature, 0.0f, 0.0f);
 
-           // v.vertex += mul(unity_WorldToObject, worldSpace);
+            //v.vertex += mul(unity_WorldToObject, worldSpace);
 		}
 
         void surf(Input IN, inout SurfaceOutput o)
