@@ -7,11 +7,16 @@ public class DeathUi : MonoBehaviour
 {
     public Text score;
     public Text coins;
+
+    public Animator animator;
+
     // Start is called before the first frame update
     void Start()
     {
         GameManager.Instance.Properties.bind(score, "score");
         GameManager.Instance.Properties.bind(coins, "coins");
+
+        animator.SetTrigger("Appear");
     }
 
     // Update is called once per frame

@@ -2276,8 +2276,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 37.108845, y: -15}
-  m_SizeDelta: {x: 74.21769, y: 30}
+  m_AnchoredPosition: {x: 37.044197, y: -15}
+  m_SizeDelta: {x: 74.088394, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &543282378
 MonoBehaviour:
@@ -2347,7 +2347,7 @@ RectTransform:
   m_GameObject: {fileID: 682833449}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 1, z: 1}
   m_Children:
   - {fileID: 1600256433}
   m_Father: {fileID: 1768815581}
@@ -2574,8 +2574,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 127.10885, y: -15}
-  m_SizeDelta: {x: 105.78232, y: 30}
+  m_AnchoredPosition: {x: 127.04419, y: -15}
+  m_SizeDelta: {x: 105.9116, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &829766433
 MonoBehaviour:
@@ -2651,8 +2651,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 53.97959, y: -15}
-  m_SizeDelta: {x: 107.95918, y: 30}
+  m_AnchoredPosition: {x: 54.104973, y: -15}
+  m_SizeDelta: {x: 108.209946, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &910246646
 MonoBehaviour:
@@ -3331,6 +3331,7 @@ GameObject:
   - component: {fileID: 1768815583}
   - component: {fileID: 1768815582}
   - component: {fileID: 1768815585}
+  - component: {fileID: 1768815586}
   m_Layer: 5
   m_Name: DeathUi
   m_TagString: GameOverUi
@@ -3436,6 +3437,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   score: {fileID: 1912835066}
   coins: {fileID: 543282378}
+  animator: {fileID: 1768815586}
+--- !u!95 &1768815586
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1768815580}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9a52033521bc73948bc2874a8257b651, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &1810656374
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3697,8 +3718,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 143.97958, y: -15}
-  m_SizeDelta: {x: 72.04082, y: 30}
+  m_AnchoredPosition: {x: 144.10498, y: -15}
+  m_SizeDelta: {x: 71.790054, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1912835066
 MonoBehaviour:
