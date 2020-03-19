@@ -19,6 +19,8 @@ public class GameManager : MonoBehaviour
     private int scoreIncrease = 1;
     private bool scoreIncreaseTick = false;
 
+    private GameObject uiPanels;
+
     void Awake()
     {
         Instance = this;
@@ -29,12 +31,16 @@ public class GameManager : MonoBehaviour
         Properties.Add("distance", 0.0f);
         Properties.Add("multiplier", 0.0f).WithCustomFormater(new MultiplierFormater());
         Properties.Add("score", 0);
-        
+
+        uiPanels = GameObject.FindWithTag("UI");
     }
 
     void Update()
     {
+        //TODO extract all string constants
+        //TODO maybe make some statemachine for states
         if (!IsRunning && MobileInput.Instance.Tap) {
+            SetUIPanelActive("InGameUi", true);
             IsRunning = true;
             playerMotor.StartRunning();
             secTimer.Start();
@@ -46,6 +52,18 @@ public class GameManager : MonoBehaviour
             int roundedScore = (int)Math.Floor(score + 1);
             Properties.setProperty("score", roundedScore);
             scoreIncreaseTick = false;
+        }
+    }
+
+    private void SetUIPanelActive(string panelTag, bool isActive)
+    {
+        foreach(Transform child in uiPanels.transform)
+        {
+            if (child.CompareTag(panelTag))
+            {
+                child.gameObject.SetActive(isActive);
+                return;
+            }
         }
     }
 
@@ -68,5 +86,12 @@ public class GameManager : MonoBehaviour
         var multiplier = Properties.GetFloat("multiplier");
         var newScore = Mathf.RoundToInt(score + multiplier * SCORE_INCREMENT);
         Properties.setProperty("score", newScore);
+    }
+
+    public void OnPlayerDeath()
+    {
+        IsRunning = false;
+        SetUIPanelActive("InGameUi", false);
+        SetUIPanelActive("GameOverUi", true);
     }
 }
