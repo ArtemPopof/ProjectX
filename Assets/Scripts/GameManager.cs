@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { private set; get; }
 
     public bool IsRunning { set; get; }
+    public bool IsDead { set; get; }
+
     public PropertyList Properties {get; private set;}
     public PlayerMotor playerMotor;
 
@@ -25,6 +27,7 @@ public class GameManager : MonoBehaviour
     {
         Instance = this;
         IsRunning = false;
+        IsDead = false;
         Properties = new PropertyList();
         secTimer = InitTimer();
 
@@ -91,6 +94,7 @@ public class GameManager : MonoBehaviour
     public void OnPlayerDeath()
     {
         IsRunning = false;
+        IsDead = true;
         SetUIPanelActive("InGameUi", false);
         SetUIPanelActive("GameOverUi", true);
     }
