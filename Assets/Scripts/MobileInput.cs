@@ -13,6 +13,7 @@ public class MobileInput : MonoBehaviour
     private bool swipeDown;
     private Vector2 swipeDelta;
     private Vector2 startTouch;
+    public bool isReversed = false;
 
     public bool Tap { get { return tap;} }
     public Vector2 SwipeDelta { get { return swipeDelta; } }
@@ -77,10 +78,16 @@ public class MobileInput : MonoBehaviour
             
             if (Mathf.Abs(x) > Mathf.Abs(y)) {
                 // Left or Right
-                if (x < 0)  {
+                if (x < 0) {
                     swipeLeft = true;
                 } else {
                     swipeRight = true;
+                }
+
+                if (isReversed)
+                {
+                    swipeLeft = !swipeLeft;
+                    swipeRight = !swipeRight;
                 }
             } else {
                 // Up or Down

@@ -12,7 +12,7 @@ public class PlayerMotor : MonoBehaviour {
     private float verticalVelocity;
     private int desiredLane = 1; // 0 = Left, 1 = Middle, 2 = Right
 
-    private float startSpeed = 7.0f;
+    private float startSpeed = 14.0f;
     private float speed;
     private float speedIncreaseLastTick;
     private float speedIncreaseTime = 2.5f;
@@ -42,7 +42,7 @@ public class PlayerMotor : MonoBehaviour {
         }
 
         // Gather the inputs on which lane we should be
-         if (MobileInput.Instance.SwipeLeft) {
+        if (MobileInput.Instance.SwipeLeft) {
              MoveLane(false);
          }
          if (MobileInput.Instance.SwipeRight) {
@@ -144,6 +144,6 @@ public class PlayerMotor : MonoBehaviour {
     private void Crash()
     {
         animator.SetTrigger("Death");
-        GameManager.Instance.IsRunning = false;
+        GameManager.Instance.OnPlayerDeath();
     }
 }
