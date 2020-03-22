@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
 
     public bool IsDead {set; get;}
     public bool IsRunning { set; get; }
-    private bool isDead = false;
+    public bool IsDead { set; get; }
     public PropertyList Properties {get; private set;}
     public PlayerMotor playerMotor;
 
@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
     {
         Instance = this;
         IsRunning = false;
+        IsDead = false;
         Properties = new PropertyList();
         secTimer = InitTimer();
 
