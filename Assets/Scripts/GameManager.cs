@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
 
     public static GameManager Instance { private set; get; }
 
+    public bool IsDead {set; get;}
     public bool IsRunning { set; get; }
     private bool isDead = false;
     public PropertyList Properties {get; private set;}
@@ -76,11 +77,16 @@ public class GameManager : MonoBehaviour
 
     private Timer InitTimer()
     {
-        var timer = new Timer();
-        timer.Elapsed += new ElapsedEventHandler(OnTimer);
-        timer.Interval = 200;
+        if (IsRunning && !IsDead)
+        {
+            var timer = new Timer();
+            timer.Elapsed += new ElapsedEventHandler(OnTimer);
+            timer.Interval = 200;
 
-        return timer;
+            return timer;
+        }
+        
+        return new Timer();
     }
 
     private void OnTimer(object source, ElapsedEventArgs e) {
@@ -98,7 +104,8 @@ public class GameManager : MonoBehaviour
 
     public void OnPlayerDeath()
     {
-        isDead = true;
+        IsRunning = false;
+        IsDead = true;
         SetUIPanelActive("InGameUi", false);
         SetUIPanelActive("GameOverUi", true);
     }
