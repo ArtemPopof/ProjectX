@@ -10,9 +10,9 @@ public class GameManager : MonoBehaviour
 
     public static GameManager Instance { private set; get; }
 
+    public bool IsDead {set; get;}
     public bool IsRunning { set; get; }
     public bool IsDead { set; get; }
-
     public PropertyList Properties {get; private set;}
     public PlayerMotor playerMotor;
 
@@ -34,12 +34,18 @@ public class GameManager : MonoBehaviour
         Properties.Add("distance", 0.0f);
         Properties.Add("multiplier", 0.0f).WithCustomFormater(new MultiplierFormater());
         Properties.Add("score", 0);
+        Properties.Add("coins", 0);
 
         uiPanels = GameObject.FindWithTag("UI");
     }
 
     void Update()
     {
+        if (isDead)
+        {
+            return;
+        }
+
         //TODO extract all string constants
         //TODO maybe make some statemachine for states
         if (!IsRunning && MobileInput.Instance.Tap) {
@@ -72,23 +78,29 @@ public class GameManager : MonoBehaviour
 
     private Timer InitTimer()
     {
-        var timer = new Timer();
-        timer.Elapsed += new ElapsedEventHandler(OnTimer);
-        timer.Interval = 200;
+        if (IsRunning && !IsDead)
+        {
+            var timer = new Timer();
+            timer.Elapsed += new ElapsedEventHandler(OnTimer);
+            timer.Interval = 200;
 
-        return timer;
+            return timer;
+        }
+        
+        return new Timer();
     }
 
     private void OnTimer(object source, ElapsedEventArgs e) {
         scoreIncreaseTick = true;
     }
 
-    public void AddScore()
+    public void AddCoin()
     {
         var score = Properties.GetInt("score");
         var multiplier = Properties.GetFloat("multiplier");
         var newScore = Mathf.RoundToInt(score + multiplier * SCORE_INCREMENT);
         Properties.setProperty("score", newScore);
+        Properties.AddToIntProperty("coins", 1);
     }
 
     public void OnPlayerDeath()
@@ -97,5 +109,11 @@ public class GameManager : MonoBehaviour
         IsDead = true;
         SetUIPanelActive("InGameUi", false);
         SetUIPanelActive("GameOverUi", true);
+    }
+
+    public void RestartGame()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Gameplay");
+        SetUIPanelActive("GameOverUi", false);
     }
 }
