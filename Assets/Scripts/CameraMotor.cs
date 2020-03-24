@@ -15,7 +15,7 @@ public class CameraMotor : MonoBehaviour
         transform.Rotate(isReversed ? 0 : downAngle, isReversed ? 180 : 0, 0);
     }
 
-    private void LateUpdate() {
+    private void Update() {
         Vector3 realOffset = isReversed ? reversedOffset : offset;
 
         Vector3 desiredPosition = lookAt.position + realOffset;
@@ -27,7 +27,7 @@ public class CameraMotor : MonoBehaviour
         }
         else
         {
-            transform.position = Vector3.Lerp(transform.position, desiredPosition, Time.deltaTime);
+            transform.position = Vector3.Lerp(transform.position, desiredPosition, Time.deltaTime * 2);
         }
     }
 }

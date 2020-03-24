@@ -12,7 +12,6 @@ public class GameManager : MonoBehaviour
 
     public bool IsDead {set; get;}
     public bool IsRunning { set; get; }
-    public bool IsDead { set; get; }
     public PropertyList Properties {get; private set;}
     public PlayerMotor playerMotor;
 
@@ -41,7 +40,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (isDead)
+        if (IsDead)
         {
             return;
         }
@@ -78,16 +77,11 @@ public class GameManager : MonoBehaviour
 
     private Timer InitTimer()
     {
-        if (IsRunning && !IsDead)
-        {
-            var timer = new Timer();
-            timer.Elapsed += new ElapsedEventHandler(OnTimer);
-            timer.Interval = 200;
+        var timer = new Timer();
+        timer.Elapsed += new ElapsedEventHandler(OnTimer);
+        timer.Interval = 200;
 
-            return timer;
-        }
-        
-        return new Timer();
+        return timer;
     }
 
     private void OnTimer(object source, ElapsedEventArgs e) {
