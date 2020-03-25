@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public bool IsDead {set; get;}
     public bool IsRunning { set; get; }
     public PropertyList Properties {get; private set;}
+
     public PlayerMotor playerMotor;
 
     private Timer secTimer;
@@ -34,6 +35,7 @@ public class GameManager : MonoBehaviour
         Properties.Add("multiplier", 0.0f).WithCustomFormater(new MultiplierFormater());
         Properties.Add("score", 0);
         Properties.Add("coins", 0);
+        Properties.Add("chests", 0);
 
         uiPanels = GameObject.FindWithTag("UI");
     }
@@ -95,6 +97,11 @@ public class GameManager : MonoBehaviour
         var newScore = Mathf.RoundToInt(score + multiplier * SCORE_INCREMENT);
         Properties.setProperty("score", newScore);
         Properties.AddToIntProperty("coins", 1);
+    }
+
+    public void AddChest()
+    {
+        Properties.AddToIntProperty("chests", 1);
     }
 
     public void OnPlayerDeath()

@@ -15,7 +15,7 @@ public class CoinSpawner : MonoBehaviour
 
         if (!IsLuckyToSpawn())
         {
-            return;
+            //return;
         }
 
         if (maxToSpawn < 0) maxToSpawn = transform.childCount;
