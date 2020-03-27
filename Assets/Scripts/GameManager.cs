@@ -92,11 +92,15 @@ public class GameManager : MonoBehaviour
 
     public void AddCoin()
     {
-        var score = Properties.GetInt("score");
-        var multiplier = Properties.GetFloat("multiplier");
-        var newScore = Mathf.RoundToInt(score + multiplier * SCORE_INCREMENT);
-        Properties.setProperty("score", newScore);
-        Properties.AddToIntProperty("coins", 1);
+        AddCoins(1);
+    }
+
+    public void AddCoins(int count)
+    {
+        //var score = Properties.GetInt("score");
+        //var multiplier = Properties.GetFloat("multiplier");
+        //var newScore = Mathf.RoundToInt(score + multiplier * SCORE_INCREMENT);
+        Properties.AddToIntProperty("coins", count);
     }
 
     public void AddChest()
@@ -116,5 +120,17 @@ public class GameManager : MonoBehaviour
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
         SetUIPanelActive("GameOverUi", false);
+    }
+
+    public void CheckForPrizesCollected()
+    {
+        if (Properties.GetInt("chests") <= 0)
+        {
+            RestartGame();
+            return;
+        }
+
+        // TODO extract constant
+        UnityEngine.SceneManagement.SceneManager.LoadScene("PrizeGivaway");
     }
 }

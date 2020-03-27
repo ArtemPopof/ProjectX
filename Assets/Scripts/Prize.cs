@@ -6,6 +6,7 @@ public class Prize : MonoBehaviour
 {
     public int maxCount;
     public int chance;
+    public PrizeType type;
 }
 
 public enum PrizeType
