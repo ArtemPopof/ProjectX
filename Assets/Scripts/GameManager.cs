@@ -122,6 +122,20 @@ public class GameManager : MonoBehaviour
         SetUIPanelActive("GameOverUi", false);
     }
 
+    public void CheckForNewHighscore()
+    {
+        var lastHighscore = PlayerPrefs.GetInt("highscore");
+        if (Properties.GetInt("score") > lastHighscore)
+        {
+            PlayerPrefs.SetInt("highscore", Properties.GetInt("score"));
+            PlayerPrefs.SetInt("chests", Properties.GetInt("chests"));
+            UnityEngine.SceneManagement.SceneManager.LoadScene("NewHighscore");
+            return;
+        }
+
+        CheckForPrizesCollected();
+    }
+
     public void CheckForPrizesCollected()
     {
         if (Properties.GetInt("chests") <= 0)

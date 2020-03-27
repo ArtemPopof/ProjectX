@@ -29,7 +29,7 @@ public class PlayerMotor : MonoBehaviour {
     }
 
     private void Update() {
-        if (!GameManager.Instance.IsRunning) {
+        if (GameManager.Instance == null || !GameManager.Instance.IsRunning) {
             return;
         }
 
