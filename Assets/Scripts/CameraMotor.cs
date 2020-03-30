@@ -19,7 +19,6 @@ public class CameraMotor : MonoBehaviour
         Vector3 realOffset = isReversed ? reversedOffset : offset;
 
         Vector3 desiredPosition = lookAt.position + realOffset;
-        desiredPosition.x = 0;
 
         if (isReversed)
         {
@@ -27,7 +26,7 @@ public class CameraMotor : MonoBehaviour
         }
         else
         {
-            transform.position = Vector3.Lerp(transform.position, desiredPosition, Time.deltaTime * 2);
+            transform.position = Vector3.Lerp(transform.position, desiredPosition, Time.deltaTime * 4);
         }
     }
 }

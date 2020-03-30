@@ -4,11 +4,11 @@ using System.Collections;
 public class PlayerMotor : MonoBehaviour {
 
     // Movement
-    private const int LANE_DISTANCE = 2;
+    private const int LANE_DISTANCE = 4;
     private const float TURN_SPEED = 0.05f;
     private CharacterController controller;
-    private float jumpForce = 8.0f;
-    private float gravity = 16.0f;
+    private float jumpForce = 10.0f;
+    private float gravity = 15.0f;
     private float verticalVelocity;
     private int desiredLane = 1; // 0 = Left, 1 = Middle, 2 = Right
 
