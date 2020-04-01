@@ -51,7 +51,7 @@ public class LevelManager : MonoBehaviour
 
      private void Start() 
      {
-         for (int i = 0; i < INITIAL_SEGMENTS; i++)
+         for (int i = 0; amountOfActiveSegments < INITIAL_SEGMENTS; i++)
             GenerateSegment();
      }
 
@@ -59,13 +59,12 @@ public class LevelManager : MonoBehaviour
         private void Update()
         {
             if (currentSpawnZ - cameraContainer.position.z < DISTANCE_BEFORE_SPAWN)
-            GenerateSegment();
+                GenerateSegment();
 
-            // TODO looks like hack(
-            if (amountOfActiveSegments >= MAX_SEGMENTS_ON_SCREEN)
+            if (amountOfActiveSegments > MAX_SEGMENTS_ON_SCREEN)
             {
-                //segments[amountOfActiveSegments - 1].DeSpawn();
-                //amountOfActiveSegments--;
+                segments[amountOfActiveSegments - 1].DeSpawn();
+                amountOfActiveSegments--;
             }
         }
      private void GenerateSegment()
@@ -75,7 +74,7 @@ public class LevelManager : MonoBehaviour
          {
              // Spawn transition seg
              countiousSegments = 0;
-             SpawnTransition();
+             //SpawnTransition();
          }
          else
          {
