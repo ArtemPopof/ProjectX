@@ -13,6 +13,7 @@ public class Coin : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        SoundManager.PlaySound("Coin");
         GameManager.Instance.AddCoin();
         animator.SetTrigger("Collision");
         Destroy(this.gameObject, 1.5f);

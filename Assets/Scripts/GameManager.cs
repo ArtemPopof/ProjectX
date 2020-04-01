@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour
     public PlayerMotor playerMotor;
     public CameraMotor cameraMotor;
 
+    public Animator gameCanvas;
+
     private Timer secTimer;
 
     private int scoreIncrease = 1;
@@ -56,6 +58,8 @@ public class GameManager : MonoBehaviour
             playerMotor.StartRunning();
             secTimer.Start();
             cameraMotor.ZoomPlayer();
+            cameraMotor.IsMoving = true;
+            gameCanvas.SetTrigger("Show");
         }
 
         if (scoreIncreaseTick)
