@@ -12,7 +12,7 @@ public class PlayerMotor : MonoBehaviour {
     private float verticalVelocity;
     private int desiredLane = 1; // 0 = Left, 1 = Middle, 2 = Right
 
-    private float startSpeed = 14.0f;
+    private float startSpeed = 18.0f;
     private float speed;
     private float speedIncreaseLastTick;
     private float speedIncreaseTime = 2.5f;
@@ -59,7 +59,7 @@ public class PlayerMotor : MonoBehaviour {
 
          // Let's caclulate our move delta
          Vector3 moveVector = Vector3.zero;
-         moveVector.x = (targetPosition - transform.position).normalized.x * speed;
+         moveVector.x = (targetPosition.x - transform.position.x) * (speed / 2.0f);
 
          bool isGrounded = IsGrounded();
          // Calculate Y
