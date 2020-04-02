@@ -35,7 +35,7 @@ public class AfterLosingScene : MonoBehaviour
 
         // generate random prize
         bool prizeIsEmpty = Random.Range(0, 100) <= chanceToGetNothing;
-        if (!prizeIsEmpty)
+        if (prizeIsEmpty)
         {
             GiveEmptyPrize();
             return;
