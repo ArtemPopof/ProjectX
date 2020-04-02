@@ -32,10 +32,11 @@ public class AfterLosingScene : MonoBehaviour
         }
 
         closedPrize.gameObject.SetActive(false);
+        footer.gameObject.SetActive(false);
 
         // generate random prize
         bool prizeIsEmpty = Random.Range(0, 100) <= chanceToGetNothing;
-        if (prizeIsEmpty)
+        if (!prizeIsEmpty)
         {
             GiveEmptyPrize();
             return;
