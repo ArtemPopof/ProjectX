@@ -34,19 +34,19 @@ public class AfterLosingScene : MonoBehaviour
         closedPrize.gameObject.SetActive(false);
 
         // generate random prize
-        bool prizeIsEmpty = UnityEngine.Random.Range(0, 100) <= chanceToGetNothing;
-        if (prizeIsEmpty)
+        bool prizeIsEmpty = Random.Range(0, 100) <= chanceToGetNothing;
+        if (!prizeIsEmpty)
         {
             GiveEmptyPrize();
             return;
         }
 
-        var prizeIndex = UnityEngine.Random.Range(0, prizes.childCount);
+        var prizeIndex = Random.Range(0, prizes.childCount);
         var prize = prizes.GetChild(prizeIndex);
         prize.gameObject.SetActive(true);
 
         var maxPrizeCount = GetMaxPrizeCount(prize);
-        var prizeCount = UnityEngine.Random.Range((int) (0.1 * maxPrizeCount), maxPrizeCount);
+        var prizeCount = Random.Range((int) (0.1 * maxPrizeCount), maxPrizeCount);
         prizeCount = Mathf.Max(1, prizeCount);
 
         GivePrize(prize.GetComponent<Prize>(), prizeCount);
