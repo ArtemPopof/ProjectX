@@ -29,4 +29,10 @@ public class CameraMotor : MonoBehaviour
             transform.position = Vector3.Lerp(transform.position, desiredPosition, Time.deltaTime * 4);
         }
     }
+
+    public void ZoomPlayer()
+    {
+        // zoom a little bit after start
+        offset.z += isReversed ? -2 : 2;
+    }
 }

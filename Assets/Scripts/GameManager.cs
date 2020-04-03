@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     public PropertyList Properties {get; private set;}
 
     public PlayerMotor playerMotor;
+    public CameraMotor cameraMotor;
 
     private Timer secTimer;
 
@@ -54,6 +55,7 @@ public class GameManager : MonoBehaviour
             IsRunning = true;
             playerMotor.StartRunning();
             secTimer.Start();
+            cameraMotor.ZoomPlayer();
         }
 
         if (scoreIncreaseTick)
