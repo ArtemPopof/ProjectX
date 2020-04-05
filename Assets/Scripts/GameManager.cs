@@ -125,8 +125,11 @@ public class GameManager : MonoBehaviour
 
     public void RestartGame()
     {
+        var coins = PlayerPrefs.GetInt("score") + Properties.GetInt("score");
+        PlayerPrefs.SetInt("coins", coins);
         UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
         SetUIPanelActive("GameOverUi", false);
+        menu.SetTrigger("Show");
     }
 
     public void CheckForNewHighscore()
