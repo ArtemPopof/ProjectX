@@ -15,11 +15,10 @@ public class CameraMotor : MonoBehaviour
         transform.Rotate(isReversed ? 0 : downAngle, isReversed ? 180 : 0, 0);
     }
 
-    private void LateUpdate() {
+    private void Update() {
         Vector3 realOffset = isReversed ? reversedOffset : offset;
 
         Vector3 desiredPosition = lookAt.position + realOffset;
-        desiredPosition.x = 0;
 
         if (isReversed)
         {
@@ -27,7 +26,13 @@ public class CameraMotor : MonoBehaviour
         }
         else
         {
-            transform.position = Vector3.Lerp(transform.position, desiredPosition, Time.deltaTime);
+            transform.position = Vector3.Lerp(transform.position, desiredPosition, Time.deltaTime * 4);
         }
+    }
+
+    public void ZoomPlayer()
+    {
+        // zoom a little bit after start
+        offset.z += isReversed ? -2 : 2;
     }
 }

@@ -4,15 +4,15 @@ using System.Collections;
 public class PlayerMotor : MonoBehaviour {
 
     // Movement
-    private const int LANE_DISTANCE = 2;
+    private const int LANE_DISTANCE = 4;
     private const float TURN_SPEED = 0.05f;
     private CharacterController controller;
-    private float jumpForce = 8.0f;
-    private float gravity = 16.0f;
+    private float jumpForce = 25.0f;
+    private float gravity = 85.0f;
     private float verticalVelocity;
     private int desiredLane = 1; // 0 = Left, 1 = Middle, 2 = Right
 
-    private float startSpeed = 14.0f;
+    private float startSpeed = 18.0f;
     private float speed;
     private float speedIncreaseLastTick;
     private float speedIncreaseTime = 2.5f;
@@ -29,7 +29,7 @@ public class PlayerMotor : MonoBehaviour {
     }
 
     private void Update() {
-        if (!GameManager.Instance.IsRunning) {
+        if (GameManager.Instance == null || !GameManager.Instance.IsRunning) {
             return;
         }
 
@@ -59,7 +59,7 @@ public class PlayerMotor : MonoBehaviour {
 
          // Let's caclulate our move delta
          Vector3 moveVector = Vector3.zero;
-         moveVector.x = (targetPosition - transform.position).normalized.x * speed;
+         moveVector.x = (targetPosition.x - transform.position.x) * (speed / 2.0f);
 
          bool isGrounded = IsGrounded();
          // Calculate Y
@@ -109,10 +109,10 @@ public class PlayerMotor : MonoBehaviour {
         Ray groundRay = new Ray(
             new Vector3(
                 controller.bounds.center.x,
-                controller.bounds.center.y - controller.bounds.extents.y + 0.2f,
+                controller.bounds.center.y - controller.bounds.extents.y,
                 controller.bounds.center.z), Vector3.down);
 
-        return Physics.Raycast(groundRay, 0.2f + 0.1f);
+        return Physics.Raycast(groundRay, 0.3f);
     }
 
     public void StartRunning() {

@@ -9,9 +9,10 @@ public class LevelManager : MonoBehaviour
     private const bool SNOW_COLLIDER = true;
 
     //Level spawning
-    private const float DISTANCE_BEFORE_SPAWN = 500.0f;
-    private const int INITIAL_SEGMENTS = 10;
-    private const int MAX_SEGMENTS_ON_SCREEN = 15;
+    private const float DISTANCE_BEFORE_SPAWN = 100.0f;
+    private const int INITIAL_SEGMENTS = 5;
+    private const int MAX_SEGMENTS_ON_SCREEN = 5;
+    public const int DISTANCE_BEFORE_FIRST_SEGMENT = 50;
     private Transform cameraContainer;
     private int amountOfActiveSegments;
     private int countiousSegments;
@@ -50,17 +51,17 @@ public class LevelManager : MonoBehaviour
 
      private void Start() 
      {
-         for (int i = 0; i < INITIAL_SEGMENTS; i++)
-         GenerateSegment();
+         for (int i = 0; amountOfActiveSegments < INITIAL_SEGMENTS; i++)
+            GenerateSegment();
      }
 
 
         private void Update()
         {
             if (currentSpawnZ - cameraContainer.position.z < DISTANCE_BEFORE_SPAWN)
-            GenerateSegment();
+                GenerateSegment();
 
-            if (amountOfActiveSegments >= MAX_SEGMENTS_ON_SCREEN)
+            if (amountOfActiveSegments > MAX_SEGMENTS_ON_SCREEN)
             {
                 segments[amountOfActiveSegments - 1].DeSpawn();
                 amountOfActiveSegments--;
@@ -73,7 +74,7 @@ public class LevelManager : MonoBehaviour
          {
              // Spawn transition seg
              countiousSegments = 0;
-             SpawnTransition();
+             //SpawnTransition();
          }
          else
          {
@@ -81,6 +82,7 @@ public class LevelManager : MonoBehaviour
          }
      }
 
+    // TODO Bad naming (not a verb)
      private void SpawnerSegment() 
      {
          List<Segment> possibleSegment = availableSegements.FindAll(
@@ -88,6 +90,7 @@ public class LevelManager : MonoBehaviour
 
         int id = Random.Range(0, possibleSegment.Count);
 
+        // TODO what does bool do?
         Segment segment = GetSegment(id, false);
 
         y1 = segment.endY1;
@@ -95,7 +98,7 @@ public class LevelManager : MonoBehaviour
         y3 = segment.endY3;
 
         segment.transform.SetParent(transform);
-        segment.transform.localPosition = Vector3.forward * currentSpawnZ;
+        segment.transform.localPosition = Vector3.forward * (currentSpawnZ + DISTANCE_BEFORE_FIRST_SEGMENT);
 
         currentSpawnZ += segment.lenght;
         amountOfActiveSegments++;
