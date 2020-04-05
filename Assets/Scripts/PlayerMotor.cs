@@ -43,9 +43,11 @@ public class PlayerMotor : MonoBehaviour {
 
         // Gather the inputs on which lane we should be
         if (MobileInput.Instance.SwipeLeft) {
-             MoveLane(false);
+            SoundManager.PlaySound("Swipe1");
+            MoveLane(false);
          }
          if (MobileInput.Instance.SwipeRight) {
+             SoundManager.PlaySound("Swipe1");
              MoveLane(true);
          }
 
@@ -70,11 +72,13 @@ public class PlayerMotor : MonoBehaviour {
 
              if (MobileInput.Instance.SwipeUp) {
                  // Jump
+                 SoundManager.PlaySound("Jump");
                  animator.SetTrigger("Jump");
                  verticalVelocity = jumpForce;
              } else if (MobileInput.Instance.SwipeDown)
              {
                  // Slide
+                 SoundManager.PlaySound("Swipe1");
                  StartSliding();
                  Invoke("StopSliding", 1.0f);
              }
@@ -83,7 +87,9 @@ public class PlayerMotor : MonoBehaviour {
 
              // Fast Falling mechanic
              if (MobileInput.Instance.SwipeDown) {
+                SoundManager.PlaySound("Swipe2");
                 verticalVelocity = -jumpForce;
+                
              }
          }
 
@@ -143,6 +149,7 @@ public class PlayerMotor : MonoBehaviour {
 
     private void Crash()
     {
+        SoundManager.PlaySound("Death");
         animator.SetTrigger("Death");
         GameManager.Instance.OnPlayerDeath();
     }

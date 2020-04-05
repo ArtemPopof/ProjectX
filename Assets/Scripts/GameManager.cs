@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour
     public PlayerMotor playerMotor;
     public CameraMotor cameraMotor;
 
+    public Animator menu;
+
     private Timer secTimer;
 
     private int scoreIncrease = 1;
@@ -56,7 +58,10 @@ public class GameManager : MonoBehaviour
             playerMotor.StartRunning();
             secTimer.Start();
             cameraMotor.ZoomPlayer();
+            cameraMotor.IsMoving = true;
+            menu.SetTrigger("Hide");
         }
+        
 
         if (scoreIncreaseTick)
         {
@@ -120,8 +125,11 @@ public class GameManager : MonoBehaviour
 
     public void RestartGame()
     {
+        var coins = PlayerPrefs.GetInt("score") + Properties.GetInt("score");
+        PlayerPrefs.SetInt("coins", coins);
         UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
         SetUIPanelActive("GameOverUi", false);
+        menu.SetTrigger("Show");
     }
 
     public void CheckForNewHighscore()
