@@ -12,9 +12,12 @@ public class GameManager : MonoBehaviour
 
     public bool IsDead {set; get;}
     public bool IsRunning { set; get; }
-    public bool IsDead { set; get; }
     public PropertyList Properties {get; private set;}
+
     public PlayerMotor playerMotor;
+    public CameraMotor cameraMotor;
+
+    public Animator menu;
 
     private Timer secTimer;
 
@@ -35,13 +38,14 @@ public class GameManager : MonoBehaviour
         Properties.Add("multiplier", 0.0f).WithCustomFormater(new MultiplierFormater());
         Properties.Add("score", 0);
         Properties.Add("coins", 0);
+        Properties.Add("chests", 0);
 
         uiPanels = GameObject.FindWithTag("UI");
     }
 
     void Update()
     {
-        if (isDead)
+        if (IsDead)
         {
             return;
         }
@@ -53,7 +57,11 @@ public class GameManager : MonoBehaviour
             IsRunning = true;
             playerMotor.StartRunning();
             secTimer.Start();
+            cameraMotor.ZoomPlayer();
+            cameraMotor.IsMoving = true;
+            menu.SetTrigger("Hide");
         }
+        
 
         if (scoreIncreaseTick)
         {
@@ -78,16 +86,11 @@ public class GameManager : MonoBehaviour
 
     private Timer InitTimer()
     {
-        if (IsRunning && !IsDead)
-        {
-            var timer = new Timer();
-            timer.Elapsed += new ElapsedEventHandler(OnTimer);
-            timer.Interval = 200;
+        var timer = new Timer();
+        timer.Elapsed += new ElapsedEventHandler(OnTimer);
+        timer.Interval = 200;
 
-            return timer;
-        }
-        
-        return new Timer();
+        return timer;
     }
 
     private void OnTimer(object source, ElapsedEventArgs e) {
@@ -96,11 +99,20 @@ public class GameManager : MonoBehaviour
 
     public void AddCoin()
     {
-        var score = Properties.GetInt("score");
-        var multiplier = Properties.GetFloat("multiplier");
-        var newScore = Mathf.RoundToInt(score + multiplier * SCORE_INCREMENT);
-        Properties.setProperty("score", newScore);
-        Properties.AddToIntProperty("coins", 1);
+        AddCoins(1);
+    }
+
+    public void AddCoins(int count)
+    {
+        //var score = Properties.GetInt("score");
+        //var multiplier = Properties.GetFloat("multiplier");
+        //var newScore = Mathf.RoundToInt(score + multiplier * SCORE_INCREMENT);
+        Properties.AddToIntProperty("coins", count);
+    }
+
+    public void AddChest()
+    {
+        Properties.AddToIntProperty("chests", 1);
     }
 
     public void OnPlayerDeath()
@@ -113,7 +125,36 @@ public class GameManager : MonoBehaviour
 
     public void RestartGame()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("Gameplay");
+        var coins = PlayerPrefs.GetInt("score") + Properties.GetInt("score");
+        PlayerPrefs.SetInt("coins", coins);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
         SetUIPanelActive("GameOverUi", false);
+        menu.SetTrigger("Show");
+    }
+
+    public void CheckForNewHighscore()
+    {
+        var lastHighscore = PlayerPrefs.GetInt("highscore");
+        if (Properties.GetInt("score") > lastHighscore)
+        {
+            PlayerPrefs.SetInt("highscore", Properties.GetInt("score"));
+            PlayerPrefs.SetInt("chests", Properties.GetInt("chests"));
+            UnityEngine.SceneManagement.SceneManager.LoadScene("NewHighscore");
+            return;
+        }
+
+        CheckForPrizesCollected();
+    }
+
+    public void CheckForPrizesCollected()
+    {
+        if (Properties.GetInt("chests") <= 0)
+        {
+            RestartGame();
+            return;
+        }
+
+        // TODO extract constant
+        UnityEngine.SceneManagement.SceneManager.LoadScene("PrizeGivaway");
     }
 }
