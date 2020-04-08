@@ -63,8 +63,9 @@ public class GameManager : MonoBehaviour
         }
         
 
-        if (scoreIncreaseTick)
+        if (scoreIncreaseTick && !PauseButton.GameIsPaused)
         {
+
             var score = Properties.GetInt("score") + scoreIncrease * Properties.GetFloat("multiplier");
             int roundedScore = (int)Math.Floor(score + 1);
             Properties.setProperty("score", roundedScore);
