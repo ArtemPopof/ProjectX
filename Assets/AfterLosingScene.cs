@@ -27,7 +27,7 @@ public class AfterLosingScene : MonoBehaviour
     {
         if (IsOpenAlready())
         {
-            UnityEngine.SceneManagement.SceneManager.LoadScene("Sprint0");
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Sprint2");
             return;
         }
 
