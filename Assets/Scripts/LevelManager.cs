@@ -11,13 +11,13 @@ public class LevelManager : MonoBehaviour
     //Level spawning
     private const float DISTANCE_BEFORE_SPAWN = 100.0f;
     private const int INITIAL_SEGMENTS = 5;
-    private const int MAX_SEGMENTS_ON_SCREEN = 5;
+    private const int MAX_SEGMENTS_ON_SCREEN = 15;
     public const int DISTANCE_BEFORE_FIRST_SEGMENT = 50;
     private Transform cameraContainer;
     private int amountOfActiveSegments;
     private int countiousSegments;
     //  private int currentLevel;
-    private int currentSpawnZ;
+    private float currentSpawnZ;
 
     private int y1, y2, y3; 
 
@@ -74,7 +74,7 @@ public class LevelManager : MonoBehaviour
          {
              // Spawn transition seg
              countiousSegments = 0;
-             //SpawnTransition();
+             SpawnTransition();
          }
          else
          {
@@ -140,7 +140,7 @@ public class LevelManager : MonoBehaviour
         y3 = segment.endY3;
 
         segment.transform.SetParent(transform);
-        segment.transform.localPosition = Vector3.forward * currentSpawnZ;
+        segment.transform.localPosition = Vector3.forward * (currentSpawnZ + DISTANCE_BEFORE_FIRST_SEGMENT);
 
         currentSpawnZ += segment.lenght;
         amountOfActiveSegments++;

@@ -8,7 +8,7 @@ public class CameraMotor : MonoBehaviour
     public Vector3 offset;
     public Vector3 reversedOffset = new Vector3(0, 1, 6);
 
-    public Vector3 rotation = new Vector3(10, 0, 0);
+    public Vector3 rotation = new Vector3(18, 0, 0);
     public bool isReversed;
     public int downAngle;
 
@@ -26,6 +26,7 @@ public class CameraMotor : MonoBehaviour
             return;
 
         Vector3 desiredPosition = lookAt.position + realOffset;
+
         transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(rotation), 0.1f);
 
         if (isReversed)
@@ -34,13 +35,17 @@ public class CameraMotor : MonoBehaviour
         }
         else
         {
-            transform.position = Vector3.Lerp(transform.position, desiredPosition, Time.deltaTime * 4);
+            // smooth camera 
+            transform.position = Vector3.Lerp(transform.position, desiredPosition, Time.deltaTime * 10);
+
+            // instant following
+            //transform.position = desiredPosition;
         }
     }
 
     public void ZoomPlayer()
     {
         // zoom a little bit after start
-        offset.z += isReversed ? -2 : 2;
+        //offset.z -= offset.z / 2;
     }
 }

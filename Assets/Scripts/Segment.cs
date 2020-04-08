@@ -7,7 +7,7 @@ public class Segment : MonoBehaviour
     public int SegmentId {set; get;}
     public bool transition;
 
-    public int lenght;
+    public float lenght;
     public int beginY1, beginY2, beginY3;
     public int endY1, endY2, endY3;
 
