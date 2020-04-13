@@ -14,7 +14,6 @@ public class AfterLosingScene : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
@@ -30,6 +29,8 @@ public class AfterLosingScene : MonoBehaviour
             UnityEngine.SceneManagement.SceneManager.LoadScene("Sprint2");
             return;
         }
+
+        SoundManager.PlaySound("Chest");
 
         closedPrize.gameObject.SetActive(false);
 

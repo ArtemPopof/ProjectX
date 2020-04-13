@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
-    public static AudioClip playerDeath, playerJump, coin, swipe1, swipe2;
+    public static AudioClip playerDeath, playerJump, coin, swipe1, swipe2, chest, highscore, special;
     static AudioSource audioSource;
     private static int coinsCountInARow;
     private static float lastCoinTime;
@@ -20,6 +20,9 @@ public class SoundManager : MonoBehaviour
         coin = Resources.Load<AudioClip>("coin");
         swipe1 = Resources.Load<AudioClip>("swipe1");
         swipe2 = Resources.Load<AudioClip>("swipe2");
+        chest = Resources.Load<AudioClip>("chest");
+        highscore = Resources.Load<AudioClip>("highscore");
+        special = Resources.Load<AudioClip>("special");
 
         audioSource = GetComponent<AudioSource>();
         lastCoinTime = 0;
@@ -38,10 +41,11 @@ public class SoundManager : MonoBehaviour
 
         switch (clip) {
             case "Death":
+                if (GameManager.Instance.IsDead) return;
                 audioSource.PlayOneShot(playerDeath);
                 break;
             case "Jump":
-                audioSource.PlayOneShot(playerJump);
+                audioSource.PlayOneShot(swipe1);
                 break;
             case "Coin":
                 increaseAudioPitch();
@@ -52,6 +56,15 @@ public class SoundManager : MonoBehaviour
                 break;
             case "Swipe2":
                 audioSource.PlayOneShot(swipe2);
+                break;
+            case "Chest":
+                audioSource.PlayOneShot(chest);
+                break;
+            case "Highscore":
+                audioSource.PlayOneShot(highscore);
+                break;
+            case "Special":
+                audioSource.PlayOneShot(special);
                 break;
             default:
                 break;
@@ -73,7 +86,6 @@ public class SoundManager : MonoBehaviour
         lastCoinTime = Time.time;
 
         var pitch = calculateCurrentPitch();
-        Debug.Log("Current pitch: " + pitch);
         audioSource.pitch = pitch;
     }
 

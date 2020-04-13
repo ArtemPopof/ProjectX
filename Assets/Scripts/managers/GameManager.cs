@@ -113,6 +113,7 @@ public class GameManager : MonoBehaviour
     public void AddChest()
     {
         Properties.AddToIntProperty("chests", 1);
+        SoundManager.PlaySound("Special");
     }
 
     public void OnPlayerDeath()
