@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
 
     public bool IsDead {set; get;}
     public bool IsRunning { set; get; }
+
+    public bool IsLoading { set; get; }
     public PropertyList Properties {get; private set;}
 
     public PlayerMotor playerMotor;
@@ -30,6 +32,7 @@ public class GameManager : MonoBehaviour
     {
         Instance = this;
         IsRunning = false;
+        IsLoading = true;
         IsDead = false;
         Properties = new PropertyList();
         secTimer = InitTimer();
@@ -52,7 +55,7 @@ public class GameManager : MonoBehaviour
 
         //TODO extract all string constants
         //TODO maybe make some statemachine for states
-        if (!IsRunning && MobileInput.Instance.Tap) {
+        if (!IsRunning && !IsLoading && MobileInput.Instance.Tap) {
             SetUIPanelActive("InGameUi", true);
             IsRunning = true;
             playerMotor.StartRunning();
@@ -70,6 +73,14 @@ public class GameManager : MonoBehaviour
             Properties.setProperty("score", roundedScore);
             scoreIncreaseTick = false;
         }
+    }
+
+    public void OnLoadingEnd()
+    {
+        SetUIPanelActive("LoadingUi", false);
+        SetUIPanelActive("MainMenuUi", true);
+
+        IsLoading = false;
     }
 
     private void SetUIPanelActive(string panelTag, bool isActive)
