@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour
         Instance = this;
         IsRunning = false;
         IsLoading = true;
-        IsDead = false;
+        IsDead = false; 
         Properties = new PropertyList();
         secTimer = InitTimer();
 
@@ -42,6 +42,13 @@ public class GameManager : MonoBehaviour
         Properties.Add("score", 0);
         Properties.Add("coins", 0);
         Properties.Add("chests", 0);
+
+        var highscore = 0;
+        if (PlayerPrefs.HasKey("highscore"))
+        {
+            highscore = PlayerPrefs.GetInt("highscore");
+        }
+        Properties.Add("highscore", highscore);
 
         uiPanels = GameObject.FindWithTag("UI");
     }
@@ -72,6 +79,7 @@ public class GameManager : MonoBehaviour
             var score = Properties.GetInt("score") + scoreIncrease * Properties.GetFloat("multiplier");
             int roundedScore = (int)Math.Floor(score + 1);
             Properties.setProperty("score", roundedScore);
+            Properties.setProperty("highscore", Mathf.Max(roundedScore, Properties.GetInt("highscore")));
             scoreIncreaseTick = false;
         }
     }
