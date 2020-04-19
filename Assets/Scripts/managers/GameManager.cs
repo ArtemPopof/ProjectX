@@ -7,6 +7,11 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     private const int SCORE_INCREMENT = 10;
+    // this constant restrict loading, if scene was recently loaded
+    // after 2 secs we need to show loading screen again
+    // this will guarantee loading screen is active after 
+    // game application is restarted
+    private const float GAME_RESTART_DELAY_BEFORE_RELOADING = 2;
 
     public static GameManager Instance { private set; get; }
 
@@ -51,6 +56,24 @@ public class GameManager : MonoBehaviour
         Properties.Add("highscore", highscore);
 
         uiPanels = GameObject.FindWithTag("UI");
+
+        if (GameRestarted())
+        {
+            OnLoadingEnd();
+        }
+    }
+
+    private bool GameRestarted()
+    {
+        if (!PlayerPrefs.HasKey("LastRestart"))
+        {
+            return false;
+        }
+
+        float delta = Time.time - PlayerPrefs.GetFloat("LastRestart");
+        if (delta < 0) return false;
+
+        return delta < GAME_RESTART_DELAY_BEFORE_RELOADING;
     }
 
     void Update()
@@ -151,6 +174,7 @@ public class GameManager : MonoBehaviour
         UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
         SetUIPanelActive("GameOverUi", false);
         menu.SetTrigger("Show");
+        PlayerPrefs.SetFloat("LastRestart", Time.time);
     }
 
     public void CheckForNewHighscore()
