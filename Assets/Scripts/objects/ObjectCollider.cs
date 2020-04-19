@@ -17,6 +17,6 @@ public class ObjectCollider : MonoBehaviour
 
     private void removeDebugRenderingComponent()
     {
-        GetComponent<MeshRenderer>().gameObject.SetActive(false);
+        GetComponent<MeshRenderer>().enabled = false;
     }
 }

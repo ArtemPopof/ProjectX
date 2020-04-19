@@ -37,7 +37,7 @@ public class PlayerMotor : MonoBehaviour {
         {
             speedIncreaseLastTick = Time.time;
             speed += speedIncreaseAmount;
-
+ 
             GameManager.Instance.Properties.setProperty("multiplier", 1.0f + (speed - startSpeed));
         }
 
