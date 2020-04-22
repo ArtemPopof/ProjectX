@@ -3,9 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Timers;
 using UnityEngine;
+using UnityEngine.Advertisements;
 
 public class GameManager : MonoBehaviour
 {
+    private const bool DEBUG_MODE = true;
+    private const string GAME_ID = "3565048";
     private const int SCORE_INCREMENT = 10;
     // this constant restrict loading, if scene was recently loaded
     // after 2 secs we need to show loading screen again
@@ -61,7 +64,15 @@ public class GameManager : MonoBehaviour
         if (GameRestarted())
         {
             OnLoadingEnd();
+        } else
+        {
+            initAdsEngine();
         }
+    }
+
+    private void initAdsEngine()
+    {
+        Advertisement.Initialize(GAME_ID, DEBUG_MODE);
     }
 
     private bool GameRestarted()
@@ -112,11 +123,10 @@ public class GameManager : MonoBehaviour
     {
         SetUIPanelActive("LoadingUi", false);
         SetUIPanelActive("MainMenuUi", true);
-
         IsLoading = false;
     }
 
-    private void SetUIPanelActive(string panelTag, bool isActive)
+    public void SetUIPanelActive(string panelTag, bool isActive)
     {
         foreach(Transform child in uiPanels.transform)
         {
