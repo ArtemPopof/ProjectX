@@ -22,10 +22,13 @@ public class GameManager : MonoBehaviour
     public bool IsRunning { set; get; }
 
     public bool IsLoading { set; get; }
+
     public PropertyList Properties {get; private set;}
 
     public PlayerMotor playerMotor;
     public CameraMotor cameraMotor;
+    public LevelManager levelManager;
+    private AdManager adManager;
 
     public Animator menu;
 
@@ -36,6 +39,8 @@ public class GameManager : MonoBehaviour
 
     private GameObject uiPanels;
 
+    private GameObject deathCauser;
+
     void Awake()
     {
         Instance = this;
@@ -44,6 +49,7 @@ public class GameManager : MonoBehaviour
         IsDead = false; 
         Properties = new PropertyList();
         secTimer = InitTimer();
+        adManager = new AdManager();
 
         Properties.Add("distance", 0.0f);
         Properties.Add("multiplier", 0.0f).WithCustomFormater(new MultiplierFormater());
@@ -175,10 +181,11 @@ public class GameManager : MonoBehaviour
         Properties.AddToIntProperty("eggs", 1);
     }
 
-    public void OnPlayerDeath()
+    public void OnPlayerDeath(GameObject collider)
     {
         IsRunning = false;
         IsDead = true;
+        deathCauser = collider;
         SetUIPanelActive("InGameUi", false);
         SetUIPanelActive("GameOverUi", true);
     }
@@ -217,5 +224,24 @@ public class GameManager : MonoBehaviour
 
         // TODO extract constant
         UnityEngine.SceneManagement.SceneManager.LoadScene("PrizeGivaway");
+    }
+    public void Resurrect()
+    {
+        SetUIPanelActive("GameOverUi", false);
+        SetUIPanelActive("InGameUi", true);
+        EvaporateGameObjectsOfCurrentAndNextSegment();
+        IsRunning = true;
+        IsDead = false;
+        playerMotor.ResurrectPlayer();
+    }
+
+    private void EvaporateGameObjectsOfCurrentAndNextSegment()
+    {
+        var currentSegment = levelManager.GetSegementByGameObject(deathCauser);
+        var nextSegment = levelManager.GetNextSegment(currentSegment);
+
+        // need animation here
+        currentSegment.SegmentObjects.SetActive(false);
+        nextSegment.SegmentObjects.SetActive(false);
     }
 }

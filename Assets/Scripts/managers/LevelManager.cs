@@ -1,10 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
-    public static LevelManager Instance {set; get;}
+    public static LevelManager Instance { set; get; }
 
     private const bool SNOW_COLLIDER = true;
 
@@ -19,7 +20,7 @@ public class LevelManager : MonoBehaviour
     //  private int currentLevel;
     private float currentSpawnZ;
 
-    private int y1, y2, y3; 
+    private int y1, y2, y3;
 
     //List of pieces
 
@@ -35,13 +36,13 @@ public class LevelManager : MonoBehaviour
     // list of segments;
     public List<Segment> availableSegements = new List<Segment>();
     public List<Segment> availableTransitions = new List<Segment>();
-      [HideInInspector]
+    [HideInInspector]
     public List<Segment> segments = new List<Segment>();
 
     // gameplay;
     // private bool isMoving = false;
 
-    private void Awake ()
+    private void Awake()
     {
         Instance = this;
         cameraContainer = Camera.main.transform;
@@ -49,46 +50,46 @@ public class LevelManager : MonoBehaviour
         // currentLevel = 0;
     }
 
-     private void Start() 
-     {
-         for (int i = 0; amountOfActiveSegments < INITIAL_SEGMENTS; i++)
+    private void Start()
+    {
+        for (int i = 0; amountOfActiveSegments < INITIAL_SEGMENTS; i++)
             GenerateSegment();
-     }
+    }
 
 
-        private void Update()
+    private void Update()
+    {
+        if (currentSpawnZ - cameraContainer.position.z < DISTANCE_BEFORE_SPAWN)
+            GenerateSegment();
+
+        if (amountOfActiveSegments > MAX_SEGMENTS_ON_SCREEN)
         {
-            if (currentSpawnZ - cameraContainer.position.z < DISTANCE_BEFORE_SPAWN)
-                GenerateSegment();
-
-            if (amountOfActiveSegments > MAX_SEGMENTS_ON_SCREEN)
-            {
-                segments[amountOfActiveSegments - 1].DeSpawn();
-                amountOfActiveSegments--;
-            }
+            segments[amountOfActiveSegments - 1].DeSpawn();
+            amountOfActiveSegments--;
         }
-     private void GenerateSegment()
-     {
-         SpawnerSegment();
-         if (Random.Range(0f, 1f) < countiousSegments * 0.25f)
-         {
-             // Spawn transition seg
-             countiousSegments = 0;
-             SpawnTransition();
-         }
-         else
-         {
-             countiousSegments++;
-         }
-     }
+    }
+    private void GenerateSegment()
+    {
+        SpawnerSegment();
+        if (UnityEngine.Random.Range(0f, 1f) < countiousSegments * 0.25f)
+        {
+            // Spawn transition seg
+            countiousSegments = 0;
+            SpawnTransition();
+        }
+        else
+        {
+            countiousSegments++;
+        }
+    }
 
     // TODO Bad naming (not a verb)
-     private void SpawnerSegment() 
-     {
-         List<Segment> possibleSegment = availableSegements.FindAll(
-             x => x.beginY1 == y1 || x.beginY2 == y2 || x.beginY3 == y3 );
+    private void SpawnerSegment()
+    {
+        List<Segment> possibleSegment = availableSegements.FindAll(
+            x => x.beginY1 == y1 || x.beginY2 == y2 || x.beginY3 == y3);
 
-        int id = Random.Range(0, possibleSegment.Count);
+        int id = UnityEngine.Random.Range(0, possibleSegment.Count);
 
         // TODO what does bool do?
         Segment segment = GetSegment(id, false);
@@ -103,36 +104,36 @@ public class LevelManager : MonoBehaviour
         currentSpawnZ += segment.lenght;
         amountOfActiveSegments++;
         segment.Spawn();
-     }
+    }
 
-     public Segment GetSegment(int id, bool transition)
-     {
-         Segment segment = null;
-         segment = segments.Find(x => x.SegmentId == id && x.transition == transition && !x.gameObject.activeSelf);
+    public Segment GetSegment(int id, bool transition)
+    {
+        Segment segment = null;
+        segment = segments.Find(x => x.SegmentId == id && x.transition == transition && !x.gameObject.activeSelf);
 
-         if (segment == null)
-         {
+        if (segment == null)
+        {
             GameObject go = Instantiate((transition) ? availableTransitions[id].gameObject : availableSegements[id].gameObject) as GameObject;
             segment = go.GetComponent<Segment>();
 
             segment.SegmentId = id;
             segment.transition = transition;
             segments.Insert(0, segment);
-         }
-         else
-         {
-             segments.Remove(segment);
-             segments.Insert(0, segment);
-         }
-         return segment;
-     }
+        }
+        else
+        {
+            segments.Remove(segment);
+            segments.Insert(0, segment);
+        }
+        return segment;
+    }
 
-     private void SpawnTransition()
-     {
-         List<Segment> possibleTransition = availableTransitions.FindAll(
-             x => x.beginY1 == y1 || x.beginY2 == y2 || x.beginY3 == y3 );
+    private void SpawnTransition()
+    {
+        List<Segment> possibleTransition = availableTransitions.FindAll(
+            x => x.beginY1 == y1 || x.beginY2 == y2 || x.beginY3 == y3);
 
-        int id = Random.Range(0, possibleTransition.Count);
+        int id = UnityEngine.Random.Range(0, possibleTransition.Count);
 
         Segment segment = GetSegment(id, true);
 
@@ -145,7 +146,7 @@ public class LevelManager : MonoBehaviour
         currentSpawnZ += segment.lenght;
         amountOfActiveSegments++;
         segment.Spawn();
-     }
+    }
 
     public Piece GetPiece(PieceType pieceType, int visualIndex)
     {
@@ -170,5 +171,29 @@ public class LevelManager : MonoBehaviour
             pieces.Add(piece);
         }
         return piece;
+    }
+
+    public Segment GetSegementByGameObject(GameObject someObject)
+    {
+        var segment = someObject.transform.GetComponentInParent<Segment>();
+        if (segment == null)
+        {
+            throw new ArgumentOutOfRangeException("Cannot find segment for given playerPosition");
+        }
+
+        return segment;
+    }
+
+    public Segment GetNextSegment(Segment currentSegment)
+    {
+        for (int i = 0; i < segments.Count; i++)
+        {
+            if (segments[i].transform.position.z == currentSegment.transform.position.z)
+            {
+                return segments[i - 1];
+            }
+        }
+
+        throw new ArgumentOutOfRangeException("Cannot find next segment for given one");
     }
 }
