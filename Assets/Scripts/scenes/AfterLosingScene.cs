@@ -31,6 +31,9 @@ public class AfterLosingScene : MonoBehaviour
         }
 
         SoundManager.PlaySound("Chest");
+        if(PlayerPrefs.GetInt("isWordCollected") == 1){
+            GiveMaxPrize() ;
+        }
 
         closedPrize.gameObject.SetActive(false);
 
@@ -42,16 +45,7 @@ public class AfterLosingScene : MonoBehaviour
             GiveEmptyPrize();
             return;
         }
-
-        var prizeIndex = Random.Range(0, prizes.childCount);
-        var prize = prizes.GetChild(prizeIndex);
-        prize.gameObject.SetActive(true);
-
-        var maxPrizeCount = GetMaxPrizeCount(prize);
-        var prizeCount = Random.Range((int) (0.1 * maxPrizeCount), maxPrizeCount);
-        prizeCount = Mathf.Max(1, prizeCount);
-
-        GivePrize(prize.GetComponent<Prize>(), prizeCount);
+        GiveMaxPrize();
     }
 
     private void GiveEmptyPrize()
@@ -76,5 +70,19 @@ public class AfterLosingScene : MonoBehaviour
     private bool IsOpenAlready()
     {
         return !closedPrize.gameObject.activeSelf;
+    }
+
+    private void GiveMaxPrize() 
+    {
+
+        var prizeIndex = Random.Range(0, prizes.childCount);
+        var prize = prizes.GetChild(prizeIndex);
+        prize.gameObject.SetActive(true);
+
+        var maxPrizeCount = GetMaxPrizeCount(prize);
+        var prizeCount = Random.Range((int) (0.1 * maxPrizeCount), maxPrizeCount);
+        prizeCount = Mathf.Max(1, prizeCount);
+
+        GivePrize(prize.GetComponent<Prize>(), prizeCount);
     }
 }

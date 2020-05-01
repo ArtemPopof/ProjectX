@@ -1,4 +1,6 @@
+using UnityEngine;
 using UnityEngine.UI;
+
 
 public class Property {
 
@@ -6,6 +8,7 @@ public class Property {
 
     private Text _field;
     public Text Field
+
     {
         get => _field;
         set

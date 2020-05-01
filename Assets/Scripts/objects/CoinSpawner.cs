@@ -13,6 +13,7 @@ public class CoinSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        DisableSpawnLetter();
         DisableAllChildren();
         
         // if(egg != null)
@@ -64,6 +65,46 @@ public class CoinSpawner : MonoBehaviour
         {
         egg = GameObject.FindWithTag("Egg");
         egg.SetActive(false);
+        }
+    }
+    
+    void DisableSpawnLetter() 
+    {
+        if(PlayerPrefs.GetString("d").Length == 1)
+        {
+            GameObject d;
+            d = GameObject.Find("D");
+            d.SetActive(false);
+        }
+        else if(PlayerPrefs.GetString("r").Length == 1)
+        {
+            GameObject r;
+            r = GameObject.Find("R");
+           r.SetActive(false);
+        }
+        else if(PlayerPrefs.GetString("a").Length == 1)
+        {
+            GameObject a;
+            a = GameObject.Find("A");
+            a.SetActive(false);
+        }
+        else if(PlayerPrefs.GetString("g").Length == 1)
+        {
+            GameObject g;
+            g = GameObject.Find("G");
+             g.SetActive(g);
+        }
+        else if(PlayerPrefs.GetString("o").Length == 1)
+        {
+            GameObject o;
+            o = GameObject.Find("O");
+            o.SetActive(false);
+        }
+        else if(PlayerPrefs.GetString("n").Length == 1)
+        {
+            GameObject n;
+            n = GameObject.Find("N");
+            n.SetActive(false);
         }
     }
 }

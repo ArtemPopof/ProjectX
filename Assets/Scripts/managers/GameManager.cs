@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
 
     public Animator menu;
 
+
     private Timer secTimer;
 
     private int scoreIncrease = 1;
@@ -167,7 +168,7 @@ public class GameManager : MonoBehaviour
         //var score = Properties.GetInt("score");
         //var multiplier = Properties.GetFloat("multiplier");
         //var newScore = Mathf.RoundToInt(score + multiplier * SCORE_INCREMENT);
-        Properties.AddToIntProperty("coins", count);
+        // Properties.AddToIntProperty("coins", count);
     }
 
     public void AddChest()
