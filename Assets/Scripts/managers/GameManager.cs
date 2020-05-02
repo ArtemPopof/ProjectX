@@ -47,6 +47,7 @@ public class GameManager : MonoBehaviour
         Properties.Add("score", 0);
         Properties.Add("coins", 0);
         Properties.Add("chests", 0);
+        Properties.Add("eggs", 0);
 
         var highscore = 0;
         if (PlayerPrefs.HasKey("highscore"))
@@ -157,6 +158,11 @@ public class GameManager : MonoBehaviour
     {
         Properties.AddToIntProperty("chests", 1);
         SoundManager.PlaySound("Special");
+    }
+
+    public void AddEgg()
+    {
+        Properties.AddToIntProperty("eggs", 1);
     }
 
     public void OnPlayerDeath()
