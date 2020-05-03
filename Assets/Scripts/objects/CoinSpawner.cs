@@ -8,10 +8,17 @@ public class CoinSpawner : MonoBehaviour
     public int chanceToSpawn = 50;
     public int maxToSpawn = -1;
 
+    public GameObject egg;
+
     // Start is called before the first frame update
     void Start()
     {
         DisableAllChildren();
+        
+        // if(egg != null)
+        // {
+        // DisableEgg();    
+        // }
 
         if (!IsLuckyToSpawn())
         {
@@ -49,5 +56,14 @@ public class CoinSpawner : MonoBehaviour
     void Update()
     {
         
+    }
+
+    void DisableEgg()
+    {
+        if(GameManager.Instance.Properties.GetInt("eggs") == 10)
+        {
+        egg = GameObject.FindWithTag("Egg");
+        egg.SetActive(false);
+        }
     }
 }

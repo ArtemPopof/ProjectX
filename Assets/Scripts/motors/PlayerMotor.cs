@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class PlayerMotor : MonoBehaviour {
 
@@ -142,15 +143,22 @@ public class PlayerMotor : MonoBehaviour {
         switch (hit.gameObject.tag)
         {
             case "Obstacle":
-                Crash();
+                Crash(hit.gameObject);
                 break;
         }
     }
 
-    private void Crash()
+    private void Crash(GameObject gameObject)
     {
         SoundManager.PlaySound("Death");
         animator.SetTrigger("Death");
-        GameManager.Instance.OnPlayerDeath();
+        GameManager.Instance.OnPlayerDeath(gameObject);
+    }
+
+    public void ResurrectPlayer()
+    {
+        var currentZ = controller.transform.position.z;
+        controller.transform.position = new Vector3((desiredLane - 1) * LANE_DISTANCE, 0.05f, currentZ);
+        animator.SetTrigger("StartRunning");
     }
 }

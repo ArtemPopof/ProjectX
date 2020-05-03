@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Color_map_village
-  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+  m_Shader: {fileID: 4800000, guid: 895fbe0b808f6da458acf12788de0555, type: 3}
   m_ShaderKeywords: _EMISSION
   m_LightmapFlags: 1
   m_EnableInstancingVariants: 0
@@ -19,6 +19,14 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _Albedo:
+        m_Texture: {fileID: 2800000, guid: e40885e4b6d7444478ed8109974f5b6c, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _AlbedoRGBOpacityA:
+        m_Texture: {fileID: 2800000, guid: e40885e4b6d7444478ed8109974f5b6c, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BumpMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -43,8 +51,28 @@ Material:
         m_Texture: {fileID: 2800000, guid: e40885e4b6d7444478ed8109974f5b6c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Mask:
+        m_Texture: {fileID: 2800000, guid: 175cf35d3d3bb47f4a6b5363dba90363, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Mask1:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Mask2:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Normal:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NormalMap:
+        m_Texture: {fileID: 2800000, guid: e40885e4b6d7444478ed8109974f5b6c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
@@ -59,7 +87,19 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Specular:
+        m_Texture: {fileID: 2800000, guid: b28efe2118feaf6418877877b70d9af3, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Floats:
+    - _AnisotropyFalloff: 77
+    - _AnisotropyOffset: -1
+    - _AnisotropyX: 1
+    - _AnisotropyY: 1
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
@@ -67,8 +107,33 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.2
     - _GlossyReflections: 1
+    - _M1AHue: 1
+    - _M1ASaturation: 0.8705882
+    - _M1AValue: 1
+    - _M1BHue: 1
+    - _M1BSaturation: 1
+    - _M1BValue: 1
+    - _M1GHue: 1
+    - _M1GSaturation: 1
+    - _M1GValue: 1
+    - _M1RHue: 1
+    - _M1RSaturation: 1
+    - _M1RValue: 1
+    - _M2AHue: 1
+    - _M2ASaturation: 1
+    - _M2AValue: 1
+    - _M2BHue: 0
+    - _M2BSaturation: 1
+    - _M2BValue: 1
+    - _M2GHue: 1
+    - _M2GSaturation: 1
+    - _M2GValue: 1
+    - _M2RHue: 1
+    - _M2RSaturation: 1
+    - _M2RValue: 1
     - _Metallic: 0.5
     - _Mode: 0
+    - _NormalAmount: 1
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _SmoothnessTextureChannel: 0
@@ -76,7 +141,11 @@ Material:
     - _SrcBlend: 1
     - _UVSec: 0
     - _ZWrite: 1
+    - __dirty: 1
     m_Colors:
+    - _AlbedoTint: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+    - _SpecularTint: {r: 1, g: 1, b: 1, a: 1}
+    - _TillingOffset: {r: 1, g: 1, b: 0, a: 0}
