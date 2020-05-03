@@ -244,4 +244,9 @@ public class GameManager : MonoBehaviour
         currentSegment.SegmentObjects.SetActive(false);
         nextSegment.SegmentObjects.SetActive(false);
     }
+
+    public void OpenShop()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Shop");
+    }
 }
