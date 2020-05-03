@@ -25,12 +25,13 @@ public class PauseButton : MonoBehaviour
     {
         Time.timeScale = 1f;
         GameIsPaused = false;
+        GameManager.Instance.SetUIPanelActive("PauseUi", false);
     }
 
     public void Pause()
     {
         Time.timeScale = 0f;
         GameIsPaused = true;
-
+        GameManager.Instance.SetUIPanelActive("PauseUi", true);
     }
 }
