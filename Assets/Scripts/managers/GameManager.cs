@@ -207,10 +207,10 @@ public class GameManager : MonoBehaviour
         {
             PlayerPrefs.SetInt("highscore", Properties.GetInt("score"));
             PlayerPrefs.SetInt("chests", Properties.GetInt("chests"));
+            PlayerPrefs.SetInt("eggs", Properties.GetInt("eggs"));
             UnityEngine.SceneManagement.SceneManager.LoadScene("NewHighscore");
             return;
         }
-
         CheckForPrizesCollected();
     }
 
@@ -225,6 +225,15 @@ public class GameManager : MonoBehaviour
         // TODO extract constant
         UnityEngine.SceneManagement.SceneManager.LoadScene("PrizeGivaway");
     }
+
+    public void CheckForEggsCollected()
+    {
+        if (Properties.GetInt("eggs") >= 10)
+        {
+             UnityEngine.SceneManagement.SceneManager.LoadScene("EggsPrize");
+        }
+    }
+
     public void Resurrect()
     {
         SetUIPanelActive("GameOverUi", false);

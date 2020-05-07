@@ -30,6 +30,10 @@ public class NewRecordScene : MonoBehaviour
         {
             UnityEngine.SceneManagement.SceneManager.LoadScene("Sprint0");
         } 
+        else if (PlayerPrefs.GetInt("eggs") >= 10)
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene("EggsPrize");
+        }
         else
         {
             UnityEngine.SceneManagement.SceneManager.LoadScene("PrizeGivaway");
