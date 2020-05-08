@@ -15,7 +15,6 @@ public class DeathUi : MonoBehaviour
     {
         GameManager.Instance.Properties.bind(score, "score");
         GameManager.Instance.Properties.bind(coins, "coins");
-        Letter.Instance.isCollectedWordComplited();
 
         animator.SetTrigger("Appear");
     }

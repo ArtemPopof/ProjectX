@@ -10,6 +10,8 @@ public class CoinSpawner : MonoBehaviour
 
     public GameObject egg;
 
+    public GameObject d,r,a,g,o,n;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -61,7 +63,7 @@ public class CoinSpawner : MonoBehaviour
 
     void DisableEgg()
     {
-        if(GameManager.Instance.Properties.GetInt("eggs") == 10)
+        if (GameManager.Instance.Properties.GetInt("eggs") == 10)
         {
         egg = GameObject.FindWithTag("Egg");
         egg.SetActive(false);
@@ -70,40 +72,34 @@ public class CoinSpawner : MonoBehaviour
     
     void DisableSpawnLetter() 
     {
-        if(PlayerPrefs.GetString("d").Length == 1)
+        if (PlayerPrefs.GetString("D").Length >= 1)
         {
-            GameObject d;
-            d = GameObject.Find("D");
+            d = GameObject.FindWithTag("D");
             d.SetActive(false);
         }
-        else if(PlayerPrefs.GetString("r").Length == 1)
+        else if (PlayerPrefs.GetString("R").Length >= 1)
         {
-            GameObject r;
-            r = GameObject.Find("R");
+           r = GameObject.FindWithTag("R");
            r.SetActive(false);
         }
-        else if(PlayerPrefs.GetString("a").Length == 1)
+        else if (PlayerPrefs.GetString("A").Length >= 1)
         {
-            GameObject a;
-            a = GameObject.Find("A");
+            a = GameObject.FindWithTag("A");
             a.SetActive(false);
         }
-        else if(PlayerPrefs.GetString("g").Length == 1)
+        else if (PlayerPrefs.GetString("G").Length >= 1)
         {
-            GameObject g;
-            g = GameObject.Find("G");
+            g = GameObject.FindWithTag("G");
              g.SetActive(g);
         }
-        else if(PlayerPrefs.GetString("o").Length == 1)
+        else if (PlayerPrefs.GetString("O").Length >= 1)
         {
-            GameObject o;
-            o = GameObject.Find("O");
+            o = GameObject.FindWithTag("O");
             o.SetActive(false);
         }
-        else if(PlayerPrefs.GetString("n").Length == 1)
+        else if (PlayerPrefs.GetString("N").Length >= 1)
         {
-            GameObject n;
-            n = GameObject.Find("N");
+            n = GameObject.FindWithTag("N");
             n.SetActive(false);
         }
     }
