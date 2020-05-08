@@ -470,6 +470,16 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8824456724599955951, guid: c713e545f836e5c2d87c9341784e0986,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 672929929}
+    - target: {fileID: 8824456724599955951, guid: c713e545f836e5c2d87c9341784e0986,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnPrizeClick
+      objectReference: {fileID: 0}
     - target: {fileID: 8824456725169482585, guid: c713e545f836e5c2d87c9341784e0986,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -718,8 +728,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prizes: {fileID: 1472082137}
   closedPrize: {fileID: 2089589513}
-  emptyPrizePanel: {fileID: 0}
-  footer: {fileID: 0}
+  emptyPrizePanel: {fileID: 1479808055}
+  footer: {fileID: 1154892137}
 --- !u!4 &672929930
 Transform:
   m_ObjectHideFlags: 0
@@ -890,6 +900,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 753239632}
   m_CullTransparentMesh: 0
+--- !u!224 &1154892137 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 8824456725169482585, guid: c713e545f836e5c2d87c9341784e0986,
+    type: 3}
+  m_PrefabInstance: {fileID: 515599283}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1332355880
 GameObject:
   m_ObjectHideFlags: 0
@@ -1108,6 +1124,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!224 &1479808055 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 8824456726246898806, guid: c713e545f836e5c2d87c9341784e0986,
+    type: 3}
+  m_PrefabInstance: {fileID: 515599283}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1631961796
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1496,7 +1518,7 @@ PrefabInstance:
     - target: {fileID: 6030262828020284442, guid: fb010a2b591186fc58d529074ec279a0,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -298
+      value: -498
       objectReference: {fileID: 0}
     - target: {fileID: 6030262828020284442, guid: fb010a2b591186fc58d529074ec279a0,
         type: 3}
