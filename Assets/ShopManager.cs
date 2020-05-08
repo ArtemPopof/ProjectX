@@ -61,6 +61,11 @@ public class ShopManager : MonoBehaviour
         }
     }
 
+    public void ReturnButtonClicked()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Sprint3");
+    }
+
     // Update is called once per frame
     void Update()
     {

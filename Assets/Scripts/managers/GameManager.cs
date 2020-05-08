@@ -104,13 +104,19 @@ public class GameManager : MonoBehaviour
         //TODO extract all string constants
         //TODO maybe make some statemachine for states
         if (!IsRunning && !IsLoading && MobileInput.Instance.Tap) {
-            SetUIPanelActive("InGameUi", true);
-            IsRunning = true;
-            playerMotor.StartRunning();
-            secTimer.Start();
-            cameraMotor.ZoomPlayer();
-            cameraMotor.IsMoving = true;
-            menu.SetTrigger("Hide");
+            if (MobileInput.Instance.TapShop)
+            {
+                OpenShop();
+            } else
+            {
+                SetUIPanelActive("InGameUi", true);
+                IsRunning = true;
+                playerMotor.StartRunning();
+                secTimer.Start();
+                cameraMotor.ZoomPlayer();
+                cameraMotor.IsMoving = true;
+                menu.SetTrigger("Hide");
+            }
         }
         
 
