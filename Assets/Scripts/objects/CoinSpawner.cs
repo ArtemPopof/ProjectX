@@ -15,13 +15,19 @@ public class CoinSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        DisableSpawnLetter();
         DisableAllChildren();
         
-        // if(egg != null)
-        // {
-        // DisableEgg();    
-        // }
+        if (d != null || r != null 
+            || a != null || g != null 
+            || o != null || n != null)
+        {
+            DisableSpawnLetter();
+        }
+
+        if (egg != null)
+        {
+            DisableEgg();    
+        }
 
         if (!IsLuckyToSpawn())
         {
