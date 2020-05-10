@@ -18,10 +18,10 @@ public class CoinSpawner : MonoBehaviour
         DisableSpawnLetter();
         DisableAllChildren();
         
-        // if(egg != null)
-        // {
-        // DisableEgg();    
-        // }
+        if(egg != null)
+        {
+        DisableEgg();    
+        }
 
         if (!IsLuckyToSpawn())
         {

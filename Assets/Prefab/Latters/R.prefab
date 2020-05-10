@@ -59,8 +59,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be764d91613947d4592731853f78124d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chanceToSpawn: 100
+  chanceToSpawn: 5
   maxToSpawn: -1
+  egg: {fileID: 0}
+  d: {fileID: 0}
+  r: {fileID: 0}
+  a: {fileID: 0}
+  g: {fileID: 0}
+  o: {fileID: 0}
+  n: {fileID: 0}
 --- !u!1 &7387031004452139266
 GameObject:
   m_ObjectHideFlags: 0
@@ -159,7 +166,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 1737039705811683165}
-  dragonLetters: []
 --- !u!95 &1737039705811683165
 Animator:
   serializedVersion: 3
