@@ -33,6 +33,9 @@ public class NewRecordScene : MonoBehaviour
         else if (Letter.Instance.IsCollectedAllLetters())
         {
             UnityEngine.SceneManagement.SceneManager.LoadScene("WordPrize");
+        else if (PlayerPrefs.GetInt("eggs") >= 10)
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene("EggsPrize");
         }
         else
         {
