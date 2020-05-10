@@ -69,7 +69,7 @@ public class PlayerMotor : MonoBehaviour {
          if (isGrounded) {
              verticalVelocity -= 0.1f;
 
-             animator.SetBool("Grounded", isGrounded);
+             //animator.SetBool("Grounded", isGrounded);
 
              if (MobileInput.Instance.SwipeUp) {
                  // Jump

@@ -29,10 +29,11 @@ public class NewRecordScene : MonoBehaviour
         if (PlayerPrefs.GetInt("chests") <= 0)
         {
             UnityEngine.SceneManagement.SceneManager.LoadScene("Sprint0");
-        } 
+        }
         else if (Letter.Instance.IsCollectedAllLetters())
         {
             UnityEngine.SceneManagement.SceneManager.LoadScene("WordPrize");
+        }
         else if (PlayerPrefs.GetInt("eggs") >= 10)
         {
             UnityEngine.SceneManagement.SceneManager.LoadScene("EggsPrize");
