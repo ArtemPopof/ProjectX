@@ -10,9 +10,12 @@ public class CoinSpawner : MonoBehaviour
 
     public GameObject egg;
 
+    public GameObject d,r,a,g,o,n;
+
     // Start is called before the first frame update
     void Start()
     {
+        DisableSpawnLetter();
         DisableAllChildren();
         
         // if(egg != null)
@@ -60,10 +63,44 @@ public class CoinSpawner : MonoBehaviour
 
     void DisableEgg()
     {
-        if(GameManager.Instance.Properties.GetInt("eggs") == 10)
+        if (GameManager.Instance.Properties.GetInt("eggs") == 10)
         {
         egg = GameObject.FindWithTag("Egg");
         egg.SetActive(false);
+        }
+    }
+    
+    void DisableSpawnLetter() 
+    {
+        if (PlayerPrefs.GetString("D").Length >= 1)
+        {
+            d = GameObject.FindWithTag("D");
+            d.SetActive(false);
+        }
+        else if (PlayerPrefs.GetString("R").Length >= 1)
+        {
+           r = GameObject.FindWithTag("R");
+           r.SetActive(false);
+        }
+        else if (PlayerPrefs.GetString("A").Length >= 1)
+        {
+            a = GameObject.FindWithTag("A");
+            a.SetActive(false);
+        }
+        else if (PlayerPrefs.GetString("G").Length >= 1)
+        {
+            g = GameObject.FindWithTag("G");
+             g.SetActive(g);
+        }
+        else if (PlayerPrefs.GetString("O").Length >= 1)
+        {
+            o = GameObject.FindWithTag("O");
+            o.SetActive(false);
+        }
+        else if (PlayerPrefs.GetString("N").Length >= 1)
+        {
+            n = GameObject.FindWithTag("N");
+            n.SetActive(false);
         }
     }
 }

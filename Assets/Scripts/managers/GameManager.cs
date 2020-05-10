@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
 
     public Animator menu;
 
+
     private Timer secTimer;
 
     private int scoreIncrease = 1;
@@ -78,7 +79,7 @@ public class GameManager : MonoBehaviour
 
     private void initAdsEngine()
     {
-        Advertisement.Initialize(GAME_ID, DEBUG_MODE);
+        // Advertisement.Initialize(GAME_ID, DEBUG_MODE);
     }
 
     private bool GameRestarted()
@@ -173,18 +174,18 @@ public class GameManager : MonoBehaviour
         //var score = Properties.GetInt("score");
         //var multiplier = Properties.GetFloat("multiplier");
         //var newScore = Mathf.RoundToInt(score + multiplier * SCORE_INCREMENT);
-        Properties.AddToIntProperty("coins", count);
+        // Properties.AddToIntProperty("coins", count);
     }
 
     public void AddChest()
     {
-        Properties.AddToIntProperty("chests", 1);
+        // Properties.AddToIntProperty("chests", 1);
         SoundManager.PlaySound("Special");
     }
 
     public void AddEgg()
     {
-        Properties.AddToIntProperty("eggs", 1);
+        // Properties.AddToIntProperty("eggs", 1);
     }
 
     public void OnPlayerDeath(GameObject collider)
@@ -230,6 +231,14 @@ public class GameManager : MonoBehaviour
 
         // TODO extract constant
         UnityEngine.SceneManagement.SceneManager.LoadScene("PrizeGivaway");
+    }
+
+    public void CheckForLettersCollected()
+    {
+        if (Letter.Instance.IsCollectedAllLetters())
+            {
+                UnityEngine.SceneManagement.SceneManager.LoadScene("WordPrize");
+            }
     }
     public void Resurrect()
     {

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
 
 // Ui properties list
@@ -21,12 +22,6 @@ public class PropertyList {
 
     public void setProperty(string name, object value) {
         properties[name].Value = value;
-    }
-
-    public void AddToIntProperty(string name, int valueToAdd)
-    {
-        var oldValue = GetInt(name);
-        properties[name].Value = oldValue + valueToAdd;
     }
 
     public class PropertySettings {

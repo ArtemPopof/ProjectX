@@ -30,6 +30,10 @@ public class NewRecordScene : MonoBehaviour
         {
             UnityEngine.SceneManagement.SceneManager.LoadScene("Sprint0");
         } 
+        else if (Letter.Instance.IsCollectedAllLetters())
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene("WordPrize");
+        }
         else
         {
             UnityEngine.SceneManagement.SceneManager.LoadScene("PrizeGivaway");
