@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -51,5 +52,12 @@ public class PropertyList {
     public int GetInt(string name)
     {
         return (int) properties[name].Value;
+    }
+
+    public void AddToIntProperty(string name, int count)
+    {
+        var current = GetInt(name);
+
+        setProperty(name, current + count);
     }
 }
