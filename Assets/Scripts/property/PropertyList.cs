@@ -59,11 +59,4 @@ public class PropertyList {
     {
         return (int) properties[name].Value;
     }
-
-    public void AddToIntProperty(string name, int count)
-    {
-        var current = GetInt(name);
-
-        setProperty(name, current + count);
-    }
 }
