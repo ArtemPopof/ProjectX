@@ -81,7 +81,7 @@ public class PlayerMotor : MonoBehaviour {
                  // Slide
                  SoundManager.PlaySound("Swipe1");
                  StartSliding();
-                 Invoke("StopSliding", 1.0f);
+                 Invoke("StopSliding", 4.0f);
              }
          } else {
              verticalVelocity -= (gravity * Time.deltaTime);
@@ -131,7 +131,8 @@ public class PlayerMotor : MonoBehaviour {
         speed += 5; // hack =(, since run animation has speed itself
         controller.radius /= 2;
         controller.height -= 0.5f;
-        controller.center = new Vector3(controller.center.x, controller.center.y / 2, controller.center.z);
+        controller.center -= new Vector3(0, 0.1f, 0);
+        //transform.position -= new Vector3(0, 0.2f, 0);
     }
 
     private void StopSliding() { 
@@ -139,7 +140,7 @@ public class PlayerMotor : MonoBehaviour {
         animator.SetBool("IsSliding", false);
         controller.radius *= 2;
         controller.height += 0.5f;
-        controller.center = new Vector3(controller.center.x, controller.center.y * 2, controller.center.z);
+        //controller.center = new Vector3(controller.center.x, controller.center.y * 4, controller.center.z);
     }
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
