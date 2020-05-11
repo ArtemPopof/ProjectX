@@ -81,7 +81,7 @@ public class PlayerMotor : MonoBehaviour {
                  // Slide
                  SoundManager.PlaySound("Swipe1");
                  StartSliding();
-                 Invoke("StopSliding", 4.0f);
+                 Invoke("StopSliding", 0.8f);
              }
          } else {
              verticalVelocity -= (gravity * Time.deltaTime);
@@ -140,6 +140,7 @@ public class PlayerMotor : MonoBehaviour {
         animator.SetBool("IsSliding", false);
         controller.radius *= 2;
         controller.height += 0.5f;
+        controller.center += new Vector3(0, 0.1f, 0);
         //controller.center = new Vector3(controller.center.x, controller.center.y * 4, controller.center.z);
     }
 
