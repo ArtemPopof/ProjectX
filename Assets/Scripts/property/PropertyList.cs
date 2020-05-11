@@ -25,6 +25,12 @@ public class PropertyList {
         properties[name].Value = value;
     }
 
+    public void AddToIntProperty(string name, int valueToAdd)
+    {
+        var oldValue = GetInt(name);
+        properties[name].Value = oldValue + valueToAdd;
+    }
+
     public class PropertySettings {
         private Property property;
 
