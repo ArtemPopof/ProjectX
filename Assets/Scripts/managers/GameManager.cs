@@ -199,7 +199,7 @@ public class GameManager : MonoBehaviour
 
     public void RestartGame()
     {
-        var coins = PlayerPrefs.GetInt("score") + Properties.GetInt("score");
+        var coins = PlayerPrefs.GetInt("coins") + Properties.GetInt("coins"); 
         PlayerPrefs.SetInt("coins", coins);
         UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
         SetUIPanelActive("GameOverUi", false);
