@@ -16,15 +16,16 @@ public class CoinSpawner : MonoBehaviour
     void Start()
     {
         DisableAllChildren();
-        
-        if(egg != null)
+
+        if (egg != null)
         {
-        DisableEgg();    
-        if (d != null || r != null 
-            || a != null || g != null 
-            || o != null || n != null)
-        {
-            DisableSpawnLetter();
+            DisableEgg();
+            if (d != null || r != null
+                || a != null || g != null
+                || o != null || n != null)
+            {
+                DisableSpawnLetter();
+            }
         }
 
         if (!IsLuckyToSpawn())
