@@ -9,6 +9,7 @@ public class Carousel : MonoBehaviour
     public Vector3 swipeVector = new Vector3(1000, 0, 1);
     public Button leftSwipeArrow;
     public Button rightSwipeArrow;
+    public Vector3 startPosition;
     public Vector3 desiredLocation;
     private int currentIndex = 0;
     private int maxIndex;
@@ -17,6 +18,7 @@ public class Carousel : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        startPosition = transform.position;
         maxIndex = transform.childCount - 1;
         leftSwipeArrow.interactable = false;
         desiredLocation = transform.position;
@@ -24,36 +26,35 @@ public class Carousel : MonoBehaviour
         rightSwipeArrow.onClick.AddListener(() => { SwipeRight(); });
     }
 
-    public void SwipeLeft()
+    public void SetIndex(int index)
     {
-        if (currentIndex == 0)
-        {
-            return;
-        }
-        desiredLocation = transform.position + swipeVector;
-        currentIndex--;
+        currentIndex = index;
+        desiredLocation = startPosition - currentIndex * swipeVector;
+        leftSwipeArrow.interactable = true;
         rightSwipeArrow.interactable = true;
+
+        if (currentIndex == maxIndex)
+        {
+            rightSwipeArrow.interactable = false;
+        }
         if (currentIndex == 0)
         {
             leftSwipeArrow.interactable = false;
         }
+    }
+
+    public void SwipeLeft()
+    {
+        currentIndex--;
+        SetIndex(currentIndex);
 
         notifyListeners();
     }
 
     public void SwipeRight()
     {
-        if (currentIndex == maxIndex)
-        {
-            return;
-        }
-        desiredLocation = transform.position - swipeVector;
-        leftSwipeArrow.interactable = true;
         currentIndex++;
-        if (currentIndex == maxIndex)
-        {
-            rightSwipeArrow.interactable = false;
-        }
+        SetIndex(currentIndex);
 
         notifyListeners();
     }

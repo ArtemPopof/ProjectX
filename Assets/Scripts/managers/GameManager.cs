@@ -25,7 +25,8 @@ public class GameManager : MonoBehaviour
 
     public PropertyList Properties {get; private set;}
 
-    public PlayerMotor playerMotor;
+    public List<PlayerMotor> models;
+    private int currentModel = 0;
     public CameraMotor cameraMotor;
     public LevelManager levelManager;
     private AdManager adManager;
@@ -59,6 +60,8 @@ public class GameManager : MonoBehaviour
         Properties.Add("chests", 0);
         Properties.Add("eggs", 0);
 
+        PlayerPrefs.SetInt("coins", 10000);
+
         var highscore = 0;
         if (PlayerPrefs.HasKey("highscore"))
         {
@@ -75,6 +78,26 @@ public class GameManager : MonoBehaviour
         {
             initAdsEngine();
         }
+
+        // Init current character look
+        currentModel = PlayerPrefs.GetInt("characterLook");
+        MakeAnotherModelsInactive(currentModel);
+
+        // Add default look into collection
+        if (PlayerPrefs.GetString("availableLooks") != "")
+        {
+            PlayerPrefs.SetString("availableLooks", "0");
+        }
+    }
+
+    private void MakeAnotherModelsInactive(int currentModel)
+    {
+        for (var i = 0; i < models.Count; i++)
+        {
+            models[currentModel].gameObject.SetActive(false);
+        }
+        models[currentModel].gameObject.SetActive(true);
+        cameraMotor.lookAt = models[currentModel].transform;
     }
 
     private void initAdsEngine()
@@ -112,7 +135,7 @@ public class GameManager : MonoBehaviour
             {
                 SetUIPanelActive("InGameUi", true);
                 IsRunning = true;
-                playerMotor.StartRunning();
+                models[currentModel].StartRunning();
                 secTimer.Start();
                 cameraMotor.ZoomPlayer();
                 cameraMotor.IsMoving = true;
@@ -256,7 +279,7 @@ public class GameManager : MonoBehaviour
         EvaporateGameObjectsOfCurrentAndNextSegment();
         IsRunning = true;
         IsDead = false;
-        playerMotor.ResurrectPlayer();
+        models[currentModel].ResurrectPlayer();
     }
 
     private void EvaporateGameObjectsOfCurrentAndNextSegment()

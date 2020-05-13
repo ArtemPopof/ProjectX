@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
+using System;
 
 public class ShopManager : MonoBehaviour
 {
@@ -12,18 +13,24 @@ public class ShopManager : MonoBehaviour
     public Text characterName;
     public Text characterPrice;
     public Button buyButton;
+    public Transform beforeBuy;
+    public Transform afterBuy;
     public Text buyText;
     public Text moneyOnAccount;
+    private int currentIndex = 0;
 
     void Start()
     {
+        currentIndex = PlayerPrefs.GetInt("characterLook");
         carousel.AddOnSwipeListener((currentIndex) => { DragonChooseChanged(currentIndex); });
-        DragonChooseChanged(0);
-        moneyOnAccount.text = PlayerPrefs.GetInt("coins").ToString();
+        carousel.SetIndex(currentIndex);
+        DragonChooseChanged(currentIndex);
     }
 
-    private void DragonChooseChanged(int currentIndex)
+    private void DragonChooseChanged(int newIndex)
     {
+        currentIndex = newIndex;
+
         var childrenDragons = dragons.Cast<Transform>().ToArray();
         currentDragon = childrenDragons[currentIndex].GetComponent<Dragon>();
 
@@ -34,13 +41,57 @@ public class ShopManager : MonoBehaviour
     {
         characterPrice.text = dragon.price.ToString();
         characterName.text = dragon.name;
-        buyButton.interactable = IsAbleToBuy(dragon.price);
-        if (IsAbleToBuy(dragon.price))
+        moneyOnAccount.text = PlayerPrefs.GetInt("coins").ToString();
+
+        if (AlreadyBought(currentIndex))
         {
-            UpdateButtonTextForAvailabilityToBuy(true);
+            UpdateAfterBuyInfo();
         } else
         {
-            UpdateButtonTextForAvailabilityToBuy(false);
+            afterBuy.gameObject.SetActive(false);
+            beforeBuy.gameObject.SetActive(true);
+
+            buyButton.interactable = IsAbleToBuy(dragon.price);
+            if (IsAbleToBuy(dragon.price))
+            {
+                UpdateButtonTextForAvailabilityToBuy(true);
+            }
+            else
+            {
+                UpdateButtonTextForAvailabilityToBuy(false);
+            }
+        }
+    }
+
+    private bool AlreadyBought(int index)
+    {
+        var availableLooks = PlayerPrefs.GetString("availableLooks").Split(';');
+        foreach (var look in availableLooks)
+        {
+            if (look == index.ToString())
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private void UpdateAfterBuyInfo()
+    {
+        afterBuy.gameObject.SetActive(true);
+        beforeBuy.gameObject.SetActive(false);
+
+        var text = afterBuy.GetComponentInChildren<Text>();
+        Debug.Log("CurrentIndex: " + currentIndex);
+        if (currentIndex == PlayerPrefs.GetInt("characterLook"))
+        {
+            text.text = "Current";
+            buyButton.interactable = false;
+        } else
+        {
+            text.text = "Choose";
+            buyButton.interactable = true;
         }
     }
 
@@ -64,6 +115,36 @@ public class ShopManager : MonoBehaviour
     public void ReturnButtonClicked()
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene("Sprint3");
+    }
+
+    public void BuyButtonClicked()
+    {
+        if (AlreadyBought(currentIndex))
+        {
+            PlayerPrefs.SetInt("characterLook", currentIndex);
+            DragonChooseChanged(currentIndex);
+            return;
+        }
+
+        AdjustCoinCount();
+        AdjustCurrentCharacterModel();
+
+        DragonChooseChanged(currentIndex);
+    }
+
+    private void AdjustCurrentCharacterModel()
+    {
+        PlayerPrefs.SetInt("characterLook", currentIndex);
+        var availableLooks = PlayerPrefs.GetString("availableLooks");
+        availableLooks += ";" + currentIndex.ToString();
+        PlayerPrefs.SetString("availableLooks", availableLooks);
+    }
+
+    private void AdjustCoinCount()
+    {
+        var playerCoins = PlayerPrefs.GetInt("coins");
+        playerCoins -= currentDragon.price;
+        PlayerPrefs.SetInt("coins", playerCoins);
     }
 
     // Update is called once per frame
