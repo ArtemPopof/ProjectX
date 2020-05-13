@@ -1829,6 +1829,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isReversed: 0
+  shopButton: {fileID: 0}
 --- !u!114 &835702246
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1843,6 +1844,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerMotor: {fileID: 1250234854}
   cameraMotor: {fileID: 0}
+  levelManager: {fileID: 0}
   menu: {fileID: 0}
 --- !u!4 &835702247
 Transform:
@@ -2643,6 +2645,7 @@ MonoBehaviour:
   coins: {fileID: 0}
   multiplier: {fileID: 2015082624}
   highscore: {fileID: 0}
+  eggs: {fileID: 0}
 --- !u!114 &1398259566
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5224,6 +5227,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1780132394170199045, guid: f78be816e7126a04eb81efa6cb5fc4b3,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 1780132394256841874, guid: f78be816e7126a04eb81efa6cb5fc4b3,
         type: 3}
       propertyPath: m_Name
