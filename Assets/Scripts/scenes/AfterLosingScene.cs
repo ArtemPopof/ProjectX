@@ -11,6 +11,8 @@ public class AfterLosingScene : MonoBehaviour
     public Transform emptyPrizePanel;
     public Transform footer;
 
+    public PrizeType prize;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -84,5 +86,11 @@ public class AfterLosingScene : MonoBehaviour
         prizeCount = Mathf.Max(1, prizeCount);
 
         GivePrize(prize.GetComponent<Prize>(), prizeCount);
+    }
+
+    public enum PrizeType {
+        CHEST,
+        EGG_QUEST,
+        LETTER_QUEST
     }
 }

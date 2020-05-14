@@ -28,7 +28,7 @@ public class NewRecordScene : MonoBehaviour
     {
         if (PlayerPrefs.GetInt("chests") <= 0)
         {
-            UnityEngine.SceneManagement.SceneManager.LoadScene("Sprint0");
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Sprint3");
         }
         else if (Letter.Instance.IsCollectedAllLetters())
         {
