@@ -26,13 +26,13 @@ public class AfterLosingScene : MonoBehaviour
     {
         if (IsOpenAlready())
         {
-            // UnityEngine.SceneManagement.SceneManager.LoadScene("Sprint2");
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Sprint3");
             return;
         }
 
         SoundManager.PlaySound("Chest");
         if(PlayerPrefs.GetInt("isWordCollected") == 1){
-            GiveMaxPrize() ;
+            GiveMaxPrize();
         }
 
         closedPrize.gameObject.SetActive(false);
