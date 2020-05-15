@@ -102,7 +102,7 @@ public class GameManager : MonoBehaviour
 
     private void initAdsEngine()
     {
-        // Advertisement.Initialize(GAME_ID, DEBUG_MODE);
+        Advertisement.Initialize(GAME_ID, DEBUG_MODE);
     }
 
     private bool GameRestarted()
