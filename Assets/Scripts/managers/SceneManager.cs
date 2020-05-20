@@ -59,13 +59,13 @@ public class SceneManager : MonoBehaviour
     {
         var Properties = GameManager.Instance.Properties;
 
-        PlayerPrefs.SetInt("highscore", Properties.GetInt("score"));
         PlayerPrefs.SetInt("chests", Properties.GetInt("chests"));
         PlayerPrefs.SetInt("eggs", Properties.GetInt("eggs"));
 
         var lastHighscore = PlayerPrefs.GetInt("highscore");
         if (Properties.GetInt("score") > lastHighscore)
         {
+            PlayerPrefs.SetInt("highscore", Properties.GetInt("score"));
             UnityEngine.SceneManagement.SceneManager.LoadScene("NewHighscore");
         } else
         {
