@@ -133,6 +133,7 @@ public class MobileInput : MonoBehaviour
 
         var factRect = shopButton.GetComponent<RectTransform>().rect;
         factRect.position = new Vector2(factRect.position.x * -1, factRect.position.y * -1);
+        factRect.size = factRect.size * 2; // le kostyl to make the shop button clickable
 
         return factRect.Contains(realPosition);
     }
