@@ -6,12 +6,13 @@ using UnityEngine.Advertisements;
 
 public class SceneManager : MonoBehaviour
 {
-    public static SceneManager Instance { get; set; } = new SceneManager();
+    public static SceneManager Instance { get; set; }
     private static List<Scene> scenes = new List<Scene>(5);
     private int currentScene = 0;
 
     static SceneManager()
     {
+        Instance = new SceneManager();
         scenes.Add(Scene.GAMEPLAY);
         scenes.Add(Scene.HIGHSCORE);
         scenes.Add(Scene.WORD_QUEST_PRIZE);
@@ -26,6 +27,8 @@ public class SceneManager : MonoBehaviour
 
     public void GoToNextScene()
     {
+        currentScene = PlayerPrefs.GetInt("currentScene");
+
         currentScene++;
         if (currentScene >= scenes.Count)
         {

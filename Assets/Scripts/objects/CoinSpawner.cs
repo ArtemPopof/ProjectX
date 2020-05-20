@@ -28,7 +28,7 @@ public class CoinSpawner : MonoBehaviour
             }
         }
 
-        if (!IsLuckyToSpawn())
+        if (IsLuckyToSpawn())
         {
             return;
         }
