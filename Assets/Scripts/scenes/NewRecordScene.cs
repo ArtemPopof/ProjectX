@@ -26,22 +26,7 @@ public class NewRecordScene : MonoBehaviour
 
     public void OnClick()
     {
-        if (PlayerPrefs.GetInt("chests") <= 0)
-        {
-            UnityEngine.SceneManagement.SceneManager.LoadScene("Sprint3");
-        }
-        else if (Letter.Instance.IsCollectedAllLetters())
-        {
-            UnityEngine.SceneManagement.SceneManager.LoadScene("WordPrize");
-        }
-        else if (PlayerPrefs.GetInt("eggs") >= 10)
-        {
-            UnityEngine.SceneManagement.SceneManager.LoadScene("EggsPrize");
-        }
-        else
-        {
-            UnityEngine.SceneManagement.SceneManager.LoadScene("PrizeGivaway");
-        }
+        SceneManager.Instance.GoToNextScene();
     }
 
 }

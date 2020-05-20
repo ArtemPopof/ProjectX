@@ -60,7 +60,8 @@ public class GameManager : MonoBehaviour
         Properties.Add("chests", 0);
         Properties.Add("eggs", 0);
 
-        PlayerPrefs.SetInt("coins", 10000);
+        PlayerPrefs.SetInt("currentScene", 0);
+        PlayerPrefs.SetInt("chests", 0);
 
         var highscore = 0;
         if (PlayerPrefs.HasKey("highscore"))
@@ -220,58 +221,6 @@ public class GameManager : MonoBehaviour
         SetUIPanelActive("GameOverUi", true);
     }
 
-    public void RestartGame()
-    {
-        var coins = PlayerPrefs.GetInt("coins") + Properties.GetInt("coins"); 
-        PlayerPrefs.SetInt("coins", coins);
-        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
-        SetUIPanelActive("GameOverUi", false);
-        menu.SetTrigger("Show");
-        PlayerPrefs.SetFloat("LastRestart", Time.time);
-    }
-
-    public void CheckForNewHighscore()
-    {
-        var lastHighscore = PlayerPrefs.GetInt("highscore");
-        if (Properties.GetInt("score") > lastHighscore)
-        {
-            PlayerPrefs.SetInt("highscore", Properties.GetInt("score"));
-            PlayerPrefs.SetInt("chests", Properties.GetInt("chests"));
-            PlayerPrefs.SetInt("eggs", Properties.GetInt("eggs"));
-            UnityEngine.SceneManagement.SceneManager.LoadScene("NewHighscore");
-            return;
-        }
-        CheckForPrizesCollected();
-    }
-
-    public void CheckForPrizesCollected()
-    {
-        if (Properties.GetInt("chests") <= 0)
-        {
-            RestartGame();
-            return;
-        }
-
-        // TODO extract constant
-        UnityEngine.SceneManagement.SceneManager.LoadScene("PrizeGivaway");
-    }
-
-    public void CheckForLettersCollected()
-    {
-        if (Letter.Instance.IsCollectedAllLetters())
-            {
-                UnityEngine.SceneManagement.SceneManager.LoadScene("WordPrize");
-            }
-    }
-    
-    public void CheckForEggsCollected()
-    {
-        if (Properties.GetInt("eggs") >= 10)
-        {
-             UnityEngine.SceneManagement.SceneManager.LoadScene("EggsPrize");
-        }
-    }
-
     public void Resurrect()
     {
         SetUIPanelActive("GameOverUi", false);
@@ -280,6 +229,16 @@ public class GameManager : MonoBehaviour
         IsRunning = true;
         IsDead = false;
         models[currentModel].ResurrectPlayer();
+    }
+
+    public void RestartGame()
+    {
+        var coins = PlayerPrefs.GetInt("coins") + Properties.GetInt("coins");
+        PlayerPrefs.SetInt("coins", coins);
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Sprint3");
+        SetUIPanelActive("GameOverUi", false);
+        menu.SetTrigger("Show");
+        PlayerPrefs.SetFloat("LastRestart", Time.time);
     }
 
     private void EvaporateGameObjectsOfCurrentAndNextSegment()
