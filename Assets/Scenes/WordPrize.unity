@@ -370,6 +370,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!224 &432081908 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 2655000447632039128, guid: ddab364bfc760802f9646d28b54d4ae0,
+    type: 3}
+  m_PrefabInstance: {fileID: 810354720}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &576982315
 GameObject:
   m_ObjectHideFlags: 0
@@ -1635,8 +1641,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7053fb5e283a6f0479a0330b229dac46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prizes: {fileID: 854586601}
-  closedPrize: {fileID: 0}
+  prizes: {fileID: 432081908}
+  closedPrize: {fileID: 432081908}
   emptyPrizePanel: {fileID: 2059465563}
   footer: {fileID: 2083052710}
   prize: 0
