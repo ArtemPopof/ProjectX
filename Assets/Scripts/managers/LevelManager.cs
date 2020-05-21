@@ -60,7 +60,13 @@ public class LevelManager : MonoBehaviour
     private void Update()
     {
         if (currentSpawnZ - cameraContainer.position.z < DISTANCE_BEFORE_SPAWN)
+        {
+            var current = DateTime.Now;
             GenerateSegment();
+            var delta = (DateTime.Now - current);
+
+            GameManager.Instance.Properties.setProperty("debug", delta.TotalMilliseconds);
+        }
 
         if (amountOfActiveSegments > MAX_SEGMENTS_ON_SCREEN)
         {
