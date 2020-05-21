@@ -59,6 +59,7 @@ public class GameManager : MonoBehaviour
         Properties.Add("coins", 0);
         Properties.Add("chests", 0);
         Properties.Add("eggs", 0);
+        Properties.Add("debug", 0);
 
         PlayerPrefs.SetInt("currentScene", 0);
         PlayerPrefs.SetInt("chests", 0);
