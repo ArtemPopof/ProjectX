@@ -85,7 +85,7 @@ public class GameManager : MonoBehaviour
         MakeAnotherModelsInactive(currentModel);
 
         // Add default look into collection
-        if (PlayerPrefs.GetString("availableLooks") != "")
+        if (PlayerPrefs.GetString("availableLooks") == "")
         {
             PlayerPrefs.SetString("availableLooks", "0");
         }

@@ -42,7 +42,7 @@ public class MobileInput : MonoBehaviour
         #region Standalone Inputs
         if (Input.GetMouseButtonDown(0)) {
             TapShop = IsShopTapped(Input.mousePosition);
-                tap = true;
+            tap = true;
             startTouch = Input.mousePosition;
         } else if (Input.GetMouseButtonUp(0)) {
             startTouch = Vector2.zero;
@@ -133,7 +133,7 @@ public class MobileInput : MonoBehaviour
 
         var factRect = shopButton.GetComponent<RectTransform>().rect;
         factRect.position = new Vector2(factRect.position.x * -1, factRect.position.y * -1);
-        factRect.size = factRect.size * 2; // le kostyl to make the shop button clickable
+        factRect.size = factRect.size * 3; // le petit kostyl to make the shop button clickable
 
         return factRect.Contains(realPosition);
     }
