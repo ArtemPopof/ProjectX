@@ -10,9 +10,9 @@ public class LevelManager : MonoBehaviour
     private const bool SNOW_COLLIDER = true;
 
     //Level spawning
-    private const float DISTANCE_BEFORE_SPAWN = 90.0f;
+    private const float DISTANCE_BEFORE_SPAWN = 40.0f;
     private const int INITIAL_SEGMENTS = 5;
-    private const int MAX_SEGMENTS_ON_SCREEN = 15;
+    private const int MAX_SEGMENTS_ON_SCREEN = 7;
     public const int DISTANCE_BEFORE_FIRST_SEGMENT = 50;
     private Transform cameraContainer;
     private int amountOfActiveSegments;
@@ -39,6 +39,11 @@ public class LevelManager : MonoBehaviour
     [HideInInspector]
     public List<Segment> segments = new List<Segment>();
 
+    // Some segements contained in this pool
+    // Level manager uses this segments to place them on the level
+    // not initialising them every time, just placing them on the right spot
+    public List<Segment> segmentPool;
+
     // gameplay;
     // private bool isMoving = false;
 
@@ -48,6 +53,35 @@ public class LevelManager : MonoBehaviour
         cameraContainer = Camera.main.transform;
         currentSpawnZ = 0;
         // currentLevel = 0;
+
+        segmentPool = new List<Segment>((availableSegements.Count + availableTransitions.Count) * 2);
+
+        var current = DateTime.Now;
+        initializeSegmentPool();
+        var delta = (DateTime.Now - current);
+        GameManager.Instance.Properties.setProperty("debug", delta.TotalMilliseconds);
+    }
+
+    private void initializeSegmentPool()
+    {
+        for (int i = 0; i < availableSegements.Count * 2; i++)
+        {
+            var gameObject = Instantiate(availableSegements[i / 2].gameObject) as GameObject;
+            var segment = gameObject.GetComponent<Segment>();
+            segmentPool.Add(segment);
+        }
+        for (int i = 0; i < availableTransitions.Count * 2; i++)
+        {
+            var gameObject = Instantiate(availableTransitions[i / 2].gameObject) as GameObject;
+            var segment = gameObject.GetComponent<Segment>();
+            segmentPool.Add(segment);
+        }
+
+        foreach (var segment in segmentPool) {
+            segment.transform.SetParent(transform);
+            segment.gameObject.SetActive(false);
+            segment.transform.localPosition = new Vector3(-1000, -1000, -1000); // some distant from level point
+        }
     }
 
     private void Start()
@@ -61,36 +95,57 @@ public class LevelManager : MonoBehaviour
     {
         if (currentSpawnZ - cameraContainer.position.z < DISTANCE_BEFORE_SPAWN)
         {
-            var current = DateTime.Now;
             GenerateSegment();
-            var delta = (DateTime.Now - current);
-
-            GameManager.Instance.Properties.setProperty("debug", delta.TotalMilliseconds);
-        }
-
-        if (amountOfActiveSegments > MAX_SEGMENTS_ON_SCREEN)
-        {
-            segments[amountOfActiveSegments - 1].DeSpawn();
-            amountOfActiveSegments--;
         }
     }
+
+    private void Despawn()
+    {       
+        var last = segments.Count - 1;
+        segments[last].DeSpawn();
+
+        // put back in the pool
+        segmentPool.Add(segments[last]);
+
+        segments.RemoveAt(last);
+        amountOfActiveSegments--;
+    }
+
     private void GenerateSegment()
     {
-        SpawnerSegment();
-        if (UnityEngine.Random.Range(0f, 1f) < countiousSegments * 0.25f)
+        SpawnSegment();
+
+        //if (UnityEngine.Random.Range(0f, 1f) < countiousSegments * 0.25f)
+        // {
+        //    // Spawn transition seg
+        //     countiousSegments = 0;
+        //    SpawnTransition();
+        //}
+        //else
+        //{
+        //    countiousSegments++;
+        //}
+    }
+    private void SpawnSegment()
+    {
+        var id = UnityEngine.Random.Range(0, segmentPool.Count);
+        var segment = segmentPool[id];
+        segmentPool.RemoveAt(id);
+
+        segment.transform.localPosition = Vector3.forward * (currentSpawnZ + DISTANCE_BEFORE_SPAWN);
+
+        segments.Insert(0, segment);
+        if (segments.Count > MAX_SEGMENTS_ON_SCREEN)
         {
-            // Spawn transition seg
-            countiousSegments = 0;
-            SpawnTransition();
+            Despawn();
         }
-        else
-        {
-            countiousSegments++;
-        }
+
+        currentSpawnZ += segment.lenght;
+        amountOfActiveSegments++;
+        segment.Spawn();
     }
 
-    // TODO Bad naming (not a verb)
-    private void SpawnerSegment()
+    private void SpawnSegmentOld()
     {
         List<Segment> possibleSegment = availableSegements.FindAll(
             x => x.beginY1 == y1 || x.beginY2 == y2 || x.beginY3 == y3);
@@ -100,9 +155,11 @@ public class LevelManager : MonoBehaviour
         // TODO what does bool do?
         Segment segment = GetSegment(id, false);
 
+
         y1 = segment.endY1;
         y2 = segment.endY2;
         y3 = segment.endY3;
+
 
         segment.transform.SetParent(transform);
         segment.transform.localPosition = Vector3.forward * (currentSpawnZ + DISTANCE_BEFORE_FIRST_SEGMENT);
@@ -131,6 +188,7 @@ public class LevelManager : MonoBehaviour
             segments.Remove(segment);
             segments.Insert(0, segment);
         }
+
         return segment;
     }
 
