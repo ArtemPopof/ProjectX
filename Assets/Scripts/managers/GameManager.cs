@@ -25,14 +25,12 @@ public class GameManager : MonoBehaviour
 
     public PropertyList Properties {get; private set;}
 
-    public List<PlayerMotor> models;
-    private int currentModel = 0;
+    public VariableLook player;
     public CameraMotor cameraMotor;
     public LevelManager levelManager;
     private AdManager adManager;
 
     public Animator menu;
-
 
     private Timer secTimer;
 
@@ -81,10 +79,6 @@ public class GameManager : MonoBehaviour
             initAdsEngine();
         }
 
-        // Init current character look
-        currentModel = PlayerPrefs.GetInt("characterLook");
-        MakeAnotherModelsInactive(currentModel);
-
         // Add default look into collection
         if (PlayerPrefs.GetString("availableLooks") == "")
         {
@@ -92,14 +86,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void MakeAnotherModelsInactive(int currentModel)
+    private void Start()
     {
-        for (var i = 0; i < models.Count; i++)
-        {
-            models[currentModel].gameObject.SetActive(false);
-        }
-        models[currentModel].gameObject.SetActive(true);
-        cameraMotor.lookAt = models[currentModel].transform;
+        // init player
+        cameraMotor.lookAt = player.CurrentModel.transform;
     }
 
     private void initAdsEngine()
@@ -137,7 +127,7 @@ public class GameManager : MonoBehaviour
             {
                 SetUIPanelActive("InGameUi", true);
                 IsRunning = true;
-                models[currentModel].StartRunning();
+                player.CurrentModel.StartRunning();
                 secTimer.Start();
                 cameraMotor.ZoomPlayer();
                 cameraMotor.IsMoving = true;
@@ -229,7 +219,7 @@ public class GameManager : MonoBehaviour
         EvaporateGameObjectsOfCurrentAndNextSegment();
         IsRunning = true;
         IsDead = false;
-        models[currentModel].ResurrectPlayer();
+        player.CurrentModel.ResurrectPlayer();
     }
 
     public void RestartGame()
