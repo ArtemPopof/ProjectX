@@ -89,10 +89,12 @@ public class SceneManager : MonoBehaviour
 
     public void CheckForWordQuest()
     {
-        if (Letter.Instance.IsCollectedAllLetters())
+        if (Letter.Instance.IsCollectedAllLetters() && PlayerPrefs.GetInt("CollectedLettersQuestPrize") != 1)
         {
             UnityEngine.SceneManagement.SceneManager.LoadScene("WordPrize");
-        } else
+            PlayerPrefs.SetInt("CollectedLettersQuestPrize", 1);
+        }
+        else
         {
             GoToNextScene();
         }
