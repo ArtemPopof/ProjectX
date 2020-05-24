@@ -170,5 +170,6 @@ public class PlayerMotor : MonoBehaviour {
         var currentZ = controller.transform.position.z;
         controller.transform.position = new Vector3((desiredLane - 1) * LANE_DISTANCE, 0.05f, currentZ);
         animator.SetTrigger("StartRunning");
+        controller.enabled = true;
     }
 }
