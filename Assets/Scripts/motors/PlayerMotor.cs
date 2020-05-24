@@ -31,6 +31,10 @@ public class PlayerMotor : MonoBehaviour {
 
     private void Update() {
         if (GameManager.Instance == null || !GameManager.Instance.IsRunning) {
+            if (GameManager.Instance.IsDead)
+            {
+                controller.enabled = false;
+            }
             return;
         }
 
