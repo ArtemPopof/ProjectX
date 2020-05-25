@@ -21,12 +21,22 @@ public class Letter : MonoBehaviour
 
     public bool IsCollectedAllLetters()
     {
-            return PlayerPrefs.GetString("D").Length >= 1 &&
-                   PlayerPrefs.GetString("R").Length >= 1 &&
-                   PlayerPrefs.GetString("A").Length >= 1 &&
-                   PlayerPrefs.GetString("G").Length >= 1 &&
-                   PlayerPrefs.GetString("O").Length >= 1 &&
-                   PlayerPrefs.GetString("N").Length >= 1;
+            return PlayerPrefs.GetString("D").Equals("D") &&
+                   PlayerPrefs.GetString("R").Equals("R") &&
+                   PlayerPrefs.GetString("A").Equals("A") &&
+                   PlayerPrefs.GetString("G").Equals("G") &&
+                   PlayerPrefs.GetString("O").Equals("O") &&
+                   PlayerPrefs.GetString("N").Equals("N");
+    }
+
+    public void DeleteLettersInPlayerPrefs()  
+    {
+        PlayerPrefs.SetString("D", null);
+        PlayerPrefs.SetString("R", null);
+        PlayerPrefs.SetString("A", null);
+        PlayerPrefs.SetString("G", null);
+        PlayerPrefs.SetString("O", null);
+        PlayerPrefs.SetString("N", null);
     }
 
     public void OnTriggerEnter(Collider other)

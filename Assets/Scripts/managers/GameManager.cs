@@ -230,6 +230,7 @@ public class GameManager : MonoBehaviour
         SetUIPanelActive("GameOverUi", false);
         menu.SetTrigger("Show");
         PlayerPrefs.SetFloat("LastRestart", Time.time);
+        Letter.Instance.DeleteLettersInPlayerPrefs();
     }
 
     private void EvaporateGameObjectsOfCurrentAndNextSegment()
