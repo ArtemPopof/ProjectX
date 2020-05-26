@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
 
     public PropertyList Properties {get; private set;}
 
-    public PlayerMotor playerMotor;
+    public VariableLook player;
     public CameraMotor cameraMotor;
     public LevelManager levelManager;
     private AdManager adManager;
@@ -57,6 +57,10 @@ public class GameManager : MonoBehaviour
         Properties.Add("coins", 0);
         Properties.Add("chests", 0);
         Properties.Add("eggs", 0);
+        Properties.Add("debug", 0);
+
+        PlayerPrefs.SetInt("currentScene", 0);
+        PlayerPrefs.SetInt("chests", 0);
 
         var highscore = 0;
         if (PlayerPrefs.HasKey("highscore"))
@@ -74,6 +78,18 @@ public class GameManager : MonoBehaviour
         {
             initAdsEngine();
         }
+
+        // Add default look into collection
+        if (PlayerPrefs.GetString("availableLooks") == "")
+        {
+            PlayerPrefs.SetString("availableLooks", "0");
+        }
+    }
+
+    private void Start()
+    {
+        // init player
+        cameraMotor.lookAt = player.CurrentModel.transform;
     }
 
     private void initAdsEngine()
@@ -104,13 +120,19 @@ public class GameManager : MonoBehaviour
         //TODO extract all string constants
         //TODO maybe make some statemachine for states
         if (!IsRunning && !IsLoading && MobileInput.Instance.Tap) {
-            SetUIPanelActive("InGameUi", true);
-            IsRunning = true;
-            playerMotor.StartRunning();
-            secTimer.Start();
-            cameraMotor.ZoomPlayer();
-            cameraMotor.IsMoving = true;
-            menu.SetTrigger("Hide");
+            if (MobileInput.Instance.TapShop)
+            {
+                OpenShop();
+            } else
+            {
+                SetUIPanelActive("InGameUi", true);
+                IsRunning = true;
+                player.CurrentModel.StartRunning();
+                secTimer.Start();
+                cameraMotor.ZoomPlayer();
+                cameraMotor.IsMoving = true;
+                menu.SetTrigger("Hide");
+            }
         }
         
 
@@ -190,41 +212,6 @@ public class GameManager : MonoBehaviour
         SetUIPanelActive("GameOverUi", true);
     }
 
-    public void RestartGame()
-    {
-        var coins = PlayerPrefs.GetInt("score") + Properties.GetInt("score");
-        PlayerPrefs.SetInt("coins", coins);
-        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
-        SetUIPanelActive("GameOverUi", false);
-        menu.SetTrigger("Show");
-        PlayerPrefs.SetFloat("LastRestart", Time.time);
-    }
-
-    public void CheckForNewHighscore()
-    {
-        var lastHighscore = PlayerPrefs.GetInt("highscore");
-        if (Properties.GetInt("score") > lastHighscore)
-        {
-            PlayerPrefs.SetInt("highscore", Properties.GetInt("score"));
-            PlayerPrefs.SetInt("chests", Properties.GetInt("chests"));
-            UnityEngine.SceneManagement.SceneManager.LoadScene("NewHighscore");
-            return;
-        }
-
-        CheckForPrizesCollected();
-    }
-
-    public void CheckForPrizesCollected()
-    {
-        if (Properties.GetInt("chests") <= 0)
-        {
-            RestartGame();
-            return;
-        }
-
-        // TODO extract constant
-        UnityEngine.SceneManagement.SceneManager.LoadScene("PrizeGivaway");
-    }
     public void Resurrect()
     {
         SetUIPanelActive("GameOverUi", false);
@@ -232,7 +219,18 @@ public class GameManager : MonoBehaviour
         EvaporateGameObjectsOfCurrentAndNextSegment();
         IsRunning = true;
         IsDead = false;
-        playerMotor.ResurrectPlayer();
+        player.CurrentModel.ResurrectPlayer();
+    }
+
+    public void RestartGame()
+    {
+        var coins = PlayerPrefs.GetInt("coins") + Properties.GetInt("coins");
+        PlayerPrefs.SetInt("coins", coins);
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Sprint3");
+        SetUIPanelActive("GameOverUi", false);
+        menu.SetTrigger("Show");
+        PlayerPrefs.SetFloat("LastRestart", Time.time);
+        Letter.Instance.DeleteLettersInPlayerPrefs();
     }
 
     private void EvaporateGameObjectsOfCurrentAndNextSegment()

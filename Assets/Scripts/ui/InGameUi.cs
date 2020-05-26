@@ -9,6 +9,7 @@ public class InGameUi : MonoBehaviour
     public Text coins;
     public Text multiplier;
     public Text highscore;
+    public Text debug;
 
     public Text eggs;
 
@@ -19,6 +20,7 @@ public class InGameUi : MonoBehaviour
         GameManager.Instance.Properties.bind(multiplier, "multiplier");
         GameManager.Instance.Properties.bind(highscore, "highscore");
         GameManager.Instance.Properties.bind(eggs, "eggs");
+        GameManager.Instance.Properties.bind(debug, "debug");
     }
     
 

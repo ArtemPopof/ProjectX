@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum PieceType{
-    none = -1,
+    letter = -1,
     ramp = 0,
     longBlock =1,
     jump = 2,

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class NewRecordScene : MonoBehaviour
 {
-    public Animator playerAnimator;
+    public VariableLook player;
     public Text scoreText;
 
     // Start is called before the first frame update
@@ -15,25 +15,16 @@ public class NewRecordScene : MonoBehaviour
 
         var score = PlayerPrefs.GetInt("highscore");
         scoreText.text = score.ToString();
-        playerAnimator.SetTrigger("StartRunning");
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        var animator = player.CurrentModel.GetComponentInChildren<Animator>();
+        // dragon animation makes dragon run away from camera. 
+        // should fix animation before uncommenting this line
+        //animator.SetTrigger("StartRunning");
     }
 
     public void OnClick()
     {
-        if (PlayerPrefs.GetInt("chests") <= 0)
-        {
-            UnityEngine.SceneManagement.SceneManager.LoadScene("Sprint0");
-        } 
-        else
-        {
-            UnityEngine.SceneManagement.SceneManager.LoadScene("PrizeGivaway");
-        }
+        SceneManager.Instance.GoToNextScene();
     }
 
 }

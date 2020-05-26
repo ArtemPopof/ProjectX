@@ -8,12 +8,12 @@ public class PlayerMotor : MonoBehaviour {
     private const int LANE_DISTANCE = 3;
     private const float TURN_SPEED = 0.05f;
     private CharacterController controller;
-    private float jumpForce = 20.0f;
+    private float jumpForce = 19.0f;
     private float gravity = 85.0f;
     private float verticalVelocity;
     private int desiredLane = 1; // 0 = Left, 1 = Middle, 2 = Right
 
-    private float startSpeed = 10.0f;
+    private float startSpeed = 5.0f;
     private float speed;
     private float speedIncreaseLastTick;
     private float speedIncreaseTime = 5.5f;
@@ -31,6 +31,10 @@ public class PlayerMotor : MonoBehaviour {
 
     private void Update() {
         if (GameManager.Instance == null || !GameManager.Instance.IsRunning) {
+            if (GameManager.Instance.IsDead)
+            {
+                controller.enabled = false;
+            }
             return;
         }
 
@@ -69,7 +73,7 @@ public class PlayerMotor : MonoBehaviour {
          if (isGrounded) {
              verticalVelocity -= 0.1f;
 
-             animator.SetBool("Grounded", isGrounded);
+             //animator.SetBool("Grounded", isGrounded);
 
              if (MobileInput.Instance.SwipeUp) {
                  // Jump
@@ -81,7 +85,7 @@ public class PlayerMotor : MonoBehaviour {
                  // Slide
                  SoundManager.PlaySound("Swipe1");
                  StartSliding();
-                 Invoke("StopSliding", 1.0f);
+                 Invoke("StopSliding", 0.8f);
              }
          } else {
              verticalVelocity -= (gravity * Time.deltaTime);
@@ -128,14 +132,20 @@ public class PlayerMotor : MonoBehaviour {
 
     private void StartSliding() {
         animator.SetBool("IsSliding", true);
+        speed += 5; // hack =(, since run animation has speed itself
         controller.radius /= 2;
-        controller.center = new Vector3(controller.center.x, controller.center.y / 2, controller.center.z);
+        controller.height -= 0.5f;
+        controller.center -= new Vector3(0, 0.1f, 0);
+        //transform.position -= new Vector3(0, 0.2f, 0);
     }
 
-    private void StopSliding() {
+    private void StopSliding() { 
+        speed -= 5; // hack =(, since run animation has speed itself
         animator.SetBool("IsSliding", false);
         controller.radius *= 2;
-        controller.center = new Vector3(controller.center.x, controller.center.y * 2, controller.center.z);
+        controller.height += 0.5f;
+        controller.center += new Vector3(0, 0.1f, 0);
+        //controller.center = new Vector3(controller.center.x, controller.center.y * 4, controller.center.z);
     }
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
@@ -160,5 +170,6 @@ public class PlayerMotor : MonoBehaviour {
         var currentZ = controller.transform.position.z;
         controller.transform.position = new Vector3((desiredLane - 1) * LANE_DISTANCE, 0.05f, currentZ);
         animator.SetTrigger("StartRunning");
+        controller.enabled = true;
     }
 }

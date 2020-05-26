@@ -15,7 +15,10 @@ public class DeathUi : MonoBehaviour
     {
         GameManager.Instance.Properties.bind(score, "score");
         GameManager.Instance.Properties.bind(coins, "coins");
+    }
 
+    private void Awake()
+    {
         animator.SetTrigger("Appear");
     }
 
