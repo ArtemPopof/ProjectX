@@ -22,6 +22,8 @@ public class Segment : MonoBehaviour
         SegmentObjects.SetActive(true);
     }
 
+
+
     private GameObject FindSegmentObjects()
     {
         foreach (Transform child in transform)
@@ -38,10 +40,17 @@ public class Segment : MonoBehaviour
     public void Spawn()
     {
         gameObject.SetActive(true);
+
+        var spawnObjects = GetComponentsInChildren<CoinSpawner>();
+        foreach (CoinSpawner spawnObject in spawnObjects)
+        {
+            spawnObject.Init();
+        }
     }
 
     public void DeSpawn() 
     {
-        gameObject.SetActive(false);
+        //gameObject.SetActiveRecursively(false);
+        gameObject.transform.localPosition = new Vector3(10000, 10000, -20000);
     }
 }

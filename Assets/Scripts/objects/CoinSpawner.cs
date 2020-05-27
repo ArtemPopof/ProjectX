@@ -15,6 +15,11 @@ public class CoinSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Init();
+    }
+
+    public void Init()
+    {
         DisableAllChildren();
 
         if (egg != null)
@@ -42,7 +47,7 @@ public class CoinSpawner : MonoBehaviour
     {
         for (int i = 0; i < maxToSpawn; i++)
         {
-            transform.GetChild(i).gameObject.SetActive(true);
+           transform.GetChild(i).gameObject.SetActive(true);
         }
     }
 
