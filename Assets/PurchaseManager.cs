@@ -56,7 +56,7 @@ public class PurchaseManager : MonoBehaviour, IStoreListener
         Debug.Log("PurchaseManager: initialization PASS");
 
         storeController = controller;
-        extensions = extensions;
+        storeExtensions = extensions;
     }
 
     public void OnInitializeFailed(InitializationFailureReason error)

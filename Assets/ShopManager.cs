@@ -16,10 +16,21 @@ public class ShopManager : MonoBehaviour
     public Transform beforeBuy;
     public Transform afterBuy;
     public Text buyText;
-    public Text moneyOnAccount;
+    public List<Text> currentMoneyLabels;
     private int currentIndex = 0;
 
+    public GameObject dragonShopUI;
+    public GameObject mainShopUI;
+
+    private GameObject currentScreen;
+
     void Start()
+    {
+        currentScreen = mainShopUI;
+        UpdateCurrentBalance();
+    }
+
+    private void OnDragonShopUIStart()
     {
         currentIndex = PlayerPrefs.GetInt("characterLook");
         carousel.AddOnSwipeListener((currentIndex) => { DragonChooseChanged(currentIndex); });
@@ -41,7 +52,7 @@ public class ShopManager : MonoBehaviour
     {
         characterPrice.text = dragon.price.ToString();
         characterName.text = dragon.name;
-        moneyOnAccount.text = PlayerPrefs.GetInt("coins").ToString();
+        UpdateCurrentBalance();
 
         if (AlreadyBought(currentIndex))
         {
@@ -60,6 +71,16 @@ public class ShopManager : MonoBehaviour
             {
                 UpdateButtonTextForAvailabilityToBuy(false);
             }
+        }
+    }
+
+    private void UpdateCurrentBalance()
+    {
+        var balance = PlayerPrefs.GetInt("coins").ToString();
+
+        foreach (Text text in currentMoneyLabels)
+        {
+            text.text = balance;
         }
     }
 
@@ -151,5 +172,11 @@ public class ShopManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void OpenDragonsShop()
+    {
+        dragonShopUI.SetActive(true);
+        mainShopUI.SetActive(false);
     }
 }
