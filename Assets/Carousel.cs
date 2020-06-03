@@ -16,12 +16,16 @@ public class Carousel : MonoBehaviour
     private List<Action<int>> listeners = new List<Action<int>>();
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         startPosition = transform.position;
         maxIndex = transform.childCount - 1;
-        leftSwipeArrow.interactable = false;
         desiredLocation = transform.position;
+    }
+
+    void Start()
+    {
+        leftSwipeArrow.interactable = false;
         leftSwipeArrow.onClick.AddListener(() => { SwipeLeft(); });
         rightSwipeArrow.onClick.AddListener(() => { SwipeRight(); });
     }

@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Advertisements;
 using System.Linq;
 using System;
 
-public class ShopManager : MonoBehaviour
+public class ShopManager : DefaultUnityAdListener
 {
     public Carousel carousel;
     public Transform dragons;
@@ -178,5 +179,29 @@ public class ShopManager : MonoBehaviour
     {
         dragonShopUI.SetActive(true);
         mainShopUI.SetActive(false);
+        OnDragonShopUIStart();
     }
+
+    public void ReturnToMainShopUI()
+    {
+        dragonShopUI.SetActive(false);
+        mainShopUI.SetActive(true);
+    }
+
+    public override void OnUnityAdsDidFinish(string placementId, ShowResult showResult)
+    {
+        Debug.Log("Ad finished, adding coins " + showResult);
+
+        if (!AdComponent.UserWatchedAd(showResult)) return;
+
+        var currentCoins = PlayerPrefs.GetInt("coins");
+        currentCoins += 300;
+        PlayerPrefs.SetInt("coins", currentCoins);
+
+        UpdateCurrentBalance();
+
+        // Maybe some dataloss here?
+        PlayerPrefs.SetInt("inshopAdLastShow", (int) (DateTime.Now.Ticks / TimeSpan.TicksPerHour));
+    }
+
 }
