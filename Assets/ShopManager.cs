@@ -22,6 +22,9 @@ public class ShopManager : DefaultUnityAdListener
 
     public GameObject dragonShopUI;
     public GameObject mainShopUI;
+    public GameObject buyMoneyDialogMain;
+    // Dialog, that opens from dragons shop ui
+    public GameObject buyMoneyDialogDragons;
 
     private GameObject currentScreen;
 
@@ -200,8 +203,18 @@ public class ShopManager : DefaultUnityAdListener
 
         UpdateCurrentBalance();
 
-        // Maybe some dataloss here?
+        // Maybe some dataloss here?    
         PlayerPrefs.SetInt("inshopAdLastShow", (int) (DateTime.Now.Ticks / TimeSpan.TicksPerHour));
+    }
+
+    public void OpenBuyMoneyDialogFromMainShop()
+    {
+        buyMoneyDialogMain.SetActive(true);
+    }
+
+    public void OpenBuyMoneyDialogFromDragonsShop()
+    {
+        buyMoneyDialogDragons.SetActive(true);
     }
 
 }
