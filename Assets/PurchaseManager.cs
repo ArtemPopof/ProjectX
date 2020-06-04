@@ -13,6 +13,8 @@ public class PurchaseManager : MonoBehaviour, IStoreListener
     public static string coins5000ProductId = "coins5000";
     public static string coins10000ProductId = "coins10000";
 
+    public PurchaseStatusDialog purchaseStatusDialog;
+
     void Start()
     {
         if (storeController == null)
@@ -31,6 +33,24 @@ public class PurchaseManager : MonoBehaviour, IStoreListener
 
         UnityPurchasing.Initialize(this, builder);
     }
+
+    public void Buy1000Coins()
+    {
+        BuyProduct(coins1000ProductId);
+    }
+    public void Buy3000Coins()
+    {
+        BuyProduct(coins3000ProductId);
+    }
+    public void Buy5000Coins()
+    {
+        BuyProduct(coins5000ProductId);
+    }
+    public void Buy10000Coins()
+    {
+        BuyProduct(coins10000ProductId);
+    }
+
 
     public void BuyProduct(string productId)
     {
@@ -80,6 +100,7 @@ public class PurchaseManager : MonoBehaviour, IStoreListener
         } else
         {
             Debug.Log("PurchaseManager: Purchased fail, unknown product Id: " + productId);
+            purchaseStatusDialog.Show("Something goes wrong! Try again later or contact developers.", false);
         }
 
         return PurchaseProcessingResult.Complete;

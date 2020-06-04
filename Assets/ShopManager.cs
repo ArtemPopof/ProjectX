@@ -22,9 +22,8 @@ public class ShopManager : DefaultUnityAdListener
 
     public GameObject dragonShopUI;
     public GameObject mainShopUI;
-    public GameObject buyMoneyDialogMain;
-    // Dialog, that opens from dragons shop ui
-    public GameObject buyMoneyDialogDragons;
+    public GameObject buyMoneyDialog;
+    public GameObject shopDragons;
 
     private GameObject currentScreen;
 
@@ -207,14 +206,17 @@ public class ShopManager : DefaultUnityAdListener
         PlayerPrefs.SetInt("inshopAdLastShow", (int) (DateTime.Now.Ticks / TimeSpan.TicksPerHour));
     }
 
-    public void OpenBuyMoneyDialogFromMainShop()
+    public void OpenBuyMoneyDialog()
     {
-        buyMoneyDialogMain.SetActive(true);
+        shopDragons.gameObject.SetActive(false);
+        buyMoneyDialog.SetActive(true);
     }
 
-    public void OpenBuyMoneyDialogFromDragonsShop()
+    public void CloseBuyMoneyDialog()
     {
-        buyMoneyDialogDragons.SetActive(true);
+        buyMoneyDialog.SetActive(false);
+
+        shopDragons.SetActive(true);
     }
 
 }
