@@ -58,9 +58,11 @@ public class GameManager : MonoBehaviour
         Properties.Add("chests", 0);
         Properties.Add("eggs", 0);
         Properties.Add("debug", 0);
-
+        Properties.Add("hard", 0);
+        Properties.Add("restartCount", 0);
         PlayerPrefs.SetInt("currentScene", 0);
         PlayerPrefs.SetInt("chests", 0);
+        
 
         var highscore = 0;
         if (PlayerPrefs.HasKey("highscore"))
@@ -201,6 +203,15 @@ public class GameManager : MonoBehaviour
     public void AddEgg()
     {
         Properties.AddToIntProperty("eggs", 1);
+    }
+
+    public void AddHard()
+    {
+        if (Properties.GetInt("eggs") == 10)
+        {
+            int hardCount = PlayerPrefs.GetInt("hard") + 1;
+            PlayerPrefs.SetInt("hard", hardCount);
+        }
     }
 
     public void OnPlayerDeath(GameObject collider)

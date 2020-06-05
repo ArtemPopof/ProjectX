@@ -8,6 +8,10 @@ public class DeathUi : MonoBehaviour
     public Text score;
     public Text coins;
 
+    public Text hards;
+
+    public GameObject hardButton;
+
     public Animator animator;
 
     // Start is called before the first frame update
@@ -15,6 +19,7 @@ public class DeathUi : MonoBehaviour
     {
         GameManager.Instance.Properties.bind(score, "score");
         GameManager.Instance.Properties.bind(coins, "coins");
+        hards = PlayerPrefs.GetInt("hard");
     }
 
     private void Awake()
@@ -26,5 +31,13 @@ public class DeathUi : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void DisableHardButton()
+    {
+        if (Hard.Instance.IsHardUsedThreeTimes())
+        {
+            hardButton.SetActive(false);
+        }
     }
 }
