@@ -4,10 +4,7 @@ using UnityEngine;
 
 public class Heart : MonoBehaviour
 {
-    private int heartsCount {get;}
-
     public static Heart Instance { private set; get; }
-    // Start is called before the first frame update
  
     public void UseHeart() 
     {
