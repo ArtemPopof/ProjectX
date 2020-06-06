@@ -24,7 +24,7 @@ public class ShopManager : DefaultUnityAdListener
     public GameObject mainShopUI;
     public GameObject buyMoneyDialog;
     public GameObject purchaseStatusDialog;
-    public GameObject shopDragons;
+    public List<GameObject> shopModels;
 
     private GameObject currentScreen;
 
@@ -211,7 +211,9 @@ public class ShopManager : DefaultUnityAdListener
 
     public void OpenBuyMoneyDialog()
     {
-        shopDragons.gameObject.SetActive(false);
+        foreach (GameObject model in shopModels) {
+            model.SetActive(false);
+        }
         buyMoneyDialog.SetActive(true);
     }
 
@@ -219,8 +221,10 @@ public class ShopManager : DefaultUnityAdListener
     {
         buyMoneyDialog.SetActive(false);
         purchaseStatusDialog.SetActive(false);
-        shopDragons.SetActive(true);
-
+        foreach (GameObject model in shopModels)
+        {
+            model.SetActive(true);
+        }
         UpdateCurrentBalance();
     }
 

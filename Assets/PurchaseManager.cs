@@ -71,6 +71,7 @@ public class PurchaseManager : MonoBehaviour, IStoreListener
         } else
         {
             Debug.Log("PurchaseManager: buying product FAIL. Not purchasing product, either is not found or is not available for purchase");
+            sorryForThatHack.Show("Failed to purchase: wrong productID", false);
         }
     }
 
@@ -90,6 +91,7 @@ public class PurchaseManager : MonoBehaviour, IStoreListener
     public void OnPurchaseFailed(Product product, PurchaseFailureReason reason)
     {
         Debug.Log("PurchaseManager: failed to buy a product " + product.definition.storeSpecificId + ", failReason: " + reason);
+        sorryForThatHack.Show("Failed to purchase: " + reason, false);
     }
 
     public PurchaseProcessingResult ProcessPurchase(PurchaseEventArgs args)

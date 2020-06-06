@@ -25,7 +25,6 @@ public class Carousel : MonoBehaviour
 
     void Start()
     {
-        leftSwipeArrow.interactable = false;
         leftSwipeArrow.onClick.AddListener(() => { SwipeLeft(); });
         rightSwipeArrow.onClick.AddListener(() => { SwipeRight(); });
     }
