@@ -58,7 +58,7 @@ public class GameManager : MonoBehaviour
         Properties.Add("chests", 0);
         Properties.Add("eggs", 0);
         Properties.Add("debug", 0);
-        Properties.Add("hard", 0);
+        Properties.Add("heart", 0);
         Properties.Add("restartCount", 0);
         PlayerPrefs.SetInt("currentScene", 0);
         PlayerPrefs.SetInt("chests", 0);
@@ -205,12 +205,12 @@ public class GameManager : MonoBehaviour
         Properties.AddToIntProperty("eggs", 1);
     }
 
-    public void AddHard()
+    public void AddHeart()
     {
         if (Properties.GetInt("eggs") == 10)
         {
-            int hardCount = PlayerPrefs.GetInt("hard") + 1;
-            PlayerPrefs.SetInt("hard", hardCount);
+            int heartsCount = PlayerPrefs.GetInt("heart") + 1;
+            PlayerPrefs.SetInt("heart", heartsCount);
         }
     }
 

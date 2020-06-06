@@ -10,7 +10,7 @@ public class DeathUi : MonoBehaviour
 
     public Text hards;
 
-    public GameObject hardButton;
+    public GameObject heartButton;
 
     public Animator animator;
 
@@ -19,7 +19,7 @@ public class DeathUi : MonoBehaviour
     {
         GameManager.Instance.Properties.bind(score, "score");
         GameManager.Instance.Properties.bind(coins, "coins");
-        hards = PlayerPrefs.GetInt("hard");
+        int hearts = PlayerPrefs.GetInt("heart");
     }
 
     private void Awake()
@@ -33,11 +33,11 @@ public class DeathUi : MonoBehaviour
         
     }
 
-    public void DisableHardButton()
+    public void DisableHeartButton()
     {
-        if (Hard.Instance.IsHardUsedThreeTimes())
+        if (Heart.Instance.IsHeartUsedThreeTimes())
         {
-            hardButton.SetActive(false);
+            heartButton.SetActive(false);
         }
     }
 }
