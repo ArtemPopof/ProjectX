@@ -324,6 +324,25 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 5798846337381073988}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &666861439 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5755809255824327322, guid: b0fcb06b59fb39444ae341fd6173636a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1757909331}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &666861440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 666861439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55f2280e8b176ae4db692ab55d44fab0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  message: {fileID: 1107019909}
 --- !u!1 &710614989
 GameObject:
   m_ObjectHideFlags: 0
@@ -353,7 +372,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 275d2ef5b885bc8468753408d0bf7ef5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  purchaseStatusDialog: {fileID: 0}
+  purchaseStatusDialog: {fileID: 666861440}
 --- !u!4 &710614991
 Transform:
   m_ObjectHideFlags: 0
@@ -1682,6 +1701,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1107019909 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6539489403640644766, guid: b0fcb06b59fb39444ae341fd6173636a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1757909331}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1347822504
 GameObject:
   m_ObjectHideFlags: 0
@@ -2020,6 +2051,7 @@ MonoBehaviour:
   dragonShopUI: {fileID: 1851943846}
   mainShopUI: {fileID: 655578546}
   buyMoneyDialog: {fileID: 281583356}
+  purchaseStatusDialog: {fileID: 666861439}
   shopDragons: {fileID: 1459576198}
 --- !u!114 &1574337550 stripped
 MonoBehaviour:
@@ -2867,6 +2899,11 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5755809255824327322, guid: b0fcb06b59fb39444ae341fd6173636a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5834040511490305767, guid: b0fcb06b59fb39444ae341fd6173636a,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -3196,6 +3233,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 7812521169667056224, guid: b0fcb06b59fb39444ae341fd6173636a,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 666861440}
+    - target: {fileID: 7812521169667056224, guid: b0fcb06b59fb39444ae341fd6173636a,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Close
       objectReference: {fileID: 0}
     - target: {fileID: 7812521169667056225, guid: b0fcb06b59fb39444ae341fd6173636a,
         type: 3}
@@ -4664,6 +4711,11 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 221334896458228894, guid: aa7a6eb38616bf248a11aad715e14a3d,
+        type: 3}
+      propertyPath: listener
+      value: 
+      objectReference: {fileID: 1524075867}
     - target: {fileID: 271133275773899178, guid: aa7a6eb38616bf248a11aad715e14a3d,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -5919,6 +5971,16 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5517741514213288012, guid: aa7a6eb38616bf248a11aad715e14a3d,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1524075867}
+    - target: {fileID: 5517741514213288012, guid: aa7a6eb38616bf248a11aad715e14a3d,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ReturnButtonClicked
+      objectReference: {fileID: 0}
     - target: {fileID: 5540477063856286321, guid: aa7a6eb38616bf248a11aad715e14a3d,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -6438,6 +6500,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8271298542422993713, guid: aa7a6eb38616bf248a11aad715e14a3d,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1524075867}
+    - target: {fileID: 8271298542422993713, guid: aa7a6eb38616bf248a11aad715e14a3d,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OpenDragonsShop
       objectReference: {fileID: 0}
     - target: {fileID: 8432134243423724934, guid: aa7a6eb38616bf248a11aad715e14a3d,
         type: 3}

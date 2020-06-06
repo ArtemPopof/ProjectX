@@ -15,6 +15,8 @@ public class PurchaseManager : MonoBehaviour, IStoreListener
 
     public PurchaseStatusDialog purchaseStatusDialog;
 
+    public static PurchaseStatusDialog sorryForThatHack;
+
     void Start()
     {
         if (storeController == null)
@@ -61,6 +63,7 @@ public class PurchaseManager : MonoBehaviour, IStoreListener
         }
 
         Product product = storeController.products.WithID(productId);
+        sorryForThatHack = purchaseStatusDialog;
         if (product != null && product.availableToPurchase)
         {
             Debug.Log(string.Format("Purchasing product asychronously: '{0}'", product.definition.id));
@@ -100,7 +103,7 @@ public class PurchaseManager : MonoBehaviour, IStoreListener
         } else
         {
             Debug.Log("PurchaseManager: Purchased fail, unknown product Id: " + productId);
-            purchaseStatusDialog.Show("Something goes wrong! Try again later or contact developers.", false);
+            sorryForThatHack.Show("Something goes wrong! Try again later or contact developers.", false);
         }
 
         return PurchaseProcessingResult.Complete;
@@ -109,6 +112,9 @@ public class PurchaseManager : MonoBehaviour, IStoreListener
     private void ProcessCoinPurchase(int count)
     {
         Debug.Log("PurchaseManager: Purchased coins " + count);
+        SoundManager.PlaySound("Chest");
+        sorryForThatHack.Show("Puchased " + count + " coins!", true);
+
         var currentCount = PlayerPrefs.GetInt("coins");
         currentCount += count;
         PlayerPrefs.SetInt("coins", currentCount);

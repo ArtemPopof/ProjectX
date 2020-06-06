@@ -23,6 +23,7 @@ public class ShopManager : DefaultUnityAdListener
     public GameObject dragonShopUI;
     public GameObject mainShopUI;
     public GameObject buyMoneyDialog;
+    public GameObject purchaseStatusDialog;
     public GameObject shopDragons;
 
     private GameObject currentScreen;
@@ -196,6 +197,8 @@ public class ShopManager : DefaultUnityAdListener
 
         if (!AdComponent.UserWatchedAd(showResult)) return;
 
+        SoundManager.PlaySound("Chest");
+
         var currentCoins = PlayerPrefs.GetInt("coins");
         currentCoins += 300;
         PlayerPrefs.SetInt("coins", currentCoins);
@@ -215,8 +218,10 @@ public class ShopManager : DefaultUnityAdListener
     public void CloseBuyMoneyDialog()
     {
         buyMoneyDialog.SetActive(false);
-
+        purchaseStatusDialog.SetActive(false);
         shopDragons.SetActive(true);
+
+        UpdateCurrentBalance();
     }
 
 }
