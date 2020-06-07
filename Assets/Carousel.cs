@@ -14,6 +14,8 @@ public class Carousel : MonoBehaviour
     private int currentIndex = 0;
     private int maxIndex;
     private List<Action<int>> listeners = new List<Action<int>>();
+    // actually move carousel (prefabs in carousel) when swiping
+    public bool enableCarouselMotion = false;
 
     // Start is called before the first frame update
     void Awake()
@@ -73,7 +75,10 @@ public class Carousel : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = Vector3.Lerp(transform.position, desiredLocation, Time.deltaTime * 2);
+        if (enableCarouselMotion)
+        {
+            transform.position = Vector3.Lerp(transform.position, desiredLocation, Time.deltaTime * 2);
+        }
     }
 
     public void AddOnSwipeListener(Action<int> onSwipe)
