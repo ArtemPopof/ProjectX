@@ -33,8 +33,14 @@ public class AfterLosingScene : MonoBehaviour
         }
 
         SoundManager.PlaySound("Chest");
-        if(PlayerPrefs.GetInt("isWordCollected") == 1){
+        if (PlayerPrefs.GetInt("isWordCollected") == 1)
+        {
             GiveMaxPrize();
+        }
+
+        if (GameManager.Instance.Properties.GetInt("eggs") >= 10)
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene("HeartPrize");
         }
 
         closedPrize.gameObject.SetActive(false);
