@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Advertisements;
 using System.Linq;
 using System;
 
-public class ShopManager : MonoBehaviour
+public class ShopManager : DefaultUnityAdListener
 {
     public Carousel carousel;
     public Transform dragons;
@@ -16,10 +17,24 @@ public class ShopManager : MonoBehaviour
     public Transform beforeBuy;
     public Transform afterBuy;
     public Text buyText;
-    public Text moneyOnAccount;
+    public List<Text> currentMoneyLabels;
     private int currentIndex = 0;
 
+    public GameObject dragonShopUI;
+    public GameObject mainShopUI;
+    public GameObject buyMoneyDialog;
+    public GameObject purchaseStatusDialog;
+    public List<GameObject> shopModels;
+
+    private GameObject currentScreen;
+
     void Start()
+    {
+        currentScreen = mainShopUI;
+        UpdateCurrentBalance();
+    }
+
+    private void OnDragonShopUIStart()
     {
         currentIndex = PlayerPrefs.GetInt("characterLook");
         carousel.AddOnSwipeListener((currentIndex) => { DragonChooseChanged(currentIndex); });
@@ -41,7 +56,7 @@ public class ShopManager : MonoBehaviour
     {
         characterPrice.text = dragon.price.ToString();
         characterName.text = dragon.name;
-        moneyOnAccount.text = PlayerPrefs.GetInt("coins").ToString();
+        UpdateCurrentBalance();
 
         if (AlreadyBought(currentIndex))
         {
@@ -60,6 +75,16 @@ public class ShopManager : MonoBehaviour
             {
                 UpdateButtonTextForAvailabilityToBuy(false);
             }
+        }
+    }
+
+    private void UpdateCurrentBalance()
+    {
+        var balance = PlayerPrefs.GetInt("coins").ToString();
+
+        foreach (Text text in currentMoneyLabels)
+        {
+            text.text = balance;
         }
     }
 
@@ -152,4 +177,55 @@ public class ShopManager : MonoBehaviour
     {
         
     }
+
+    public void OpenDragonsShop()
+    {
+        dragonShopUI.SetActive(true);
+        mainShopUI.SetActive(false);
+        OnDragonShopUIStart();
+    }
+
+    public void ReturnToMainShopUI()
+    {
+        dragonShopUI.SetActive(false);
+        mainShopUI.SetActive(true);
+    }
+
+    public override void OnUnityAdsDidFinish(string placementId, ShowResult showResult)
+    {
+        Debug.Log("Ad finished, adding coins " + showResult);
+
+        if (!AdComponent.UserWatchedAd(showResult)) return;
+
+        SoundManager.PlaySound("Chest");
+
+        var currentCoins = PlayerPrefs.GetInt("coins");
+        currentCoins += 300;
+        PlayerPrefs.SetInt("coins", currentCoins);
+
+        UpdateCurrentBalance();
+
+        // Maybe some dataloss here?    
+        PlayerPrefs.SetInt("inshopAdLastShow", (int) (DateTime.Now.Ticks / TimeSpan.TicksPerHour));
+    }
+
+    public void OpenBuyMoneyDialog()
+    {
+        foreach (GameObject model in shopModels) {
+            model.SetActive(false);
+        }
+        buyMoneyDialog.SetActive(true);
+    }
+
+    public void CloseBuyMoneyDialog()
+    {
+        buyMoneyDialog.SetActive(false);
+        purchaseStatusDialog.SetActive(false);
+        foreach (GameObject model in shopModels)
+        {
+            model.SetActive(true);
+        }
+        UpdateCurrentBalance();
+    }
+
 }

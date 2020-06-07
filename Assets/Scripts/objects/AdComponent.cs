@@ -1,19 +1,38 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 using UnityEngine.Advertisements;
 
-public class AdComponent : MonoBehaviour, IUnityAdsListener
+public class AdComponent : DefaultUnityAdListener
 {
     public AdType type;
     public int maxShowCount;
+    public DefaultUnityAdListener listener;
 
     void Start()
     {
         Advertisement.AddListener(this);
+
+        UpdateAdAvailability();
     }
 
-    public void ShowAdToResume()
+    private void UpdateAdAvailability()
+    {
+        if (type == AdType.INSHOP_AD)
+        {
+            // timestamp in hours (to fit int size)
+            var lastViewDate = PlayerPrefs.GetInt("inshopAdLastShow");
+            var nowHoursTimestamp = DateTime.Now.Ticks / TimeSpan.TicksPerHour;
+            var diff = nowHoursTimestamp - lastViewDate;
+
+            if (diff < 1)
+            {
+                transform.gameObject.SetActive(false);
+                return;
+            }
+        }
+    }
+
+    public void Show()
     {
         if (!Advertisement.IsReady())
         {
@@ -30,7 +49,7 @@ public class AdComponent : MonoBehaviour, IUnityAdsListener
         }
     }
 
-    public void OnUnityAdsDidError(string message)
+    public override void OnUnityAdsDidError(string message)
     {
         Debug.LogError(message);
 
@@ -40,31 +59,30 @@ public class AdComponent : MonoBehaviour, IUnityAdsListener
         }
     }
 
-    public void OnUnityAdsDidFinish(string placementId, ShowResult showResult)
+    public override void OnUnityAdsDidFinish(string placementId, ShowResult showResult)
     {
         Debug.Log("Ad finished " + showResult);
-        if (type == AdType.RESUME_AD && UserWatchedAd(showResult))
+
+        if (!UserWatchedAd(showResult)) return;
+
+        if (listener != null) listener.OnUnityAdsDidFinish(placementId, showResult);
+
+        if (type == AdType.RESUME_AD)
         {
             GameManager.Instance.Resurrect();
         }
+
+        UpdateAdAvailability();
     }
 
-    private bool UserWatchedAd(ShowResult showResult)
+    public static bool UserWatchedAd(ShowResult showResult)
     {
         return showResult == ShowResult.Finished || showResult == ShowResult.Failed;
-    }
-
-    public void OnUnityAdsDidStart(string placementId)
-    {
-    }
-
-    public void OnUnityAdsReady(string placementId)
-    {
     }
 
     public enum AdType
     {
         RESUME_AD,
-        REWARD_AD
+        INSHOP_AD
     }
 }
