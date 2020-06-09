@@ -810,7 +810,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 1843.1}
+  m_SizeDelta: {x: 0, y: 1538}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2385246550281748882
 CanvasRenderer:
@@ -833,13 +833,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.5176471}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 3dd8dcb7776526948bbb6ffb3a818a0c, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -880,16 +880,17 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2241630377749815290}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 402524dd2f2759e4ab1adea61f80f6c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   swipeVector: {x: 1000, y: 0, z: 1}
-  leftSwipeArrow: {fileID: 0}
-  rightSwipeArrow: {fileID: 0}
+  leftSwipeArrow: {fileID: 2115585452212061546}
+  rightSwipeArrow: {fileID: 2115585453339623541}
   startPosition: {x: 0, y: 0, z: 0}
   desiredLocation: {x: 0, y: 0, z: 0}
+  enableCarouselMotion: 1
 --- !u!1 &3023503184002461958
 GameObject:
   m_ObjectHideFlags: 0
@@ -1946,7 +1947,7 @@ GameObject:
   - component: {fileID: 8689925320161128988}
   - component: {fileID: 3782986003701339444}
   m_Layer: 5
-  m_Name: LevelsShop
+  m_Name: DragonsShopUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1965,6 +1966,7 @@ RectTransform:
   m_Children:
   - {fileID: 8689925321104539310}
   - {fileID: 8689925321838020863}
+  - {fileID: 1328285764324848348}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2049,6 +2051,8 @@ MonoBehaviour:
   levelCovers:
   - {fileID: 21300000, guid: 3dd8dcb7776526948bbb6ffb3a818a0c, type: 3}
   - {fileID: 21300000, guid: 881c71d2490a05c4aa46339589774818, type: 3}
+  carousel: {fileID: 0}
+  cover: {fileID: 0}
 --- !u!1 &8689925320290896114
 GameObject:
   m_ObjectHideFlags: 0
@@ -2295,7 +2299,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 2700}
+  m_SizeDelta: {x: 0, y: 2457.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8689925321838020861
 CanvasRenderer:
@@ -2648,3 +2652,118 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: your balance
+--- !u!1001 &2115585452260090648
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 8689925320161128989}
+    m_Modifications:
+    - target: {fileID: 1090493182647735422, guid: f38db7767841dbe47ae893f33bb17afb,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.62
+      objectReference: {fileID: 0}
+    - target: {fileID: 1090493182647735422, guid: f38db7767841dbe47ae893f33bb17afb,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.96
+      objectReference: {fileID: 0}
+    - target: {fileID: 1095242361484087748, guid: f38db7767841dbe47ae893f33bb17afb,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 1095242361484087748, guid: f38db7767841dbe47ae893f33bb17afb,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -149
+      objectReference: {fileID: 0}
+    - target: {fileID: 1095242361484087748, guid: f38db7767841dbe47ae893f33bb17afb,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1648
+      objectReference: {fileID: 0}
+    - target: {fileID: 1095242361484087748, guid: f38db7767841dbe47ae893f33bb17afb,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1095242361484087748, guid: f38db7767841dbe47ae893f33bb17afb,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.94832367
+      objectReference: {fileID: 0}
+    - target: {fileID: 1095242361484087748, guid: f38db7767841dbe47ae893f33bb17afb,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1095242361484087748, guid: f38db7767841dbe47ae893f33bb17afb,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.31730464
+      objectReference: {fileID: 0}
+    - target: {fileID: 1095242361484087748, guid: f38db7767841dbe47ae893f33bb17afb,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1095242361484087748, guid: f38db7767841dbe47ae893f33bb17afb,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1095242361484087748, guid: f38db7767841dbe47ae893f33bb17afb,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 217
+      objectReference: {fileID: 0}
+    - target: {fileID: 1095242361484087748, guid: f38db7767841dbe47ae893f33bb17afb,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1095242361484087749, guid: f38db7767841dbe47ae893f33bb17afb,
+        type: 3}
+      propertyPath: m_Name
+      value: MainShopDragons
+      objectReference: {fileID: 0}
+    - target: {fileID: 1095242361484087750, guid: f38db7767841dbe47ae893f33bb17afb,
+        type: 3}
+      propertyPath: leftSwipeArrow
+      value: 
+      objectReference: {fileID: 2115585452212061546}
+    - target: {fileID: 1095242361484087750, guid: f38db7767841dbe47ae893f33bb17afb,
+        type: 3}
+      propertyPath: rightSwipeArrow
+      value: 
+      objectReference: {fileID: 2115585453339623541}
+    - target: {fileID: 1095242361484087750, guid: f38db7767841dbe47ae893f33bb17afb,
+        type: 3}
+      propertyPath: enableCarouselMotion
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1095242361484087750, guid: f38db7767841dbe47ae893f33bb17afb,
+        type: 3}
+      propertyPath: swipeVector.x
+      value: 620
+      objectReference: {fileID: 0}
+    - target: {fileID: 1098137308331860158, guid: f38db7767841dbe47ae893f33bb17afb,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.34
+      objectReference: {fileID: 0}
+    - target: {fileID: 1098137308331860158, guid: f38db7767841dbe47ae893f33bb17afb,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.99
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f38db7767841dbe47ae893f33bb17afb, type: 3}
+--- !u!4 &1328285764324848348 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1095242361484087748, guid: f38db7767841dbe47ae893f33bb17afb,
+    type: 3}
+  m_PrefabInstance: {fileID: 2115585452260090648}
+  m_PrefabAsset: {fileID: 0}
