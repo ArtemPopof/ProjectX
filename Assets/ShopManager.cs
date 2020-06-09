@@ -21,6 +21,7 @@ public class ShopManager : DefaultUnityAdListener
     private int currentIndex = 0;
 
     public GameObject dragonShopUI;
+    public GameObject levelShopUI;
     public GameObject mainShopUI;
     public GameObject buyMoneyDialog;
     public GameObject purchaseStatusDialog;
@@ -226,6 +227,12 @@ public class ShopManager : DefaultUnityAdListener
             model.SetActive(true);
         }
         UpdateCurrentBalance();
+    }
+
+    public void OpenLevelShop()
+    {
+        levelShopUI.SetActive(true);
+        mainShopUI.SetActive(false);
     }
 
 }
