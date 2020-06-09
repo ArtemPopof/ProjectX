@@ -9,16 +9,13 @@ public class GameMenuUI : MonoBehaviour
     public Text coins;
     public Text hearts;
 
-    public int i;
-
     // Start is called before the first frame update
     void Start()
     {
         highscore.text = PlayerPrefs.GetInt("highscore").ToString();
-        hearts.text = PlayerPrefs.GetInt("heart").ToString();
         coins.text = PlayerPrefs.GetInt("coins").ToString();
+        hearts.text = PlayerPrefs.GetInt("heart").ToString();
         
-        i= PlayerPrefs.GetInt("highscore");
     }
 
 }

@@ -60,9 +60,13 @@ public class GameManager : MonoBehaviour
         Properties.Add("debug", 0);
         Properties.Add("heart", 0);
         Properties.Add("restartCount", 0);
-        PlayerPrefs.SetInt("currentScene", 0);
+        PlayerPrefs.SetInt("currentScene", 0); 
         PlayerPrefs.SetInt("chests", 0);
         
+        if (PlayerPrefs.GetInt("heart") == null) 
+        {
+            PlayerPrefs.SetInt("heart", 0);
+        }
 
         var highscore = 0;
         if (PlayerPrefs.HasKey("highscore"))
