@@ -20,14 +20,17 @@ public class ShopItemUi : MonoBehaviour
 
     void Start()
     {
-        carousel.AddOnSwipeListener((currentItem) => { UpdateItemInfo(currentItem); });
+        carousel.AddOnSwipeListener((item) => { UpdateItemInfo(item); });
     }
 
     public void UpdateItemInfo(ShopItem item)
     {
         currentItem = item;
         characterPrice.text = item.price.ToString();
-        characterName.text = item.name;
+        if (characterName != null)
+        {
+            characterName.text = item.name;
+        }
 
         if (AlreadyBought(item.index))
         {

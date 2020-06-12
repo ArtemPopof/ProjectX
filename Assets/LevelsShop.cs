@@ -5,26 +5,21 @@ using UnityEngine.UI;
 
 public class LevelsShop : MonoBehaviour
 {
-    public List<Level> levels;
-    private Level currentLevel;
     public Image cover;
     public ShopItemUi shopItem;
+    public Carousel carousel;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        var currentLevelIndex = PlayerPrefs.GetInt("currentLevel");
-        currentLevel = levels[currentLevelIndex];
-
-        //carousel.AddOnSwipeListener((currentIndex) => { UpdateCurrentLevel(currentIndex); });
+        carousel.AddOnSwipeListener((level) => { UpdateCurrentLevel(level as Level); });
     }
 
-    private void UpdateCurrentLevel(int currentIndex)
+    private void UpdateCurrentLevel(Level level)
     {
-        currentLevel = levels[currentIndex];
-        cover.sprite = currentLevel.shopCover;
+        cover.sprite = level.shopCover;
 
-        shopItem.UpdateItemInfo(currentLevel);
+        shopItem.UpdateItemInfo(level);
     }
 
     // Update is called once per frame
