@@ -13,9 +13,10 @@ public class Carousel : MonoBehaviour
     public Vector3 desiredLocation;
     private int currentIndex = 0;
     private int maxIndex;
-    private List<Action<int>> listeners = new List<Action<int>>();
+    private List<Action<ShopItem>> listeners = new List<Action<ShopItem>>();
     // actually move carousel (prefabs in carousel) when swiping
     public bool enableCarouselMotion = false;
+    public List<ShopItem> items;
 
     // Start is called before the first frame update
     void Awake()
@@ -29,6 +30,7 @@ public class Carousel : MonoBehaviour
     {
         leftSwipeArrow.onClick.AddListener(() => { SwipeLeft(); });
         rightSwipeArrow.onClick.AddListener(() => { SwipeRight(); });
+        SetIndex(0);
     }
 
     public void SetIndex(int index)
@@ -46,29 +48,27 @@ public class Carousel : MonoBehaviour
         {
             leftSwipeArrow.interactable = false;
         }
+
+        notifyListeners();
     }
 
     public void SwipeLeft()
     {
         currentIndex--;
         SetIndex(currentIndex);
-
-        notifyListeners();
     }
 
     public void SwipeRight()
     {
         currentIndex++;
         SetIndex(currentIndex);
-
-        notifyListeners();
     }
 
     private void notifyListeners()
     {
         foreach (var listener in listeners)
         {
-            listener.Invoke(currentIndex);
+            listener.Invoke(items[currentIndex]);
         }
     }
 
@@ -81,7 +81,7 @@ public class Carousel : MonoBehaviour
         }
     }
 
-    public void AddOnSwipeListener(Action<int> onSwipe)
+    public void AddOnSwipeListener(Action<ShopItem> onSwipe)
     {
         listeners.Add(onSwipe);
     }

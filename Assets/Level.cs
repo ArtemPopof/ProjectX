@@ -1,13 +1,9 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class Level : MonoBehaviour
+public class Level : ShopItem
 {
-    public string name;
-    public int price;
-    public Image shopCover;
+    public Sprite shopCover;
 
     void Start()
     {

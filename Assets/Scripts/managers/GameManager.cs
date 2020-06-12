@@ -85,10 +85,16 @@ public class GameManager : MonoBehaviour
             initAdsEngine();
         }
 
-        // Add default look into collection
-        if (PlayerPrefs.GetString("availableLooks") == "")
+        // Add default look and level into collection
+        // 0 - default look, 100 - default lvl
+        if (PlayerPrefs.GetString("availableItems") == "")
         {
-            PlayerPrefs.SetString("availableLooks", "0");
+            PlayerPrefs.SetString("availableItems", "0;100");
+        }
+        // set default level
+        if (PlayerPrefs.GetInt("currentLevel") == 0)
+        {
+            PlayerPrefs.SetInt("currentLevel", 100);
         }
     }
 
