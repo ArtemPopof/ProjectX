@@ -36,6 +36,8 @@ public class LevelManager : MonoBehaviour
     // list of segments;
     public List<Segment> firstLevelSegments = new List<Segment>();
     public List<Segment> secondLevelSegments = new List<Segment>();
+    public GameObject initSegmentFirstLevel;
+    public GameObject initSegmentSecondLevel;
 
     private List<Segment> availableTransitions = new List<Segment>();
 
@@ -63,9 +65,14 @@ public class LevelManager : MonoBehaviour
         if (currentLevel == 0)
         {
             currentLevelSegments = firstLevelSegments;
-        } else
+            initSegmentFirstLevel.SetActive(true);
+            initSegmentSecondLevel.SetActive(false);
+        }
+        else
         {
             currentLevelSegments = secondLevelSegments;
+            initSegmentFirstLevel.SetActive(false);
+            initSegmentSecondLevel.SetActive(true);
         }
 
         segmentPool = new List<Segment>((currentLevelSegments.Count + availableTransitions.Count) * 2);

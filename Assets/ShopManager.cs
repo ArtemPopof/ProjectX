@@ -67,6 +67,7 @@ public class ShopManager : DefaultUnityAdListener
     public void ReturnToMainShopUI()
     {
         dragonShopUI.SetActive(false);
+        levelShopUI.SetActive(false);
         mainShopUI.SetActive(true);
     }
 
