@@ -168,14 +168,21 @@ public class GameManager : MonoBehaviour
 
     public void SetUIPanelActive(string panelTag, bool isActive)
     {
-        foreach(Transform child in uiPanels.transform)
+        var panel = FindComponentByTag(uiPanels.transform, panelTag);
+        panel.SetActive(isActive);
+    }
+
+    public static GameObject FindComponentByTag(Transform parent, string tag)
+    {
+        foreach (Transform child in parent)
         {
-            if (child.CompareTag(panelTag))
+            if (child.CompareTag(tag))
             {
-                child.gameObject.SetActive(isActive);
-                return;
+                return child.gameObject;
             }
         }
+
+        return null;
     }
 
     private Timer InitTimer()

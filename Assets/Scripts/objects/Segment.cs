@@ -20,9 +20,23 @@ public class Segment : MonoBehaviour
         pieces = gameObject.GetComponentsInChildren<Piece>();
         SegmentObjects = FindSegmentObjects();
         SegmentObjects.SetActive(true);
+
+        lenght = CalculateRealLength();
     }
 
+    private float CalculateRealLength()
+    {
+        var grass = GameManager.FindComponentByTag(transform, "Grass");
+        if (grass == null)
+        {
+            return lenght;
+        }
 
+        var size = grass.GetComponent<MeshFilter>().mesh.bounds.size.z;
+        size *= grass.transform.localScale.z;
+
+        return size;
+    }
 
     private GameObject FindSegmentObjects()
     {
