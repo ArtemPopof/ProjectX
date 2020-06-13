@@ -91,11 +91,13 @@ public class LevelManager : MonoBehaviour
         if (levelCode == 0)
         {
             RenderSettings.skybox = firstLevelSkybox;
+            RenderSettings.ambientSkyColor = Color.white;
         }
         else
         {
             // fire level
             RenderSettings.skybox = secondLevelSkybox;
+            RenderSettings.ambientSkyColor = new Color(0.4f, 0.4f, 0.4f);
         }
     }
 
