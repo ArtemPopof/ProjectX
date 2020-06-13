@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 3
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: 5883f6143a36c3e4397fd660ad361602, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 7f3371231beaa46ccbcc83804ac7a097, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -2708,6 +2708,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.x
       value: 0.005639527
       objectReference: {fileID: 0}
+    - target: {fileID: 3160868604525904105, guid: 3e608f228d1610c54a9b50015d1b6cc1,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 6.19
+      objectReference: {fileID: 0}
     - target: {fileID: 3286241200749075798, guid: 3e608f228d1610c54a9b50015d1b6cc1,
         type: 3}
       propertyPath: m_LocalPosition.z
@@ -4267,7 +4272,7 @@ PrefabInstance:
     - target: {fileID: 4938415035657669464, guid: 336063ebeeea7fa4788b45db614b46c3,
         type: 3}
       propertyPath: firstLevelSegments.Array.size
-      value: 9
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 4938415035657669464, guid: 336063ebeeea7fa4788b45db614b46c3,
         type: 3}
@@ -4315,6 +4320,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6756429388750605274, guid: f78be816e7126a04eb81efa6cb5fc4b3,
         type: 3}
+    - target: {fileID: 4938415035657669464, guid: 336063ebeeea7fa4788b45db614b46c3,
+        type: 3}
+      propertyPath: secondLevelSkybox
+      value: 
+      objectReference: {fileID: 2100000, guid: 7f3371231beaa46ccbcc83804ac7a097, type: 2}
+    - target: {fileID: 4938415035657669464, guid: 336063ebeeea7fa4788b45db614b46c3,
+        type: 3}
+      propertyPath: firstLevelSkybox
+      value: 
+      objectReference: {fileID: 2100000, guid: 32cbc1b39d41ab941b5f643d8600457a, type: 2}
     - target: {fileID: 4938415035657669465, guid: 336063ebeeea7fa4788b45db614b46c3,
         type: 3}
       propertyPath: m_Name
