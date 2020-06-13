@@ -10,7 +10,7 @@ public class DeathUi : MonoBehaviour
 
     public Text hearts;
 
-    public gameObject heart;
+    public GameObject heart;
 
     public Animator animator;
 
