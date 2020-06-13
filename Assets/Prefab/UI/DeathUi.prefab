@@ -640,7 +640,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   score: {fileID: 162230920587578066}
   coins: {fileID: 162230920288491415}
-  hearts: {fileID: 0}
+  hearts: {fileID: 162230920288491415}
   animator: {fileID: 162230920814033997}
 --- !u!95 &162230920814033997
 Animator:
@@ -1240,7 +1240,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 8096365680350246097}
-        m_MethodName: DisableHeartButton
+        m_MethodName: UserHeart
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1562,7 +1562,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 7037759970955087996}
-        m_MethodName: ShowAdToResume
+        m_MethodName: Show
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

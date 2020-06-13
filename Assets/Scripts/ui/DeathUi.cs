@@ -10,17 +10,11 @@ public class DeathUi : MonoBehaviour
 
     public Text hearts;
 
-    public gameObject heart;
-
     public Animator animator;
 
     // Start is called before the first frame update
     void Start()
     {
-        if (PlayerPrefs.GetInt("heart") == 0 || Heart.Instance.IsHeartUsedThreeTimes())
-        {
-            heart.SetActive(false);
-        }
         GameManager.Instance.Properties.bind(score, "score");
         GameManager.Instance.Properties.bind(coins, "coins");
         hearts.text = PlayerPrefs.GetInt("heart").ToString();
