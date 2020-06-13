@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Dragon : MonoBehaviour
+public class ShopItem : MonoBehaviour
 {
+    public int index;
     public int price;
     public string name;
 

@@ -34,15 +34,22 @@ public class LevelManager : MonoBehaviour
     public List<Piece> pieces = new List<Piece>();
 
     // list of segments;
-    public List<Segment> availableSegements = new List<Segment>();
-    public List<Segment> availableTransitions = new List<Segment>();
+    public List<Segment> firstLevelSegments = new List<Segment>();
+    public List<Segment> secondLevelSegments = new List<Segment>();
+    public GameObject initSegmentFirstLevel;
+    public GameObject initSegmentSecondLevel;
+
+    private List<Segment> availableTransitions = new List<Segment>();
+
     [HideInInspector]
     public List<Segment> segments = new List<Segment>();
 
     // Some segements contained in this pool
     // Level manager uses this segments to place them on the level
     // not initialising them every time, just placing them on the right spot
-    public List<Segment> segmentPool;
+    private List<Segment> segmentPool;
+
+    private List<Segment> currentLevelSegments;
 
     // gameplay;
     // private bool isMoving = false;
@@ -52,21 +59,32 @@ public class LevelManager : MonoBehaviour
         Instance = this;
         cameraContainer = Camera.main.transform;
         currentSpawnZ = 0;
-        // currentLevel = 0;
 
-        segmentPool = new List<Segment>((availableSegements.Count + availableTransitions.Count) * 2);
+        // level indexes start with 100
+        var currentLevel = PlayerPrefs.GetInt("currentLevel") - 100;
+        if (currentLevel == 0)
+        {
+            currentLevelSegments = firstLevelSegments;
+            initSegmentFirstLevel.SetActive(true);
+            initSegmentSecondLevel.SetActive(false);
+        }
+        else
+        {
+            currentLevelSegments = secondLevelSegments;
+            initSegmentFirstLevel.SetActive(false);
+            initSegmentSecondLevel.SetActive(true);
+        }
 
-        var current = DateTime.Now;
+        segmentPool = new List<Segment>((currentLevelSegments.Count + availableTransitions.Count) * 2);
+
         initializeSegmentPool();
-        var delta = (DateTime.Now - current);
-        GameManager.Instance.Properties.setProperty("debug", delta.TotalMilliseconds);
     }
 
     private void initializeSegmentPool()
     {
-        for (int i = 0; i < availableSegements.Count * 2; i++)
+        for (int i = 0; i < currentLevelSegments.Count * 2; i++)
         {
-            var gameObject = Instantiate(availableSegements[i / 2].gameObject) as GameObject;
+            var gameObject = Instantiate(currentLevelSegments[i / 2].gameObject) as GameObject;
             var segment = gameObject.GetComponent<Segment>();
             segmentPool.Add(segment);
         }
@@ -87,7 +105,7 @@ public class LevelManager : MonoBehaviour
     private void Start()
     {
         for (int i = 0; amountOfActiveSegments < INITIAL_SEGMENTS; i++)
-            GenerateSegment();
+            SpawnSegment();
     }
 
 
@@ -95,7 +113,7 @@ public class LevelManager : MonoBehaviour
     {
         if (currentSpawnZ - cameraContainer.position.z < DISTANCE_BEFORE_SPAWN)
         {
-            GenerateSegment();
+            SpawnSegment();
         }
     }
 
@@ -111,21 +129,6 @@ public class LevelManager : MonoBehaviour
         amountOfActiveSegments--;
     }
 
-    private void GenerateSegment()
-    {
-        SpawnSegment();
-
-        //if (UnityEngine.Random.Range(0f, 1f) < countiousSegments * 0.25f)
-        // {
-        //    // Spawn transition seg
-        //     countiousSegments = 0;
-        //    SpawnTransition();
-        //}
-        //else
-        //{
-        //    countiousSegments++;
-        //}
-    }
     private void SpawnSegment()
     {
         var id = UnityEngine.Random.Range(0, segmentPool.Count);
@@ -149,30 +152,6 @@ public class LevelManager : MonoBehaviour
         segment.Spawn();
     }
 
-    private void SpawnSegmentOld()
-    {
-        List<Segment> possibleSegment = availableSegements.FindAll(
-            x => x.beginY1 == y1 || x.beginY2 == y2 || x.beginY3 == y3);
-
-        int id = UnityEngine.Random.Range(0, possibleSegment.Count);
-
-        // TODO what does bool do?
-        Segment segment = GetSegment(id, false);
-
-
-        y1 = segment.endY1;
-        y2 = segment.endY2;
-        y3 = segment.endY3;
-
-
-        segment.transform.SetParent(transform);
-        segment.transform.localPosition = Vector3.forward * (currentSpawnZ + DISTANCE_BEFORE_FIRST_SEGMENT);
-
-        currentSpawnZ += segment.lenght;
-        amountOfActiveSegments++;
-        segment.Spawn();
-    }
-
     public Segment GetSegment(int id, bool transition)
     {
         Segment segment = null;
@@ -180,7 +159,7 @@ public class LevelManager : MonoBehaviour
 
         if (segment == null)
         {
-            GameObject go = Instantiate((transition) ? availableTransitions[id].gameObject : availableSegements[id].gameObject) as GameObject;
+            GameObject go = Instantiate((transition) ? availableTransitions[id].gameObject : currentLevelSegments[id].gameObject) as GameObject;
             segment = go.GetComponent<Segment>();
 
             segment.SegmentId = id;
