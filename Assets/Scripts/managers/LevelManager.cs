@@ -51,6 +51,9 @@ public class LevelManager : MonoBehaviour
 
     private List<Segment> currentLevelSegments;
 
+    public Material firstLevelSkybox;
+    public Material secondLevelSkybox;
+
     // gameplay;
     // private bool isMoving = false;
 
@@ -75,9 +78,27 @@ public class LevelManager : MonoBehaviour
             initSegmentSecondLevel.SetActive(true);
         }
 
+        InitLightingAndSkyboxSettings(currentLevel);
+
         segmentPool = new List<Segment>((currentLevelSegments.Count + availableTransitions.Count) * 2);
 
         initializeSegmentPool();
+    }
+
+    private void InitLightingAndSkyboxSettings(int levelCode)
+    {
+        // default level
+        if (levelCode == 0)
+        {
+            RenderSettings.skybox = firstLevelSkybox;
+            RenderSettings.ambientSkyColor = Color.white;
+        }
+        else
+        {
+            // fire level
+            RenderSettings.skybox = secondLevelSkybox;
+            RenderSettings.ambientSkyColor = new Color(0.4f, 0.4f, 0.4f);
+        }
     }
 
     private void initializeSegmentPool()

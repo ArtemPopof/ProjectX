@@ -96,6 +96,7 @@ public class GameManager : MonoBehaviour
         {
             PlayerPrefs.SetInt("currentLevel", 100);
         }
+
     }
 
     private void Start()
