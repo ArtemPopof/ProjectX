@@ -32,15 +32,14 @@ public class AfterLosingScene : MonoBehaviour
             return;
         }
 
+        if (PlayerPrefs.GetInt("eggs") == 0) {
+            return;
+        }
+
         SoundManager.PlaySound("Chest");
         if (PlayerPrefs.GetInt("isWordCollected") == 1)
         {
             GiveMaxPrize();
-        }
-
-        if (GameManager.Instance.Properties.GetInt("eggs") >= 10)
-        {
-            UnityEngine.SceneManagement.SceneManager.LoadScene("HeartPrize");
         }
 
         closedPrize.gameObject.SetActive(false);
@@ -53,7 +52,7 @@ public class AfterLosingScene : MonoBehaviour
             GiveEmptyPrize();
             return;
         }
-        GiveMaxPrize();
+        // GiveMaxPrize();
     }
 
     private void GiveEmptyPrize()
