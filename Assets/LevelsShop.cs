@@ -12,7 +12,7 @@ public class LevelsShop : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        carousel.AddOnSwipeListener((level) => { UpdateCurrentLevel(level as Level); });
+        carousel.AddOnSwipeListener((newLevel) => { UpdateCurrentLevel(newLevel as Level); });
     }
 
     private void UpdateCurrentLevel(Level level)
