@@ -60,7 +60,7 @@ public class SceneManager : MonoBehaviour
 
     public void CheckHighscore()
     {
-        var Properties = GameManager.Instance.Properties;
+         var Properties = GameManager.Instance.Properties;
 
         PlayerPrefs.SetInt("chests", Properties.GetInt("chests"));
         PlayerPrefs.SetInt("eggs", Properties.GetInt("eggs"));
