@@ -15,12 +15,24 @@ public class ShopItemUi : MonoBehaviour
     public Transform afterBuy;
     public Text buyText;
     public Carousel carousel;
+    public Type itemType;
 
     private ShopItem currentItem;
 
     void Start()
     {
         carousel.AddOnSwipeListener((item) => { UpdateItemInfo(item); });
+
+        var currentItemIndex = 0;
+        if (itemType == Type.LEVELS)
+        {
+            currentItemIndex = PlayerPrefs.GetInt("currentLevel") - 100;    // 100 looks like kostyl =(
+        } else if (itemType == Type.DRAGONS)
+        {
+            currentItemIndex = PlayerPrefs.GetInt("characterLook");
+        }
+
+        carousel.SetIndex(currentItemIndex);
     }
 
     public void UpdateItemInfo(ShopItem item)
@@ -139,6 +151,12 @@ public class ShopItemUi : MonoBehaviour
         {
             PlayerPrefs.SetInt("characterLook", currentItem.index);
         }
+    }
+
+    public enum Type
+    {
+        DRAGONS,
+        LEVELS
     }
 
 }

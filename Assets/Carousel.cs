@@ -30,7 +30,6 @@ public class Carousel : MonoBehaviour
     {
         leftSwipeArrow.onClick.AddListener(() => { SwipeLeft(); });
         rightSwipeArrow.onClick.AddListener(() => { SwipeRight(); });
-        SetIndex(0);
     }
 
     public void SetIndex(int index)
