@@ -98,7 +98,7 @@ public class GameManager : MonoBehaviour
         }
 
         // uncomment to reset all props
-        //PlayerPrefs.DeleteAll();
+        PlayerPrefs.DeleteAll();
     }
 
     private void Start()

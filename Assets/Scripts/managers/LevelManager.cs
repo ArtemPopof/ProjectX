@@ -62,9 +62,12 @@ public class LevelManager : MonoBehaviour
         Instance = this;
         cameraContainer = Camera.main.transform;
         currentSpawnZ = 0;
+    }
 
+    void Start()
+    {
         // level indexes start with 100
-        var currentLevel = PlayerPrefs.GetInt("currentLevel") - 100;
+        var currentLevel = PlayerPrefs.GetInt("currentLevel");
         if (currentLevel == 0)
         {
             currentLevelSegments = firstLevelSegments;
@@ -83,6 +86,9 @@ public class LevelManager : MonoBehaviour
         segmentPool = new List<Segment>((currentLevelSegments.Count + availableTransitions.Count) * 2);
 
         initializeSegmentPool();
+
+        for (int i = 0; amountOfActiveSegments < INITIAL_SEGMENTS; i++)
+            SpawnSegment();
     }
 
     private void InitLightingAndSkyboxSettings(int levelCode)
@@ -122,13 +128,6 @@ public class LevelManager : MonoBehaviour
             segment.transform.localPosition = new Vector3(-1000, -1000, -1000); // some distant from level point
         }
     }
-
-    private void Start()
-    {
-        for (int i = 0; amountOfActiveSegments < INITIAL_SEGMENTS; i++)
-            SpawnSegment();
-    }
-
 
     private void Update()
     {
