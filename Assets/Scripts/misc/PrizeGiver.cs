@@ -12,6 +12,9 @@ public class PrizeGiver : MonoBehaviour
             case PrizeType.Coins:
                 GameManager.Instance.AddCoins(count);
                 break;
+                case PrizeType.Heart:
+                GameManager.Instance.AddHeart(count);
+                break;
             default:
                 break;
         }

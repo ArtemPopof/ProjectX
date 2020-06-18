@@ -12,5 +12,6 @@ public class Prize : MonoBehaviour
 public enum PrizeType
 {
     Coins,
+    Heart,
     Nothing
 }

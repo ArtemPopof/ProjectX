@@ -38,11 +38,6 @@ public class AfterLosingScene : MonoBehaviour
             GiveMaxPrize();
         }
 
-        if (GameManager.Instance.Properties.GetInt("eggs") >= 10)
-        {
-            UnityEngine.SceneManagement.SceneManager.LoadScene("HeartPrize");
-        }
-
         closedPrize.gameObject.SetActive(false);
 
         // generate random prize

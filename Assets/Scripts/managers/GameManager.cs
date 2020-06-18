@@ -223,11 +223,11 @@ public class GameManager : MonoBehaviour
         Properties.AddToIntProperty("eggs", 1);
     }
 
-    public void AddHeart()
+    public void AddHeart(int count)
     {
         if (Properties.GetInt("eggs") == 10)
         {
-            int heartsCount = PlayerPrefs.GetInt("heart") + 1;
+            int heartsCount = PlayerPrefs.GetInt("heart") + count;
             PlayerPrefs.SetInt("heart", heartsCount);
         }
     }

@@ -18,7 +18,6 @@ public class SceneManager : MonoBehaviour
         scenes.Add(Scene.WORD_QUEST_PRIZE);
         scenes.Add(Scene.EGG_QUEST_PRIZE);
         scenes.Add(Scene.PRIZE_GIVAWAY);
-        scenes.Add(Scene.HEART_PRIZE);
     }
 
     void Awake()
@@ -55,16 +54,13 @@ public class SceneManager : MonoBehaviour
             case Scene.WORD_QUEST_PRIZE:
                 CheckForWordQuest();
                 break;
-            case Scene.HEART_PRIZE:
-                ShowHeart();
-                break;
         }
     }
 
 
     public void CheckHighscore()
     {
-        var Properties = GameManager.Instance.Properties;
+         var Properties = GameManager.Instance.Properties;
 
         PlayerPrefs.SetInt("chests", Properties.GetInt("chests"));
         PlayerPrefs.SetInt("eggs", Properties.GetInt("eggs"));
@@ -115,18 +111,12 @@ public class SceneManager : MonoBehaviour
         }
     }
 
-    public void ShowHeart()
-    {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("HeartPrize");
-    }
-
     public enum Scene
     {
         PRIZE_GIVAWAY,
         HIGHSCORE,
         EGG_QUEST_PRIZE,
         WORD_QUEST_PRIZE,
-        GAMEPLAY,
-        HEART_PRIZE
+        GAMEPLAY
     }
 }

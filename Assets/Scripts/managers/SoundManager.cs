@@ -37,7 +37,7 @@ public class SoundManager : MonoBehaviour
 
     public static void PlaySound(string clip)
     {
-        resetPitch();
+        // resetPitch();
 
         switch (clip) {
             case "Death":
@@ -57,9 +57,9 @@ public class SoundManager : MonoBehaviour
             case "Swipe2":
                 audioSource.PlayOneShot(swipe2);
                 break;
-            case "Chest":
-                audioSource.PlayOneShot(chest);
-                break;
+            // case "Chest":
+            //     audioSource.PlayOneShot(chest);
+            //     break;
             case "Highscore":
                 audioSource.PlayOneShot(highscore);
                 break;
