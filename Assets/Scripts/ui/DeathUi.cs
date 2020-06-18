@@ -15,8 +15,8 @@ public class DeathUi : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameManager.Instance.Properties.bind(score, "score");
-        GameManager.Instance.Properties.bind(coins, "coins");
+        //GameManager.Instance.Properties.bind(score, "score");
+        //GameManager.Instance.Properties.bind(coins, "coins");
         hearts.text = PlayerPrefs.GetInt("heart").ToString();
     }
 
@@ -28,6 +28,7 @@ public class DeathUi : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        score.text = GameManager.Instance.Properties.GetInt("score").ToString();
+        coins.text = GameManager.Instance.Properties.GetInt("coins").ToString();
     }
 }
