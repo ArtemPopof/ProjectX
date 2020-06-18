@@ -82,7 +82,7 @@ public class GameManager : MonoBehaviour
             OnLoadingEnd();
         } else
         {
-            initAdsEngine();
+            InitAdsEngine();
         }
 
         // Add default look and level into collection
@@ -97,6 +97,8 @@ public class GameManager : MonoBehaviour
             PlayerPrefs.SetInt("currentLevel", 100);
         }
 
+        // uncomment to reset all props
+        //PlayerPrefs.DeleteAll();
     }
 
     private void Start()
@@ -105,7 +107,7 @@ public class GameManager : MonoBehaviour
         cameraMotor.lookAt = player.CurrentModel.transform;
     }
 
-    private void initAdsEngine()
+    public static void InitAdsEngine()
     {
         Advertisement.Initialize(GAME_ID, DEBUG_MODE);
     }

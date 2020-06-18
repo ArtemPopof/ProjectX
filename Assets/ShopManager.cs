@@ -25,6 +25,8 @@ public class ShopManager : DefaultUnityAdListener
     {
         currentScreen = mainShopUI;
         UpdateCurrentBalance();
+
+        GameManager.InitAdsEngine();
     }
 
     
