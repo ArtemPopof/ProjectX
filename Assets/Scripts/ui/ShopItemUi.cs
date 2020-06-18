@@ -8,6 +8,7 @@ using UnityEngine.UI;
  */
 public class ShopItemUi : MonoBehaviour
 {
+    public Text balance;
     public Text characterName;
     public Text characterPrice;
     public Button buyButton;
@@ -37,6 +38,7 @@ public class ShopItemUi : MonoBehaviour
 
     public void UpdateItemInfo(ShopItem item)
     {
+        balance.text = PlayerPrefs.GetInt("coins").ToString();
         currentItem = item;
         characterPrice.text = item.price.ToString();
         if (characterName != null)
