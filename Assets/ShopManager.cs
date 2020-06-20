@@ -18,6 +18,7 @@ public class ShopManager : DefaultUnityAdListener
     public GameObject purchaseStatusDialog;
     public List<GameObject> shopModels;
     public List<Text> currentMoneyLabels;
+    public List<ShopItemUi> shopItems;
 
     private GameObject currentScreen;
 
@@ -108,6 +109,7 @@ public class ShopManager : DefaultUnityAdListener
             model.SetActive(true);
         }
         UpdateCurrentBalance();
+        UpdateShopItems();
     }
 
     public void OpenLevelShop()
@@ -123,6 +125,13 @@ public class ShopManager : DefaultUnityAdListener
         foreach (Text text in currentMoneyLabels)
         {
             text.text = balance;
+        }
+    }
+
+    private void UpdateShopItems()
+    {
+        foreach (ShopItemUi item in shopItems) {
+            item.RefreshUI();
         }
     }
 }

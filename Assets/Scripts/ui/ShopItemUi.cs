@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -134,6 +135,11 @@ public class ShopItemUi : MonoBehaviour
         PlayerPrefs.SetString("availableItems", items);
 
         UpdateCurrentDragonOrLvl();
+        UpdateItemInfo(currentItem);
+    }
+
+    public void RefreshUI()
+    {
         UpdateItemInfo(currentItem);
     }
 
