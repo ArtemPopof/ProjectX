@@ -503,6 +503,26 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8824456725713650127, guid: c713e545f836e5c2d87c9341784e0986,
+        type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8824456725713650127, guid: c713e545f836e5c2d87c9341784e0986,
+        type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 2960
+      objectReference: {fileID: 0}
+    - target: {fileID: 8824456725713650127, guid: c713e545f836e5c2d87c9341784e0986,
+        type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 1440
+      objectReference: {fileID: 0}
+    - target: {fileID: 8824456725713650127, guid: c713e545f836e5c2d87c9341784e0986,
+        type: 3}
+      propertyPath: m_MatchWidthOrHeight
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8824456725713650161, guid: c713e545f836e5c2d87c9341784e0986,
         type: 3}
       propertyPath: m_Name
@@ -920,13 +940,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1332355880}
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalRotation: {x: 0.11693237, y: -0.18914387, z: 0.1766691, w: 0.9588219}
+  m_LocalPosition: {x: -979, y: -970, z: -592}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+  m_LocalEulerAnglesHint: {x: 16.922, y: -19.630001, z: 17.932001}
 --- !u!1 &1472082136
 GameObject:
   m_ObjectHideFlags: 0
@@ -1097,12 +1117,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
-  m_ReferencePixelsPerUnit: 100
+  m_UiScaleMode: 1
+  m_ReferencePixelsPerUnit: 500
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 2960, y: 1440}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 0.57
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -1155,6 +1175,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5928875612468620458, guid: fb010a2b591186fc58d529074ec279a0,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 171a8d514e3c756479fd34c6c5e50ae9, type: 2}
     - target: {fileID: 6030262828020284440, guid: fb010a2b591186fc58d529074ec279a0,
         type: 3}
       propertyPath: m_Name
@@ -1168,7 +1193,7 @@ PrefabInstance:
     - target: {fileID: 6030262828020284442, guid: fb010a2b591186fc58d529074ec279a0,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -498
+      value: -371
       objectReference: {fileID: 0}
     - target: {fileID: 6030262828020284442, guid: fb010a2b591186fc58d529074ec279a0,
         type: 3}
@@ -1228,7 +1253,7 @@ PrefabInstance:
     - target: {fileID: 6030262828020284442, guid: fb010a2b591186fc58d529074ec279a0,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 6030262828020284443, guid: fb010a2b591186fc58d529074ec279a0,
         type: 3}
@@ -1239,6 +1264,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6034634261713207440, guid: fb010a2b591186fc58d529074ec279a0,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fb010a2b591186fc58d529074ec279a0, type: 3}
