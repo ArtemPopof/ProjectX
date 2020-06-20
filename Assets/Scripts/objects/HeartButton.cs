@@ -6,7 +6,7 @@ public class HeartButton : MonoBehaviour
 {
     public void Start()
     {
-      if (PlayerPrefs.GetInt("heart") == 0 || IsHeartUsedThreeTimes())
+      if (PlayerPrefs.GetInt("heart") == 0 || AdManager.CantShowAnotherResumeAd())
         {
             gameObject.SetActive(false);
         }
@@ -21,7 +21,7 @@ public class HeartButton : MonoBehaviour
         GameManager.Instance.Resurrect();
     }
 
-    public bool IsHeartUsedThreeTimes()
+    public bool IsResurrectedThreeTimes()
     {
         bool flag = false;
         if (GameManager.Instance.Properties.GetInt("restartCount") == 3)
