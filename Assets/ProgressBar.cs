@@ -10,7 +10,7 @@ using UnityEngine;
 public class ProgressBar : MonoBehaviour
 {
     private float maxWidth;
-    private const float loadingTime = 2.0f;
+    private const float loadingTime = 4.0f;
     private float startTime;
     // Start is called before the first frame update
     void Start()

@@ -92,13 +92,14 @@ public class GameManager : MonoBehaviour
             PlayerPrefs.SetString("availableItems", "0;100");
         }
         // set default level
-        if (PlayerPrefs.GetInt("currentLevel") == 0)
+        if (!PlayerPrefs.HasKey("currentLevel"))
         {
             PlayerPrefs.SetInt("currentLevel", 100);
         }
 
         // uncomment to reset all props
         //PlayerPrefs.DeleteAll();
+        //PlayerPrefs.SetInt("coins", 50000);
     }
 
     private void Start()

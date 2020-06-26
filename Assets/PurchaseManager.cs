@@ -86,6 +86,7 @@ public class PurchaseManager : MonoBehaviour, IStoreListener
     public void OnInitializeFailed(InitializationFailureReason error)
     {
         Debug.Log("PurchaseManager: InitializationFailed, " + error);
+        sorryForThatHack.Show("Can't initialize purchasing, please contact developers: " + error, false);
     }
 
     public void OnPurchaseFailed(Product product, PurchaseFailureReason reason)

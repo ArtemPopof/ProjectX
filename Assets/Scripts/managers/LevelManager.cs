@@ -67,7 +67,7 @@ public class LevelManager : MonoBehaviour
     void Start()
     {
         // level indexes start with 100
-        var currentLevel = PlayerPrefs.GetInt("currentLevel");
+        var currentLevel = PlayerPrefs.GetInt("currentLevel") - 100;
         if (currentLevel == 0)
         {
             currentLevelSegments = firstLevelSegments;
