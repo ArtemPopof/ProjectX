@@ -1973,11 +1973,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_UiScaleMode: 1
-  m_ReferencePixelsPerUnit: 100
+  m_ReferencePixelsPerUnit: 400
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 2960, y: 1444}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0.89
+  m_MatchWidthOrHeight: 0.895
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -2554,6 +2554,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac944225575a9164bb937c0025e5400f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1044680581 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8542733378677908699, guid: 5f66a8ba342c30b4a8b33ca82f580fc0,
+    type: 3}
+  m_PrefabInstance: {fileID: 1298849260}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1044680583 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2238598686319097053, guid: 5f66a8ba342c30b4a8b33ca82f580fc0,
+    type: 3}
+  m_PrefabInstance: {fileID: 1298849260}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1044680581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1044680585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1044680581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa3d12c9caa43c2418167ff1818fd74b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprites:
+  - {fileID: 21300000, guid: 8bd965062385fc24590b92c21977f863, type: 3}
+  - {fileID: 21300000, guid: 117bc386ad2e51445ba8b4b9441c0c78, type: 3}
+  image: {fileID: 1044680583}
 --- !u!1001 &1052998500
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3323,7 +3357,7 @@ PrefabInstance:
     - target: {fileID: 5776567230220900033, guid: 5f66a8ba342c30b4a8b33ca82f580fc0,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 228.2
+      value: 175.53
       objectReference: {fileID: 0}
     - target: {fileID: 6971027667650494602, guid: 5f66a8ba342c30b4a8b33ca82f580fc0,
         type: 3}
@@ -3398,7 +3432,7 @@ PrefabInstance:
     - target: {fileID: 7165899980736556671, guid: 5f66a8ba342c30b4a8b33ca82f580fc0,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 822.91
+      value: 894.2
       objectReference: {fileID: 0}
     - target: {fileID: 7165899980736556671, guid: 5f66a8ba342c30b4a8b33ca82f580fc0,
         type: 3}
