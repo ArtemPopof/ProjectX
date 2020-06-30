@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class AfterLosingScene : MonoBehaviour
+public class PrizeScene : MonoBehaviour
 {
     public Transform prizes;
     public Transform closedPrize;
     private const int chanceToGetNothing = 5;
     public Transform emptyPrizePanel;
-    public Transform footer;
+    public Transform receivedPrizeLabel;
+    public Text yayLabel;
+    private bool open = false;
 
     public PrizeType prize;
 
@@ -26,25 +28,22 @@ public class AfterLosingScene : MonoBehaviour
 
     public void OnPrizeClick()
     {
-        if (IsOpenAlready())
+        if (open)
         {
             SceneManager.Instance.GoToNextScene();
             return;
         }
 
+        open = true;
         SoundManager.PlaySound("Chest");
-        if (PlayerPrefs.GetInt("isWordCollected") == 1)
-        {
-            GiveMaxPrize();
-        }
-
-        closedPrize.gameObject.SetActive(false);
+        yayLabel.text = "Wow! Click to continue";
+        //closedPrize.gameObject.SetActive(false);
 
         // generate random prize
-        bool prizeIsEmpty = Random.Range(0, 100) <= chanceToGetNothing;
-        if (prizeIsEmpty)
+        //bool prizeIsEmpty = Random.Range(0, 100) <= chanceToGetNothing;
+        if (false)
         {
-            footer.gameObject.SetActive(false);
+            receivedPrizeLabel.gameObject.SetActive(false);
             GiveEmptyPrize();
             return;
         }
@@ -64,7 +63,7 @@ public class AfterLosingScene : MonoBehaviour
 
     private void GivePrize(Prize prize, int count)
     {
-        var text = footer.GetComponent<Text>();
+        var text = receivedPrizeLabel.GetComponent<Text>();
         text.text = prize.type.ToString() + " x " + count.ToString();
 
         PrizeGiver.GivePrize(prize, count);

@@ -7,6 +7,9 @@ using UnityEngine;
 public class Chest : MonoBehaviour
 {
     public Animator animator;
+    public GameObject closed;
+    public GameObject open;
+    public GameObject fx;
 
     private void Start()
     {
@@ -18,5 +21,12 @@ public class Chest : MonoBehaviour
         GameManager.Instance.AddChest();
         animator.SetTrigger("Collision");
         Destroy(this.gameObject, 1.5f);
+    }
+
+    public void OpenChest()
+    {
+        closed.SetActive(false);
+        open.SetActive(true);
+        fx.SetActive(true);
     }
 }

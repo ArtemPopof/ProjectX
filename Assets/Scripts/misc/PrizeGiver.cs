@@ -10,10 +10,10 @@ public class PrizeGiver : MonoBehaviour
         switch(prize.type)
         {
             case PrizeType.Coins:
-                GameManager.Instance.AddCoins(count);
+                PlayerPrefs.SetInt("coins", PlayerPrefs.GetInt("coins") + count);
                 break;
                 case PrizeType.Heart:
-                GameManager.Instance.AddHeart(count);
+                PlayerPrefs.SetInt("heart", PlayerPrefs.GetInt("hearts") + count);
                 break;
             default:
                 break;
