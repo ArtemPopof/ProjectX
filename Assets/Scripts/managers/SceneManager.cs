@@ -46,12 +46,15 @@ public class SceneManager : MonoBehaviour
                 CheckHighscore();
                 break;
             case Scene.PRIZE_GIVAWAY:
+                PlayerPrefs.SetInt(PrizeScene.CURRENT_PRIZE, 0);
                 CheckForChests();
                 break;
             case Scene.EGG_QUEST_PRIZE:
+                PlayerPrefs.SetInt(PrizeScene.CURRENT_PRIZE, 1);
                 CheckForEggQuest();
                 break;
             case Scene.WORD_QUEST_PRIZE:
+                PlayerPrefs.SetInt(PrizeScene.CURRENT_PRIZE, 2);
                 CheckForWordQuest();
                 break;
         }

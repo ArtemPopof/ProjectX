@@ -18,6 +18,9 @@ public class PrizeScene : MonoBehaviour
     public GameObject letterSceneObjects;
     public GameObject eggSceneObjects;
 
+    public GameObject coins;
+    public GameObject heart;
+
     private bool open = false;
     private PrizeType type;
 
