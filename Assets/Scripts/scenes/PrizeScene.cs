@@ -81,7 +81,8 @@ public class PrizeScene : MonoBehaviour
 
         open = true;
         SoundManager.PlaySound("Chest");
-        yayLabel.text = "Wow! Click to continue";
+        yayLabel.text = "Wow!\n" +
+            "Click to continue";
         //closedPrize.gameObject.SetActive(false);
 
         // generate random prize
