@@ -63,9 +63,9 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetInt("currentScene", 0); 
         PlayerPrefs.SetInt("chests", 0);
         
-        if (PlayerPrefs.GetInt("heart") == null) 
+        if (PlayerPrefs.GetInt("heart") <= 0) 
         {
-            PlayerPrefs.SetInt("heart", 0);
+            PlayerPrefs.SetInt("heart", 3);
         }
 
         var highscore = 0;

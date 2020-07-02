@@ -4,30 +4,30 @@ using UnityEngine;
 
 public class HeartButton : MonoBehaviour
 {
+    public static HeartButton Instance { private set; get; }
     public void Start()
     {
-      if (PlayerPrefs.GetInt("heart") == 0 || AdManager.CantShowAnotherResumeAd())
+        if (PlayerPrefs.GetInt("heart") == 0)
         {
             gameObject.SetActive(false);
         }
     }
 
-    public void UserHeart()
+        public void UserHeart()
     {
         int heartsCount = PlayerPrefs.GetInt("heart");
         PlayerPrefs.SetInt("heart", heartsCount - 1);
-        int i = PlayerPrefs.GetInt("heart");
-        GameManager.Instance.Properties.AddToIntProperty("restartCount", 1);
         GameManager.Instance.Resurrect();
+        DisableHeartButton();
+        int i = PlayerPrefs.GetInt(AdManager.AFTER_DEATH_ADS_SHOWN);
+        AdComponent.Instance.DisableFreeLifeButton();
     }
 
-    public bool IsResurrectedThreeTimes()
+    public void DisableHeartButton()
     {
-        bool flag = false;
-        if (GameManager.Instance.Properties.GetInt("restartCount") == 3)
+        if (PlayerPrefs.GetInt("heart") == 0 || PlayerPrefs.GetInt(AdManager.AFTER_DEATH_ADS_SHOWN) >= 3) 
         {
-            flag = true;
+            gameObject.SetActive(false);
         }
-        return flag;
     }
 }
