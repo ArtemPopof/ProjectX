@@ -44,12 +44,10 @@ public class AdComponent : DefaultUnityAdListener
         Advertisement.Show();
 
         // exeeded max resurection ad count
-        if (AdManager.CantShowAnotherResumeAd())
+        if (type == AdType.RESUME_AD && AdManager.CantShowAnotherResumeAd())
         {
             transform.gameObject.SetActive(false);
         }
-        int i = PlayerPrefs.GetInt(AdManager.AFTER_DEATH_ADS_SHOWN);
-        HeartButton.Instance.DisableHeartButton();
     }
 
     public override void OnUnityAdsDidError(string message)
@@ -81,14 +79,6 @@ public class AdComponent : DefaultUnityAdListener
     public static bool UserWatchedAd(ShowResult showResult)
     {
         return showResult == ShowResult.Finished || showResult == ShowResult.Failed;
-    }
-
-    public void DisableFreeLifeButton()
-    {
-        if (AdManager.CantShowAnotherResumeAd())
-        {
-            transform.gameObject.SetActive(false);
-        }
     }
 
     public enum AdType

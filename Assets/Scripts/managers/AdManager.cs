@@ -7,7 +7,7 @@ using UnityEngine.Advertisements;
 public class AdManager
 {
     public static string AFTER_DEATH_ADS_SHOWN = "after_death_ads";
-    public static int MAX_RESUME_AD_COUNT = 3;
+    public static int MAX_RESUME_AD_COUNT = 2;
 
     public AdManager()
     {

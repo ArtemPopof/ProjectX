@@ -13,21 +13,11 @@ public class HeartButton : MonoBehaviour
         }
     }
 
-        public void UserHeart()
+    public void UserHeart()
     {
-        int heartsCount = PlayerPrefs.GetInt("heart");
-        PlayerPrefs.SetInt("heart", heartsCount - 1);
-        GameManager.Instance.Resurrect();
-        DisableHeartButton();
-        int i = PlayerPrefs.GetInt(AdManager.AFTER_DEATH_ADS_SHOWN);
-        AdComponent.Instance.DisableFreeLifeButton();
-    }
-
-    public void DisableHeartButton()
-    {
-        if (PlayerPrefs.GetInt("heart") == 0 || PlayerPrefs.GetInt(AdManager.AFTER_DEATH_ADS_SHOWN) >= 3) 
-        {
-            gameObject.SetActive(false);
-        }
+      int heartsCount = PlayerPrefs.GetInt("heart");
+      PlayerPrefs.SetInt("heart", heartsCount - 1);
+      GameManager.Instance.Resurrect();
+      gameObject.SetActive(false);
     }
 }
