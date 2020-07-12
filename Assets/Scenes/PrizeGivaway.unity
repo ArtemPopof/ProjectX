@@ -133,6 +133,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: BackgoundAudio
       objectReference: {fileID: 0}
+    - target: {fileID: 3112683633620642750, guid: 4291935b6b3cac3499ad61aebf79f540,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 682549eaea6398d4198f9d9345dc7324, type: 3}
+    - target: {fileID: 3112683633620642750, guid: 4291935b6b3cac3499ad61aebf79f540,
+        type: 3}
+      propertyPath: m_Volume
+      value: 0.44
+      objectReference: {fileID: 0}
     - target: {fileID: 3112683633620642751, guid: 4291935b6b3cac3499ad61aebf79f540,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -602,12 +612,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4e6d6f62868e46244b7df4981664503c, type: 3}
---- !u!224 &840868151 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 6118587787084808779, guid: 7d379bcbd247cb24d802d0b1883a44c8,
-    type: 3}
-  m_PrefabInstance: {fileID: 6118587786311590780}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &909717933
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1057,9 +1061,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prizes: {fileID: 1158452943}
   closedPrize: {fileID: 1129779466}
+  prizeDescriptionText: {fileID: 0}
   emptyPrizePanel: {fileID: 1918285336}
-  footer: {fileID: 840868151}
-  prize: 0
+  receivedPrizeLabel: {fileID: 0}
+  yayLabel: {fileID: 0}
+  chestSceneObjects: {fileID: 0}
+  letterSceneObjects: {fileID: 0}
+  eggSceneObjects: {fileID: 0}
+  coins: {fileID: 0}
+  heart: {fileID: 0}
 --- !u!4 &1401251176
 Transform:
   m_ObjectHideFlags: 0
