@@ -10,6 +10,7 @@ public class Chest : MonoBehaviour
     public GameObject closed;
     public GameObject open;
     public GameObject fx;
+    public Boolean canBeCollected = true;
 
     private void Start()
     {
@@ -18,6 +19,7 @@ public class Chest : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (!canBeCollected) return;
         GameManager.Instance.AddChest();
         animator.SetTrigger("Collision");
         Destroy(this.gameObject, 1.5f);
