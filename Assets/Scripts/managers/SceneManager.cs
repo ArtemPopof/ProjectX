@@ -83,7 +83,7 @@ public class SceneManager : MonoBehaviour
     {
         if (GameManager.Instance.Properties.GetInt("chests") > 0)
         {
-            UnityEngine.SceneManagement.SceneManager.LoadScene("PrizeGivaway");
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Prizes");
         } else
         {
             GoToNextScene();
@@ -94,7 +94,7 @@ public class SceneManager : MonoBehaviour
     {
         if (Letter.Instance.IsCollectedAllLetters() && PlayerPrefs.GetInt("CollectedLettersQuestPrize") != 1)
         {
-            UnityEngine.SceneManagement.SceneManager.LoadScene("WordPrize");
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Prizes");
             PlayerPrefs.SetInt("CollectedLettersQuestPrize", 1);
         }
         else
@@ -107,8 +107,9 @@ public class SceneManager : MonoBehaviour
     {
         if (GameManager.Instance.Properties.GetInt("eggs") >= 10)
         {
-            UnityEngine.SceneManagement.SceneManager.LoadScene("EggsPrize");
-        } else
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Prizes");
+        }
+        else
         {
             GoToNextScene();
         }

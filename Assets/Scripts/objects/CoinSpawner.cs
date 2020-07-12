@@ -10,6 +10,7 @@ public class CoinSpawner : MonoBehaviour
 
     public GameObject egg;
 
+    // TODO refactor
     public GameObject d,r,a,g,o,n;
 
     // Start is called before the first frame update
@@ -24,6 +25,7 @@ public class CoinSpawner : MonoBehaviour
 
         if (egg != null)
         {
+            //TODO refactor
             DisableEgg();
             if (d != null || r != null
                 || a != null || g != null
@@ -35,7 +37,7 @@ public class CoinSpawner : MonoBehaviour
 
         if (!IsLuckyToSpawn())
         {
-            return;
+            //return;
         }
 
         if (maxToSpawn < 0) maxToSpawn = transform.childCount;
