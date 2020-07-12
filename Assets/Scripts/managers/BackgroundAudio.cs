@@ -20,4 +20,23 @@ public class BackgroundAudio : MonoBehaviour
             seceondLevel.Play();
         }
     }
+
+    public void Update()
+    {
+        currentLevel = PlayerPrefs.GetInt("currentLevel") - 100;
+        if (currentLevel == 0)
+        {
+            if (!firstLevel.isPlaying)
+            {
+                firstLevel.Play();
+            }
+        }
+        else
+        {
+            if (!seceondLevel.isPlaying)
+            {
+                seceondLevel.Play();
+            }
+        }
+    }
 }
