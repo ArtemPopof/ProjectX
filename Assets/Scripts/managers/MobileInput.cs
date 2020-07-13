@@ -15,6 +15,8 @@ public class MobileInput : MonoBehaviour
     private Vector2 startTouch;
     public bool isReversed = false;
 
+    private Vector3 previousTapPos = Vector2.zero;
+
     public Transform shopButton;
 
     public bool Tap { get { return tap;} }
@@ -107,10 +109,17 @@ public class MobileInput : MonoBehaviour
             startTouch = Vector2.zero;
             swipeDelta = Vector2.zero;
         }
+
+        if ((tap || TapShop) && !swipeDown && !swipeUp && !swipeLeft && !swipeRight && !GameManager.Instance.IsRunning)
+        {
+            SoundManager.PlaySound("Click");
+        }
     }
 
     private bool IsShopTapped(Touch[] touches)
     {
+        if (shopButton == null) return false;
+
         foreach (Touch touch in touches)
         {
             var realPosition = new Vector2(touch.position.x, Screen.height - touch.position.y);
@@ -129,6 +138,8 @@ public class MobileInput : MonoBehaviour
 
     private bool IsShopTapped(Vector3 position)
     {
+        if (shopButton == null) return false;
+
         var realPosition = new Vector3(position.x, Screen.height - position.y, position.z);
 
         var factRect = shopButton.GetComponent<RectTransform>().rect;

@@ -699,6 +699,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1524075866}
   - component: {fileID: 1524075867}
+  - component: {fileID: 1524075868}
   m_Layer: 0
   m_Name: ShopManager
   m_TagString: Untagged
@@ -748,6 +749,20 @@ MonoBehaviour:
   shopItems:
   - {fileID: 1224468767}
   - {fileID: 7333198072503244135}
+--- !u!114 &1524075868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1524075865}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4727a383c092a409d888546775d80088, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isReversed: 0
+  shopButton: {fileID: 0}
 --- !u!1001 &1757909331
 PrefabInstance:
   m_ObjectHideFlags: 0

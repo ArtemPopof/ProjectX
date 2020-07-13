@@ -6,6 +6,7 @@ using UnityEngine;
 public class SoundManager : MonoBehaviour
 {
     public static AudioClip playerDeath, playerJump, coin, swipe1, swipe2, chest, highscore, special;
+    public static AudioClip click;
     static AudioSource audioSource;
     private static int coinsCountInARow;
     private static float lastCoinTime;
@@ -23,6 +24,7 @@ public class SoundManager : MonoBehaviour
         chest = Resources.Load<AudioClip>("chest");
         highscore = Resources.Load<AudioClip>("highscore");
         special = Resources.Load<AudioClip>("special");
+        click = Resources.Load<AudioClip>("click");
 
         audioSource = GetComponent<AudioSource>();
         lastCoinTime = 0;
@@ -65,6 +67,9 @@ public class SoundManager : MonoBehaviour
                 break;
             case "Special":
                 audioSource.PlayOneShot(special);
+                break;
+            case "Click":
+                audioSource.PlayOneShot(click);
                 break;
             default:
                 break;

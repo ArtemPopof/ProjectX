@@ -48,6 +48,7 @@ public class Carousel : MonoBehaviour
             leftSwipeArrow.interactable = false;
         }
 
+        SoundManager.PlaySound("swipe1");
         notifyListeners();
     }
 
