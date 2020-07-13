@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HeartButton : MonoBehaviour
 {
@@ -9,7 +10,8 @@ public class HeartButton : MonoBehaviour
     {
         if (PlayerPrefs.GetInt("heart") == 0)
         {
-            gameObject.SetActive(false);
+            var button = gameObject.GetComponent<Button>();
+            button.interactable = false;
         }
     }
 
@@ -18,6 +20,7 @@ public class HeartButton : MonoBehaviour
       int heartsCount = PlayerPrefs.GetInt("heart");
       PlayerPrefs.SetInt("heart", heartsCount - 1);
       GameManager.Instance.Resurrect();
-      gameObject.SetActive(false);
+      var button = gameObject.GetComponent<Button>();
+      button.interactable = false;
     }
 }

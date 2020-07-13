@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.Advertisements;
+using UnityEngine.UI;
 
 public class AdComponent : DefaultUnityAdListener
 {
@@ -46,7 +47,8 @@ public class AdComponent : DefaultUnityAdListener
         // exeeded max resurection ad count
         if (type == AdType.RESUME_AD && AdManager.CantShowAnotherResumeAd())
         {
-            transform.gameObject.SetActive(false);
+            var button = transform.gameObject.GetComponent<Button>();
+            button.interactable = false;
         }
     }
 
