@@ -11,9 +11,9 @@ public class LevelManager : MonoBehaviour
 
     //Level spawning
     private const float DISTANCE_BEFORE_SPAWN = 40.0f;
-    private const int INITIAL_SEGMENTS = 5;
-    private const int MAX_SEGMENTS_ON_SCREEN = 9;
-    public const int DISTANCE_BEFORE_FIRST_SEGMENT = 50;
+    private const int INITIAL_SEGMENTS = 6;
+    private const int MAX_SEGMENTS_ON_SCREEN = 6;
+    public const int DISTANCE_BEFORE_FIRST_SEGMENT = 40;
     private Transform cameraContainer;
     private int amountOfActiveSegments;
     private int countiousSegments;
@@ -157,7 +157,7 @@ public class LevelManager : MonoBehaviour
 
         Debug.Log("Spawn " + segment.name);
 
-        segment.transform.localPosition = Vector3.forward * (currentSpawnZ + DISTANCE_BEFORE_SPAWN);
+        segment.transform.localPosition = Vector3.forward * (currentSpawnZ + DISTANCE_BEFORE_FIRST_SEGMENT);
 
         segments.Insert(0, segment);
         if (segments.Count > MAX_SEGMENTS_ON_SCREEN)
