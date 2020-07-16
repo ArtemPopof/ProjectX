@@ -170,8 +170,13 @@ public class PlayerMotor : MonoBehaviour {
     public void ResurrectPlayer()
     {
         var currentZ = controller.transform.position.z;
+
+       
         controller.transform.position = new Vector3((desiredLane - 1) * LANE_DISTANCE, 0.05f, currentZ);
+        System.Threading.Thread.Sleep(500);
         animator.SetTrigger("StartRunning");
         controller.enabled = true;
+        
     }
+    
 }
