@@ -16,8 +16,8 @@ public class PlayerMotor : MonoBehaviour {
     private float startSpeed = 5.0f;
     private float speed;
     private float speedIncreaseLastTick;
-    private float speedIncreaseTime = 5.5f;
-    private float speedIncreaseAmount = 0.1f;
+    private float speedIncreaseTime = 4.5f;
+    private float speedIncreaseAmount = 0.2f;
 
     // Animation
     private Animator animator;
