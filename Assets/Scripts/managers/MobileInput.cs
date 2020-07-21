@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class MobileInput : MonoBehaviour
 {
     private const float DEADZONE = 100.0f;
@@ -126,6 +126,9 @@ public class MobileInput : MonoBehaviour
 
             var factRect = shopButton.GetComponent<RectTransform>().rect;
             factRect.position = new Vector2(factRect.position.x * -1, factRect.position.y * -1);
+            factRect.size = factRect.size * 1.5f;
+            var heightScale = Screen.height / shopButton.GetComponentInParent<CanvasScaler>().referenceResolution.y;
+            factRect.size *= heightScale;
 
             if (factRect.Contains(realPosition))
             {
@@ -144,8 +147,9 @@ public class MobileInput : MonoBehaviour
 
         var factRect = shopButton.GetComponent<RectTransform>().rect;
         factRect.position = new Vector2(factRect.position.x * -1, factRect.position.y * -1);
-        factRect.size = factRect.size * 3; // le petit kostyl to make the shop button clickable
-
+        factRect.size = factRect.size * 1.5f; // le petit kostyl to make the shop button clickable
+        var heightScale = Screen.height / shopButton.GetComponentInParent<CanvasScaler>().referenceResolution.y;
+        factRect.size *= heightScale;
         return factRect.Contains(realPosition);
     }
 }
