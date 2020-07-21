@@ -62,9 +62,9 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetInt("currentScene", 0); 
         PlayerPrefs.SetInt("chests", 0);
         
-        if (PlayerPrefs.GetInt("heart") <= 0) 
+        if (PlayerPrefs.GetInt("heart") < 0) 
         {
-            PlayerPrefs.SetInt("heart", 3);
+            PlayerPrefs.SetInt("heart", 0);
         }
 
         var highscore = 0;
@@ -258,6 +258,7 @@ public class GameManager : MonoBehaviour
         var coins = PlayerPrefs.GetInt("coins") + Properties.GetInt("coins");
         PlayerPrefs.SetInt("coins", coins);
         UnityEngine.SceneManagement.SceneManager.LoadScene("Sprint3");
+        System.Threading.Thread.Sleep(500);
         SetUIPanelActive("GameOverUi", false);
         menu.SetTrigger("Show");
         PlayerPrefs.SetFloat("LastRestart", Time.time);
