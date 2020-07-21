@@ -16,8 +16,8 @@ public class PlayerMotor : MonoBehaviour {
     private float startSpeed = 5.0f;
     private float speed;
     private float speedIncreaseLastTick;
-    private float speedIncreaseTime = 5.5f;
-    private float speedIncreaseAmount = 0.1f;
+    private float speedIncreaseTime = 4.5f;
+    private float speedIncreaseAmount = 0.2f;
 
     // Animation
     private Animator animator;
@@ -170,8 +170,13 @@ public class PlayerMotor : MonoBehaviour {
     public void ResurrectPlayer()
     {
         var currentZ = controller.transform.position.z;
+
+       
         controller.transform.position = new Vector3((desiredLane - 1) * LANE_DISTANCE, 0.05f, currentZ);
+        System.Threading.Thread.Sleep(500);
         animator.SetTrigger("StartRunning");
         controller.enabled = true;
+        
     }
+    
 }
