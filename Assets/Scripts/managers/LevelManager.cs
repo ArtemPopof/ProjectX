@@ -10,9 +10,9 @@ public class LevelManager : MonoBehaviour
     private const bool SNOW_COLLIDER = true;
 
     //Level spawning
-    private const float DISTANCE_BEFORE_SPAWN = 37.0f;
-    private const int INITIAL_SEGMENTS = 6;
-    private const int MAX_SEGMENTS_ON_SCREEN = 6;
+    private const float DISTANCE_BEFORE_SPAWN = 45.0f;
+    private const int INITIAL_SEGMENTS = 7;
+    private const int MAX_SEGMENTS_ON_SCREEN = 7;
     public const int DISTANCE_BEFORE_FIRST_SEGMENT = 40;
     private Transform cameraContainer;
     private int amountOfActiveSegments;
