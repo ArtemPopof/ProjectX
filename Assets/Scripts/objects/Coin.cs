@@ -16,6 +16,5 @@ public class Coin : MonoBehaviour
         SoundManager.PlaySound("Coin");
         GameManager.Instance.AddCoin();
         animator.SetTrigger("Collision");
-
     } 
 }

@@ -22,12 +22,15 @@ public class ShopManager : DefaultUnityAdListener
 
     private GameObject currentScreen;
 
+    private void Awake()
+    {
+        GameManager.InitAdsEngine();
+    }
+
     void Start()
     {
         currentScreen = mainShopUI;
         UpdateCurrentBalance();
-
-        GameManager.InitAdsEngine();
     }
 
     
@@ -74,11 +77,9 @@ public class ShopManager : DefaultUnityAdListener
         mainShopUI.SetActive(true);
     }
 
-    public override void OnUnityAdsDidFinish(string placementId, ShowResult showResult)
+    public override void OnUnityAdsDidFinish()
     {
-        Debug.Log("Ad finished, adding coins " + showResult);
-
-        if (!AdComponent.UserWatchedAd(showResult)) return;
+        Debug.Log("Ad finished, adding coins ");
 
         SoundManager.PlaySound("Chest");
 

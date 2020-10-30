@@ -4,11 +4,13 @@ using System.Collections.Generic;
 using System.Timers;
 using UnityEngine;
 using UnityEngine.Advertisements;
+using GoogleMobileAds.Api;
 
 public class GameManager : MonoBehaviour
 {
-    private const bool DEBUG_MODE = true;
-    private const string GAME_ID = "3565048";
+    private const bool DEBUG_MODE = false;
+    private const string GAME_ID = "ca-app-pub-3940256099942544/5224354917";
+    public const string ADMOB_GAME_ID = "ca-app-pub-4835916624633322~1666485099";
     private const int SCORE_INCREMENT = 10;
     // this constant restrict loading, if scene was recently loaded
     // after 2 secs we need to show loading screen again
@@ -63,7 +65,7 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetInt("chests", 0);
         
         if (PlayerPrefs.GetInt("heart") <= 0) 
-        {
+        { 
             PlayerPrefs.SetInt("heart", 0);
         }
 
@@ -83,6 +85,7 @@ public class GameManager : MonoBehaviour
         {
             InitAdsEngine();
         }
+
 
         // Add default look and level into collection
         // 0 - default look, 100 - default lvl
@@ -109,7 +112,7 @@ public class GameManager : MonoBehaviour
 
     public static void InitAdsEngine()
     {
-        Advertisement.Initialize(GAME_ID, DEBUG_MODE);
+        MobileAds.Initialize(initStatus => { Debug.Log("Init ad engine: " + initStatus); });
     }
 
     private bool GameRestarted()

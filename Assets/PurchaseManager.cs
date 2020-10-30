@@ -8,10 +8,10 @@ public class PurchaseManager : MonoBehaviour, IStoreListener
     private static IStoreController storeController;
     private static IExtensionProvider storeExtensions;
 
-    public static string coins1000ProductId = "coins1000";
     public static string coins3000ProductId = "coins3000";
     public static string coins5000ProductId = "coins5000";
     public static string coins10000ProductId = "coins10000";
+    public static string coins20000ProductId = "coins20000";
 
     public PurchaseStatusDialog purchaseStatusDialog;
 
@@ -28,18 +28,14 @@ public class PurchaseManager : MonoBehaviour, IStoreListener
     private void InitializePurchasing()
     {
         var builder = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance());
-        builder.AddProduct(coins1000ProductId, ProductType.Consumable);
         builder.AddProduct(coins3000ProductId, ProductType.Consumable);
         builder.AddProduct(coins5000ProductId, ProductType.Consumable);
         builder.AddProduct(coins10000ProductId, ProductType.Consumable);
+        builder.AddProduct(coins20000ProductId, ProductType.Consumable);
 
         UnityPurchasing.Initialize(this, builder);
     }
 
-    public void Buy1000Coins()
-    {
-        BuyProduct(coins1000ProductId);
-    }
     public void Buy3000Coins()
     {
         BuyProduct(coins3000ProductId);
@@ -52,7 +48,10 @@ public class PurchaseManager : MonoBehaviour, IStoreListener
     {
         BuyProduct(coins10000ProductId);
     }
-
+    public void Buy20000Coins()
+    {
+        BuyProduct(coins20000ProductId);
+    }
 
     public void BuyProduct(string productId)
     {

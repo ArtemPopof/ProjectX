@@ -1,16 +1,16 @@
 ﻿using UnityEngine.Advertisements;
 using UnityEngine;
 
-public class DefaultUnityAdListener : MonoBehaviour, IUnityAdsListener
+public class DefaultUnityAdListener : MonoBehaviour
 {
     public virtual void OnUnityAdsDidError(string message)
     {
         Debug.LogError(message);
     }
 
-    public virtual void OnUnityAdsDidFinish(string placementId, ShowResult showResult)
+    public virtual void OnUnityAdsDidFinish()
     {
-        Debug.Log("Ad finished " + showResult);
+        Debug.Log("Ad finished ");
     }
 
     public virtual void OnUnityAdsDidStart(string placementId)
