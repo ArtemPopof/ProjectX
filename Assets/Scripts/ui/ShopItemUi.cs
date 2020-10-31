@@ -39,6 +39,8 @@ public class ShopItemUi : MonoBehaviour
 
     public void UpdateItemInfo(ShopItem item)
     {
+        if (item == null) return;
+
         balance.text = PlayerPrefs.GetInt("coins").ToString();
         currentItem = item;
         if (characterPrice != null && item != null)
