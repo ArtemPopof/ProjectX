@@ -170,6 +170,36 @@ public class GameManager : MonoBehaviour
         SetUIPanelActive("LoadingUi", false);
         SetUIPanelActive("MainMenuUi", true);
         IsLoading = false;
+
+        ShowFeedbackWindowIfWasnt();
+    }
+
+    private void ShowFeedbackWindowIfWasnt()
+    {
+        if (PlayerPrefs.GetInt("highscore") == 0)
+        {
+            return;
+        }
+        if (PlayerPrefs.GetInt("feedbackPerformed") != 0)
+        {
+            return;
+        }
+        var currentHours = (int)(DateTime.Now.Ticks / TimeSpan.TicksPerHour);
+        if (currentHours - PlayerPrefs.GetInt("feedbackRequestLastTime") < 10)
+        {
+            return;
+        }
+
+        // need to show feedback window
+        SetUIPanelActive("FeedbackUI", true);
+        PlayerPrefs.SetInt("feedbackRequestLastTime", currentHours);
+    }
+
+    public void GoToPlayStore()
+    {
+        Application.OpenURL("market://details?id=com.AbbySoft.DragonRun");
+        PlayerPrefs.SetInt("feedbackPerformed", 1);
+        SetUIPanelActive("FeedbackUI", false);
     }
 
     public void SetUIPanelActive(string panelTag, bool isActive)
