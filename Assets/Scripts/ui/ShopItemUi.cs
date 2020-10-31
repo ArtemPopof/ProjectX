@@ -41,7 +41,10 @@ public class ShopItemUi : MonoBehaviour
     {
         balance.text = PlayerPrefs.GetInt("coins").ToString();
         currentItem = item;
-        characterPrice.text = item.price.ToString();
+        if (characterPrice != null && item != null)
+        {
+            characterPrice.text = item.price.ToString();
+        }
         if (characterName != null)
         {
             characterName.text = item.name;

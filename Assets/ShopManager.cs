@@ -60,7 +60,10 @@ public class ShopManager : DefaultUnityAdListener
     // Update is called once per frame
     void Update()
     {
-        
+        foreach (Text label in currentMoneyLabels)
+        {
+            label.text = PlayerPrefs.GetInt("coin").ToString();
+        }
     }
 
     public void OpenDragonsShop()

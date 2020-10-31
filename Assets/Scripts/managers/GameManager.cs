@@ -101,7 +101,7 @@ public class GameManager : MonoBehaviour
 
         // uncomment to reset all props
         //PlayerPrefs.DeleteAll();
-        //PlayerPrefs.SetInt("coins", 50000);
+        PlayerPrefs.SetInt("coins", 0);
     }
 
     private void Start()
@@ -243,7 +243,7 @@ public class GameManager : MonoBehaviour
         IsDead = true;
         deathCauser = collider;
         SetUIPanelActive("InGameUi", false);
-        SetUIPanelActive("GameOverUi", true);
+        SetUIPanelActive("DialogsUI", true);
     }
 
     public void Resurrect()
