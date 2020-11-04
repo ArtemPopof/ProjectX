@@ -191,6 +191,7 @@ public class GameManager : MonoBehaviour
         }
 
         // need to show feedback window
+        IsRunning = false;
         SetUIPanelActive("FeedbackUI", true);
         PlayerPrefs.SetInt("feedbackRequestLastTime", currentHours);
     }
@@ -200,6 +201,7 @@ public class GameManager : MonoBehaviour
         Application.OpenURL("market://details?id=com.AbbySoft.DragonRun");
         PlayerPrefs.SetInt("feedbackPerformed", 1);
         SetUIPanelActive("FeedbackUI", false);
+        IsRunning = true;
     }
 
     public void SetUIPanelActive(string panelTag, bool isActive)
