@@ -201,6 +201,7 @@ public class GameManager : MonoBehaviour
         Application.OpenURL("market://details?id=com.AbbySoft.DragonRun");
         PlayerPrefs.SetInt("feedbackPerformed", 1);
         SetUIPanelActive("FeedbackUI", false);
+        AddCoins(500);
         IsRunning = true;
     }
 

@@ -12,6 +12,11 @@ public class CircleProgressBar : MonoBehaviour
     public EventTrigger.TriggerEvent whenTimeEnds;
     void Start()
     {
+        //timeLeft = time;
+    }
+
+    private void Awake()
+    {
         timeLeft = time;
     }
 
@@ -20,6 +25,7 @@ public class CircleProgressBar : MonoBehaviour
     {
         if (timeLeft <= 0)
         {
+            timeLeft = time;
             whenTimeEnds.Invoke(null);
             return;
         }
