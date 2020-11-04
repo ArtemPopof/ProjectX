@@ -40,6 +40,7 @@ public class SceneManager : MonoBehaviour
         switch (scenes[currentScene])
         {
             case Scene.GAMEPLAY:
+                var time = Time.time;
                 GameManager.Instance.RestartGame();
                 break;
             case Scene.HIGHSCORE:

@@ -290,6 +290,7 @@ public class GameManager : MonoBehaviour
 
     public void RestartGame()
     {
+        var time = Time.time;
         var coins = PlayerPrefs.GetInt("coins") + Properties.GetInt("coins");
         PlayerPrefs.SetInt("coins", coins);
         UnityEngine.SceneManagement.SceneManager.LoadScene("Sprint3");
@@ -297,6 +298,8 @@ public class GameManager : MonoBehaviour
         menu.SetTrigger("Show");
         PlayerPrefs.SetFloat("LastRestart", Time.time);
         Letter.Instance.DeleteLettersInPlayerPrefs();
+
+        Debug.Log("Restarted in " + (Time.time - time) + " seconds");
     }
 
     private void EvaporateGameObjectsOfCurrentAndNextSegment()

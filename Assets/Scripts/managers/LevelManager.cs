@@ -155,7 +155,7 @@ public class LevelManager : MonoBehaviour
         var segment = segmentPool[id];
         segmentPool.RemoveAt(id);
 
-        Debug.Log("Spawn " + segment.name);
+        //Debug.Log("Spawn " + segment.name);
 
         segment.transform.localPosition = Vector3.forward * (currentSpawnZ + DISTANCE_BEFORE_FIRST_SEGMENT);
 
@@ -168,7 +168,7 @@ public class LevelManager : MonoBehaviour
         currentSpawnZ += segment.lenght;
         amountOfActiveSegments++;
 
-        Debug.Log("CurrentZ: " + currentSpawnZ);
+        //Debug.Log("CurrentZ: " + currentSpawnZ);
         segment.Spawn();
     }
 

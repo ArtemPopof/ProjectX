@@ -62,6 +62,7 @@ public class AdComponent : MonoBehaviour
 
         if (type == AdType.RESUME_AD)
         {
+            GameManager.Instance.SetUIPanelActive("DialogsUI", false);
             GameManager.Instance.Resurrect();
         }
         if (listener != null)
