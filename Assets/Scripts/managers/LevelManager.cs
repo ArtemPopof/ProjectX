@@ -36,8 +36,10 @@ public class LevelManager : MonoBehaviour
     // list of segments;
     public List<Segment> firstLevelSegments = new List<Segment>();
     public List<Segment> secondLevelSegments = new List<Segment>();
+    public List<Segment> desertSegments = new List<Segment>();
     public GameObject initSegmentFirstLevel;
     public GameObject initSegmentSecondLevel;
+    public GameObject initSegmentDesert;
 
     private List<Segment> availableTransitions = new List<Segment>();
 
@@ -53,6 +55,7 @@ public class LevelManager : MonoBehaviour
 
     public Material firstLevelSkybox;
     public Material secondLevelSkybox;
+    //public Material desertSkybox;
 
     // gameplay;
     // private bool isMoving = false;
@@ -68,17 +71,26 @@ public class LevelManager : MonoBehaviour
     {
         // level indexes start with 100
         var currentLevel = PlayerPrefs.GetInt("currentLevel") - 100;
-        if (currentLevel == 0)
+        if (currentLevel == 2)
         {
             currentLevelSegments = firstLevelSegments;
             initSegmentFirstLevel.SetActive(true);
             initSegmentSecondLevel.SetActive(false);
+            initSegmentDesert.SetActive(false);
         }
-        else
+        else if (currentLevel == 1)
         {
             currentLevelSegments = secondLevelSegments;
             initSegmentFirstLevel.SetActive(false);
             initSegmentSecondLevel.SetActive(true);
+            initSegmentDesert.SetActive(false);
+        }
+        else if (currentLevel == 0)
+        {
+            currentLevelSegments = desertSegments;
+            initSegmentFirstLevel.SetActive(false);
+            initSegmentSecondLevel.SetActive(false);
+            initSegmentDesert.SetActive(true);
         }
 
         InitLightingAndSkyboxSettings(currentLevel);
@@ -94,7 +106,7 @@ public class LevelManager : MonoBehaviour
     private void InitLightingAndSkyboxSettings(int levelCode)
     {
         // default level
-        if (levelCode == 0)
+        if (levelCode == 0 || levelCode == 2)
         {
             RenderSettings.skybox = firstLevelSkybox;
             RenderSettings.ambientSkyColor = Color.white;
