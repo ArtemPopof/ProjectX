@@ -101,7 +101,8 @@ public class GameManager : MonoBehaviour
 
         // uncomment to reset all props
         //PlayerPrefs.DeleteAll();
-        PlayerPrefs.SetInt("coins", 55550);
+        //PlayerPrefs.SetInt("heart", 550);
+        //PlayerPrefs.SetInt("coins", 55550);
     }
 
     private void Start()

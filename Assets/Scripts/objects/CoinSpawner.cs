@@ -35,7 +35,7 @@ public class CoinSpawner : MonoBehaviour
             }
         }
 
-        if (!IsLuckyToSpawn())
+        if (!IsLuckyToSpawn() || (IsChest() && AlreadyCollected()))
         {
             return;
         }
@@ -43,6 +43,16 @@ public class CoinSpawner : MonoBehaviour
         if (maxToSpawn < 0) maxToSpawn = transform.childCount;
 
         EnableLuckyChildren();
+    }
+
+    private bool IsChest()
+    {
+        return this.gameObject.name == "Chest";
+    }
+
+    private bool AlreadyCollected()
+    {
+        return PlayerPrefs.GetInt("chests") > 0;
     }
 
     private void EnableLuckyChildren()
