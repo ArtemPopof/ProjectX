@@ -101,6 +101,22 @@ public class PurchaseManager : MonoBehaviour, IStoreListener
         if (productId.StartsWith("coins"))
         {
             var count = int.Parse(productId.Substring(5));
+            if (count == 3000)
+            {
+                count = 8000;
+            }
+            if (count == 5000)
+            {
+                count = 15000;
+            }
+            if (count == 10000)
+            {
+                count = 25000;
+            }
+            if (count == 20000)
+            {
+                count = 50000;
+            }
             ProcessCoinPurchase(count);
         } else
         {

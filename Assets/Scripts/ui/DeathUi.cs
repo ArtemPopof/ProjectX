@@ -32,6 +32,9 @@ public class DeathUi : MonoBehaviour
     {
         score.text = GameManager.Instance.Properties.GetInt("score").ToString();
         coins.text = GameManager.Instance.Properties.GetInt("coins").ToString();
-        hearts.text = PlayerPrefs.GetInt("heart").ToString();
+        if (hearts != null)
+        {
+            hearts.text = PlayerPrefs.GetInt("heart").ToString();
+        }
     }
 }

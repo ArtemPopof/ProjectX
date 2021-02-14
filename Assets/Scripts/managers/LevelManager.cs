@@ -71,7 +71,7 @@ public class LevelManager : MonoBehaviour
     {
         // level indexes start with 100
         var currentLevel = PlayerPrefs.GetInt("currentLevel") - 100;
-        if (currentLevel == 2)
+        if (currentLevel == 0)
         {
             currentLevelSegments = firstLevelSegments;
             initSegmentFirstLevel.SetActive(true);
@@ -85,7 +85,7 @@ public class LevelManager : MonoBehaviour
             initSegmentSecondLevel.SetActive(true);
             initSegmentDesert.SetActive(false);
         }
-        else if (currentLevel == 0)
+        else if (currentLevel == 2)
         {
             currentLevelSegments = desertSegments;
             initSegmentFirstLevel.SetActive(false);

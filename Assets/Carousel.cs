@@ -22,7 +22,7 @@ public class Carousel : MonoBehaviour
     void Awake()
     {
         startPosition = transform.position;
-        maxIndex = transform.childCount - 1;
+        maxIndex = items.Count -1;
         desiredLocation = transform.position;
     }
 
