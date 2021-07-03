@@ -8,6 +8,8 @@ public class DeathUi : MonoBehaviour
     public Text score;
     public Text coins;
 
+    public Text hearts;
+
     public Animator animator;
 
     // Start is called before the first frame update
@@ -15,6 +17,7 @@ public class DeathUi : MonoBehaviour
     {
         GameManager.Instance.Properties.bind(score, "score");
         GameManager.Instance.Properties.bind(coins, "coins");
+        hearts.text = PlayerPrefs.GetInt("heart").ToString();
     }
 
     private void Awake()
