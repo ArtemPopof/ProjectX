@@ -129,6 +129,8 @@ public class PurchaseManager : MonoBehaviour, IStoreListener
 
     private void ProcessCoinPurchase(int count)
     {
+        AppSpyClient.JornalAction("PurchasedCoins", count.ToString());
+
         Debug.Log("PurchaseManager: Purchased coins " + count);
         SoundManager.PlaySound("Chest");
         sorryForThatHack.Show("Puchased " + count + " coins!", true);

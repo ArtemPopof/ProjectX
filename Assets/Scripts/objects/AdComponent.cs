@@ -52,6 +52,8 @@ public class AdComponent : MonoBehaviour
 
     private void HandleRewardedAdClosed(object sender, EventArgs e)
     {
+        AppSpyClient.JornalAction("AdClosed", "");
+
         Debug.Log("Ad closed");
         ConfigureNextAd();
     }
@@ -59,6 +61,8 @@ public class AdComponent : MonoBehaviour
     private void HandleUserEarnedReward(object sender, Reward e)
     {
         Debug.Log("Ad finished with reward");
+
+        AppSpyClient.JornalAction("AdWatched", type.ToString());
 
         if (type == AdType.RESUME_AD)
         {
@@ -82,6 +86,8 @@ public class AdComponent : MonoBehaviour
 
     private void HandleRewardedAdFailedToShow(object sender, AdErrorEventArgs e)
     {
+        AppSpyClient.JornalAction("AdFailedToShow", e.Message);
+
         Debug.LogError(e.Message);
         ConfigureNextAd();
     }
@@ -92,6 +98,8 @@ public class AdComponent : MonoBehaviour
 
     private void HandleRewardedAdFailedToLoad(object sender, AdErrorEventArgs e)
     {
+        AppSpyClient.JornalAction("AdFailedToLoad", e.Message);
+
         Debug.LogError(e.Message);
     }
 

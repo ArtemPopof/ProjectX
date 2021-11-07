@@ -79,6 +79,8 @@ public class ShopManager : DefaultUnityAdListener
 
     public override void OnUnityAdsDidFinish()
     {
+        AppSpyClient.JornalAction("WatchedShopAd", "");
+
         Debug.Log("Ad finished, adding coins ");
 
         SoundManager.PlaySound("Chest");
@@ -95,6 +97,8 @@ public class ShopManager : DefaultUnityAdListener
 
     public void OpenBuyMoneyDialog()
     {
+        AppSpyClient.JornalAction("OpenBuyMoneyDialog", "");
+
         foreach (GameObject model in shopModels) {
             model.SetActive(false);
         }

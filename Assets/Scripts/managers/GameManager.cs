@@ -107,6 +107,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        AppSpyClient.JornalAction("Start", "");
         // init player
         cameraMotor.lookAt = player.CurrentModel.transform;
     }
@@ -177,6 +178,8 @@ public class GameManager : MonoBehaviour
 
     private void ShowFeedbackWindowIfWasnt()
     {
+        AppSpyClient.JornalAction("FeedbackShown", "");
+
         if (PlayerPrefs.GetInt("highscore") == 0)
         {
             return;
@@ -199,6 +202,8 @@ public class GameManager : MonoBehaviour
 
     public void GoToPlayStore()
     {
+        AppSpyClient.JornalAction("GoToStore", "");
+
         Application.OpenURL("market://details?id=com.AbbySoft.DragonRun");
         PlayerPrefs.SetInt("feedbackPerformed", 1);
         SetUIPanelActive("FeedbackUI", false);
@@ -273,6 +278,8 @@ public class GameManager : MonoBehaviour
 
     public void OnPlayerDeath(GameObject collider)
     {
+        AppSpyClient.JornalAction("Dead", "");
+
         IsRunning = false;
         IsDead = true;
         deathCauser = collider;
@@ -282,6 +289,8 @@ public class GameManager : MonoBehaviour
 
     public void Resurrect()
     {
+        AppSpyClient.JornalAction("Ressurected", "");
+
         SetUIPanelActive("GameOverUi", false);
         SetUIPanelActive("InGameUi", true);
         EvaporateGameObjectsOfCurrentAndNextSegment();
@@ -292,6 +301,8 @@ public class GameManager : MonoBehaviour
 
     public void RestartGame()
     {
+        AppSpyClient.JornalAction("Restart", "");
+
         var time = Time.time;
         var coins = PlayerPrefs.GetInt("coins") + Properties.GetInt("coins");
         PlayerPrefs.SetInt("coins", coins);
@@ -316,6 +327,8 @@ public class GameManager : MonoBehaviour
 
     public void OpenShop()
     {
+        AppSpyClient.JornalAction("OpenShop", "");
+
         UnityEngine.SceneManagement.SceneManager.LoadScene("Shop");
     }
 }
