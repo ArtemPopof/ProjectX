@@ -43,7 +43,7 @@ public class MobileInput : MonoBehaviour
         // Let's check for inputs 
         #region Standalone Inputs
         if (Input.GetMouseButtonDown(0)) {
-            TapButton = IsButtonTapped(Input.mousePosition);
+            //TapButton = IsButtonTapped(Input.mousePosition);
             tap = true;
             startTouch = Input.mousePosition;
         } else if (Input.GetMouseButtonUp(0)) {
@@ -56,7 +56,7 @@ public class MobileInput : MonoBehaviour
         if (Input.touches.Length != 0) {
             if (Input.touches[0].phase == TouchPhase.Began) {
                 tap = true;
-                TapButton = IsButtonTapped(Input.touches);
+                //TapButton = IsButtonTapped(Input.touches);
                 startTouch = Input.mousePosition;
             } else if (Input.touches[0].phase == TouchPhase.Ended || Input.touches[0].phase == TouchPhase.Canceled) {
                 startTouch = Vector2.zero;

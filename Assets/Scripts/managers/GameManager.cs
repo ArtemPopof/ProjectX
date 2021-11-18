@@ -105,7 +105,7 @@ public class GameManager : MonoBehaviour
         //PlayerPrefs.SetInt("coins", 55550);
     }
 
-    private void Start()
+    public void Start()
     {
         AppSpyClient.JornalAction("Start", "");
         // init player
@@ -140,19 +140,7 @@ public class GameManager : MonoBehaviour
         //TODO extract all string constants
         //TODO maybe make some statemachine for states
         if (!IsRunning && !IsLoading && MobileInput.Instance.Tap) {
-            if (MobileInput.Instance.TapButton)
-            {
-                //OpenShop();
-            } else
-            {
-                SetUIPanelActive("InGameUi", true);
-                IsRunning = true;
-                player.CurrentModel.StartRunning();
-                secTimer.Start();
-                cameraMotor.ZoomPlayer();
-                cameraMotor.IsMoving = true;
-                menu.SetTrigger("Hide");
-            }
+
         }
         
 
@@ -165,6 +153,19 @@ public class GameManager : MonoBehaviour
             Properties.setProperty("highscore", Mathf.Max(roundedScore, Properties.GetInt("highscore")));
             scoreIncreaseTick = false;
         }
+    }
+    
+    public void StartRunning()
+    {
+        AppSpyClient.JornalAction("StartRunning", "");
+
+        SetUIPanelActive("InGameUi", true);
+        IsRunning = true;
+        player.CurrentModel.StartRunning();
+        secTimer.Start();
+        cameraMotor.ZoomPlayer();
+        cameraMotor.IsMoving = true;
+        menu.SetTrigger("Hide");
     }
 
     public void OnLoadingEnd()
@@ -223,6 +224,7 @@ public class GameManager : MonoBehaviour
         if (panel == null)
         {
             Debug.LogError("ERROR, NO PANEL FOUND: " + panelTag);
+            return;
         }
 
         panel.SetActive(isActive);
