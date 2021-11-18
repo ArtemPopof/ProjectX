@@ -21,7 +21,7 @@ public class MobileInput : MonoBehaviour
 
     public bool Tap { get { return tap;} }
 
-    public bool TapShop { get; set; }
+    public bool TapButton { get; set; }
     public Vector2 SwipeDelta { get { return swipeDelta; } }
     public bool SwipeLeft { get { return swipeLeft; } }
     public bool SwipeRight { get { return swipeRight; } }
@@ -43,7 +43,7 @@ public class MobileInput : MonoBehaviour
         // Let's check for inputs 
         #region Standalone Inputs
         if (Input.GetMouseButtonDown(0)) {
-            TapShop = IsShopTapped(Input.mousePosition);
+            TapButton = IsButtonTapped(Input.mousePosition);
             tap = true;
             startTouch = Input.mousePosition;
         } else if (Input.GetMouseButtonUp(0)) {
@@ -56,7 +56,7 @@ public class MobileInput : MonoBehaviour
         if (Input.touches.Length != 0) {
             if (Input.touches[0].phase == TouchPhase.Began) {
                 tap = true;
-                TapShop = IsShopTapped(Input.touches);
+                TapButton = IsButtonTapped(Input.touches);
                 startTouch = Input.mousePosition;
             } else if (Input.touches[0].phase == TouchPhase.Ended || Input.touches[0].phase == TouchPhase.Canceled) {
                 startTouch = Vector2.zero;
@@ -110,27 +110,34 @@ public class MobileInput : MonoBehaviour
             swipeDelta = Vector2.zero;
         }
 
-        if ((tap || TapShop) && !swipeDown && !swipeUp && !swipeLeft && !swipeRight && !GameManager.Instance.IsRunning)
+        if ((tap || TapButton) && !swipeDown && !swipeUp && !swipeLeft && !swipeRight && !GameManager.Instance.IsRunning)
         {
             SoundManager.PlaySound("Click");
         }
     }
 
-    private bool IsShopTapped(Touch[] touches)
+    private bool IsButtonTapped(Touch[] touches)
     {
         if (shopButton == null) return false;
+
+        var buttonsZone = Screen.height - shopButton.position.y + 100;
 
         foreach (Touch touch in touches)
         {
             var realPosition = new Vector2(touch.position.x, Screen.height - touch.position.y);
 
-            var factRect = shopButton.GetComponent<RectTransform>().rect;
-            factRect.position = new Vector2(factRect.position.x * -1, factRect.position.y * -1);
-            factRect.size = factRect.size * 1.5f;
-            var heightScale = Screen.height / shopButton.GetComponentInParent<CanvasScaler>().referenceResolution.y;
-            factRect.size *= heightScale;
+            //var factRect = shopButton.GetComponent<RectTransform>().rect;
+            //factRect.position = new Vector2(factRect.position.x * -1, factRect.position.y * -1);
+            //factRect.size = factRect.size * 1.5f;
+            //var heightScale = Screen.height / shopButton.GetComponentInParent<CanvasScaler>().referenceResolution.y;
+            //factRect.size *= heightScale;
 
-            if (factRect.Contains(realPosition))
+            //if (factRect.Contains(realPosition))
+            //{
+            //    return true;
+            //}
+
+            if (realPosition.y < buttonsZone)
             {
                 return true;
             }
@@ -139,17 +146,24 @@ public class MobileInput : MonoBehaviour
         return false;
     }
 
-    private bool IsShopTapped(Vector3 position)
+    private bool IsButtonTapped(Vector3 position)
     {
-        if (shopButton == null) return false;
-
         var realPosition = new Vector3(position.x, Screen.height - position.y, position.z);
 
-        var factRect = shopButton.GetComponent<RectTransform>().rect;
-        factRect.position = new Vector2(factRect.position.x * -1, factRect.position.y * -1);
-        factRect.size = factRect.size * 1.5f; // le petit kostyl to make the shop button clickable
-        var heightScale = Screen.height / shopButton.GetComponentInParent<CanvasScaler>().referenceResolution.y;
-        factRect.size *= heightScale;
-        return factRect.Contains(realPosition);
+        //var factRect = shopButton.GetComponent<RectTransform>().rect;
+        //factRect.position = new Vector2(factRect.position.x * -1, factRect.position.y * -1);
+        //factRect.size = factRect.size * 1.5f; // le petit kostyl to make the shop button clickable
+        //var heightScale = Screen.height / shopButton.GetComponentInParent<CanvasScaler>().referenceResolution.y;
+        //factRect.size *= heightScale;
+        //return factRect.Contains(realPosition);
+
+        var buttonsZone = Screen.height - shopButton.position.y + 100;
+
+        Debug.Log("POS: " + shopButton.position);
+
+        Debug.Log("ButtonsZone: " + buttonsZone);
+        Debug.Log("RealPosition: " + realPosition);
+
+        return realPosition.y < buttonsZone;
     }
 }

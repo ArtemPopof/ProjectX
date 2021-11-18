@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour
     private int scoreIncrease = 1;
     private bool scoreIncreaseTick = false;
 
-    private GameObject uiPanels;
+    private GameObject[] convases;
 
     private GameObject deathCauser;
 
@@ -76,7 +76,7 @@ public class GameManager : MonoBehaviour
         }
         Properties.Add("highscore", highscore);
 
-        uiPanels = GameObject.FindWithTag("UI");
+        convases = GameObject.FindGameObjectsWithTag("UI");
 
         if (GameRestarted())
         {
@@ -140,9 +140,9 @@ public class GameManager : MonoBehaviour
         //TODO extract all string constants
         //TODO maybe make some statemachine for states
         if (!IsRunning && !IsLoading && MobileInput.Instance.Tap) {
-            if (MobileInput.Instance.TapShop)
+            if (MobileInput.Instance.TapButton)
             {
-                OpenShop();
+                //OpenShop();
             } else
             {
                 SetUIPanelActive("InGameUi", true);
@@ -213,7 +213,18 @@ public class GameManager : MonoBehaviour
 
     public void SetUIPanelActive(string panelTag, bool isActive)
     {
-        var panel = FindComponentByTag(uiPanels.transform, panelTag);
+        GameObject panel = null;
+        for (int i = 0; i < this.convases.Length; i++)
+        {
+            panel = FindComponentByTag(convases[i].transform, panelTag);
+            if (panel != null) break;
+        }
+
+        if (panel == null)
+        {
+            Debug.LogError("ERROR, NO PANEL FOUND: " + panelTag);
+        }
+
         panel.SetActive(isActive);
     }
 
