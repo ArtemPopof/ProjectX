@@ -179,8 +179,6 @@ public class GameManager : MonoBehaviour
 
     private void ShowFeedbackWindowIfWasnt()
     {
-        AppSpyClient.JornalAction("FeedbackShown", "");
-
         if (PlayerPrefs.GetInt("highscore") == 0)
         {
             return;
@@ -195,6 +193,7 @@ public class GameManager : MonoBehaviour
             return;
         }
 
+        AppSpyClient.JornalAction("FeedbackShown", "");
         // need to show feedback window
         IsRunning = false;
         SetUIPanelActive("FeedbackUI", true);
