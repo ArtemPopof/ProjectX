@@ -53,6 +53,9 @@ public class GameManager : MonoBehaviour
         secTimer = InitTimer();
         adManager = new AdManager();
 
+        // uncomment to reset all props
+        //PlayerPrefs.DeleteAll();
+
         Properties.Add("distance", 0.0f);
         Properties.Add("multiplier", 0.0f).WithCustomFormater(new MultiplierFormater());
         Properties.Add("score", 0);
@@ -99,8 +102,6 @@ public class GameManager : MonoBehaviour
             PlayerPrefs.SetInt("currentLevel", 100);
         }
 
-        // uncomment to reset all props
-        //PlayerPrefs.DeleteAll();
         //PlayerPrefs.SetInt("heart", 550);
         //PlayerPrefs.SetInt("coins", 55550);
     }
