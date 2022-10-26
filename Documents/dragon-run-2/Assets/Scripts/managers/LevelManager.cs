@@ -37,6 +37,9 @@ public class LevelManager : MonoBehaviour
 
     [HideInInspector]
     public List<Segment> segments = new List<Segment>();
+    //public List<Segment> initSegments;
+
+    private Segment initSegment;
 
     // Some segements contained in this pool
     // Level manager uses this segments to place them on the level
@@ -44,7 +47,6 @@ public class LevelManager : MonoBehaviour
     private List<Segment> segmentPool;
 
     private List<Segment> currentLevelSegments;
-    private Segment initSegment;
     private float initSegmentOffset;
 
     public Material firstLevelSkybox;
@@ -64,7 +66,9 @@ public class LevelManager : MonoBehaviour
     void Start()
     {
         // level indexes start with 100
-        var currentLevel = PlayerPrefs.GetInt("currentLevel") - 100;
+        var currentLevel = PlayerPrefs.GetInt("currentLevel") - 99;
+       // initSegments.ForEach(seg => seg.gameObject.SetActive(false));
+       // initSegments[currentLevel].gameObject.SetActive(true);
         currentLevelSegments = LoadSegmentsForLevel(currentLevel);
 
         InitLightingAndSkyboxSettings(currentLevel);
@@ -91,7 +95,9 @@ public class LevelManager : MonoBehaviour
 
             if (gameObject.name.StartsWith("init"))
             {
-                initSegment = gameObject.GetComponent<Segment>();
+                initSegment = Instantiate<GameObject>(gameObject).GetComponent<Segment>();
+                initSegment.transform.position = Vector3.zero;
+                initSegment.gameObject.transform.SetParent(transform);
                 initSegmentOffset = 20;
                 Debug.Log($"[LevelManager] Init seg length: {initSegmentOffset}");
                 continue;
