@@ -66,7 +66,7 @@ public class LevelManager : MonoBehaviour
     void Start()
     {
         // level indexes start with 100
-        var currentLevel = PlayerPrefs.GetInt("currentLevel") - 99;
+        var currentLevel = PlayerPrefs.GetInt("currentLevel") - 100;
        // initSegments.ForEach(seg => seg.gameObject.SetActive(false));
        // initSegments[currentLevel].gameObject.SetActive(true);
         currentLevelSegments = LoadSegmentsForLevel(currentLevel);
